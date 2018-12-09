@@ -1,0 +1,17 @@
+.pred_calc_title {
+  color: grey;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+.pred_calc_selected_county {
+  color: rgb(34,172,138);
+  font-weight: bold;
+}
+
+.pred_calc_top_hr {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}

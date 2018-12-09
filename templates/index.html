@@ -1,10 +1,135 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<script src="http://d3js.org/d3.v4.min.js"></script>
+
   <div class="row">
     <div class="col-md-12">
       <h1>e14a Team Project</h1>
+      <h2>How does food access affect the health of the country?</h2>
+      <div class="row">
+        <div class="col-md-9">
+          <form class="form-inline">
+            <p>Filtered by:
+              <select name="filter_var" class="form-control" id="filter_var">
+                <option>filter_var_1</option>
+                <option>filter_var_2</option>
+                <option>filter_var_3</option>
+                <option>filter_var_4</option>
+              </select>
+            </p>
+            <svg id='us_map_svg' width="800" height="300"></svg>
+          </form>
+        </div>
+        <div class="col-md-3 border">
+          <h3 class="pred_calc_title">Prediction Calculator</h3>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="selected_state">Select State:</label>
+              <select name="selected_state" class="form-control" id="selected_state">
+                <option>Alabama</option>
+                <option>Alaska</option>
+                <option>Arizona</option>
+                <option>Arkansas</option>
+                <option>California</option>
+                <option>Colorado</option>
+                <option>Connecticut</option>
+                <option>Delaware</option>
+                <option>Florida</option>
+                <option>Georgia</option>
+                <option>Hawaii</option>
+                <option>Idaho</option>
+                <option>Illinois</option>
+                <option>Indiana</option>
+                <option>Iowa</option>
+                <option>Kansas</option>
+                <option>Kentucky</option>
+                <option>Louisiana</option>
+                <option>Maine</option>
+                <option>Maryland</option>
+                <option>Massachusetts</option>
+                <option>Michigan</option>
+                <option>Minnesota</option>
+                <option>Mississippi</option>
+                <option>Missouri</option>
+                <option>Montana</option>
+                <option>Nebraska</option>
+                <option>Nevada</option>
+                <option>New Hampshire</option>
+                <option>New Jersey</option>
+                <option>New Mexico</option>
+                <option>New York</option>
+                <option>North Carolina</option>
+                <option>North Dakota</option>
+                <option>Ohio</option>
+                <option>Oklahoma</option>
+                <option>Oregon</option>
+                <option>Pennsylvania</option>
+                <option>Rhode Island</option>
+                <option>South Carolina</option>
+                <option>South Dakota</option>
+                <option>Tennessee</option>
+                <option>Texas</option>
+                <option>Utah</option>
+                <option>Vermont</option>
+                <option>Virginia</option>
+                <option>Washington</option>
+                <option>West Virginia</option>
+                <option>Wisconsin</option>
+                <option>Wyoming</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label for="selected_county">Select County:</label>
+              <select name="selected_state" class="form-control" id="selected_state">
+                <!-- Populate this based on state selection -->
+                <option>Select county</option>
+              </select>
+            </div>
+          </div>
+
+          <hr class="pred_calc_top_hr">
+          <p class="pred_calc_selected_county">County Abc</p>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="input_1">Input var 1</label>
+              <input type="text" class="form-control" name="input_1" id="input_1">
+            </div>
+            <div class="col-sm-6">
+              <label for="input_2">Input var 2</label>
+              <input type="text" class="form-control" name="input_2" id="input_2">
+            </div>
+            <div class="col-sm-6">
+              <label for="input_3">Input var 1</label>
+              <input type="text" class="form-control" name="input_3" id="input_3">
+            </div>
+          </div>
+
+          <br>
+          <button type="button" class="btn btn-primary">Calculate</button>
+          <button type="button" class="btn btn-default">Reset</button>
+        </div>
+      </div>
+
+      <h2>Deep Dive on country/state</h2>
+      <div class="row">
+        <div class="col-md-4 border">
+          <svg id='deep_dive_1_svg' width="365" height="300"></svg>
+        </div>
+        <div class="col-md-4 border">
+          <svg id='deep_dive_2_svg' width="365" height="300"></svg>
+        </div>
+        <div class="col-md-4 border">
+          <svg id='deep_dive_2_svg' width="365" height="300"></svg>
+        </div>
+      </div>
+
     </div>
   </div>
+
+<script src="static/js/us_map.js"></script>
+<script src="static/js/deep_dive_1.js"></script>
+<script src="static/js/deep_dive_2.js"></script>
+<script src="static/js/deep_dive_3.js"></script>
 
 {% endblock %}

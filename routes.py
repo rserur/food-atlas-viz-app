@@ -1,4 +1,7 @@
+# 2018-12-09 @ 05:29:55 PM
 from flask import Flask, flash, render_template, request, url_for, redirect, session
+import os
+
 
 app = Flask(__name__)
 
@@ -18,6 +21,20 @@ def calculator():
 
     return render_template('calculator.html', title="Prediction Calculator")
 
+# @app.route('/load_data', methods=['GET'])
+# def load_data():
+#   # test
+
+@app.route("/data/<path:csv>")
+def getCSV(csv):
+    csvFile = os.path.join("data/", csv)
+    print(csvFile)
+    return parseCSV(csvFile)
+
+def parseCSV(fileNm):
+  with open(fileNm, 'r') as fr:
+    lines = fr.readlines()
+  return '\n'.join(lines)
 
 if __name__ == "__main__":
     app.run(debug=True)
