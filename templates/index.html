@@ -1,8 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<script src="http://d3js.org/d3.v4.min.js"></script>
-
   <div class="row">
     <div class="col-md-12">
       <h1>e14a Team Project</h1>
@@ -18,7 +15,18 @@
                 <option>filter_var_4</option>
               </select>
             </p>
-            <svg id='us_map_svg' width="800" height="300"></svg>
+            <div class="btn-group btn-group-toggle mx-auto" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+              </label>
+            </div>
+            <svg id="food-atlas-map" width="960" height="600"></svg>
           </form>
         </div>
         <div class="col-md-3 border">
