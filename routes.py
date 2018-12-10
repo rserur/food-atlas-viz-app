@@ -28,7 +28,6 @@ def calculator():
 @app.route("/data/<path:csv>")
 def getCSV(csv):
     csvFile = os.path.join("data/", csv)
-    print(csvFile)
     return parseCSV(csvFile)
 
 def parseCSV(fileNm):
