@@ -23,7 +23,7 @@ d3.csv("/data/combined.csv", function (data) {
 function draw_viz_3(data) {
 	var svg = d3.select("#deep_dive_3_svg");
 
-      margin = {top: 20, right: 10, bottom: 50, left: 30},
+      margin = {top: 20, right: 10, bottom: 50, left: 40},
       width = +svg.attr("width") - margin.left - margin.right,
       height = +svg.attr("height") - margin.top - margin.bottom,
       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -58,8 +58,8 @@ function draw_viz_3(data) {
     return d.obesity;
   }));
 
-  console.log(xScale.domain());
-  console.log(yScale.domain());
+  // console.log(xScale.domain());
+  // console.log(yScale.domain());
 
   // Creating scatter plot bubbles
   var bubble;
@@ -68,7 +68,7 @@ function draw_viz_3(data) {
     .enter()
     .append('circle')
     .attr('class', 'bubble')
-    .attr('cx', function(d){ console.log(xScale(d.food_tax)); return xScale(d.food_tax); })
+    .attr('cx', function(d){ return xScale(d.food_tax); })
     .attr('cy', function(d){ return yScale(d.obesity); })
     .attr('r', function(d){ return 2; })
     .style('fill', 'green');
@@ -80,7 +80,7 @@ function draw_viz_3(data) {
   g.append('text')
     .attr("transform", "rotate(-90)")
     .attr('x', -90)
-    .attr('y', 15)
+    .attr('y', -28)
     .attr('class', 'label')
     .text('Obesity');
 
