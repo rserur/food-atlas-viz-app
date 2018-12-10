@@ -37,13 +37,13 @@ ScatterPlot.prototype.initVis = function(){
 	vis.radius = d3.scaleSqrt().range([2, 5]);
 
 	vis.xScale = d3.scaleLinear()
-	  .domain(d3.extent(vis.data, function(d) { return d.ffrpth14; }))
+	  .domain(d3.extent(vis.data, function(d) { return d.fast_food; }))
 	  .range([0, vis.width]);
 
 
 	vis.yScale = d3.scaleLinear()
 	  .range([vis.height, 0])
-	  .domain(d3.extent(vis.data, function(d) { return d.pct_obese_adults13; }));
+	  .domain(d3.extent(vis.data, function(d) { return d.obesity; }));
 
 
 	vis.xAxis = d3.axisBottom()
@@ -52,7 +52,7 @@ ScatterPlot.prototype.initVis = function(){
   	vis.yAxis = d3.axisLeft()
   		.scale(vis.yScale);
 
-  	vis.radius.domain(d3.extent(vis.data, function(d){ return d.pct_laccess_pop15; })).nice();
+  	vis.radius.domain(d3.extent(vis.data, function(d){ return d.low_access; })).nice();
 
   	// changed these both from "g" to "svg" for some reason
   	vis.svg.append("g")
@@ -93,10 +93,11 @@ ScatterPlot.prototype.updateVis = function(){
 	.data(vis.data)
 	.enter()
 	.append("circle")
-	.attr("cx", function(d) { return vis.xScale(d.ffrpth14); })
-	.attr("cy", function(d) { return vis.yScale(d.pct_obese_adults13); })
-	.attr("r", function(d) { return vis.radius(d.pct_laccess_pop15); })
+	.attr("cx", function(d) { return vis.xScale(d.fast_food); })
+	.attr("cy", function(d) { return vis.yScale(d.obesity); })
+	.attr("r", function(d) { return vis.radius(d.low_access); })
 	.style("fill", "steelblue")
+	.attr("opacity", .4)
 	.on("mouseover", function(d) {
 		vis.tooltip.text(d.name);
 	});
