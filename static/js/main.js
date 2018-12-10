@@ -49,3 +49,42 @@ function createVis() {
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
+
+let map_selection = $("input[name='map_selection']:checked").val();
+
+$(':radio[name="map_selection"]').change(function() {
+  map_selection=$("input[name='map_selection']:checked").val();
+  map.updateMapSelection(map_selection);
+});
+
+map = new Map({ parentElement: 'food-atlas-map', mapSelection: map_selection });
+
+d3.queue()
+  .defer(d3.json, "https://d3js.org/us-10m.v1.json")
+  .defer(d3.csv, "/static/data/food_atlas_data.csv", function(d) {
+    map.d3_map.set(d.id, {
+      pop15: d.PCT_LACCESS_POP15,
+      lowi15: d.PCT_LACCESS_LOWI15,
+      hhnv15: d.PCT_LACCESS_HHNV15,
+      snapspth16: d.SNAPSPTH16,
+      ffrpth14: d.FFRPTH14,
+      snap16: d.PCT_SNAP16,
+      fmrktpth16: d.FMRKTPTH16
+    })
+  })
+  .await(draw_map);
+
+function draw_map(error, us) {
+  if (error) throw error;
+
+  map.initVis(us);
+}
+
+var color = d3.scaleQuantize()
+    .domain([0, 100])
+    .range(d3.schemeRdYlGn[9].reverse());
+
+var x = d3.scaleLinear()
+    .domain([0, 100])
+    .rangeRound([600, 860]);
+>>>>>>> Convert map js to rough OOP

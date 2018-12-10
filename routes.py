@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
 @app.route('/index')
 def index():
     map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
-    return render_template('index.html', title="Home")
+    return render_template('index.html', title="Home", map_options=map_options)
 
 # prediction calculator route
 @app.route('/prediction-calculator')

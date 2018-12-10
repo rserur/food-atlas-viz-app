@@ -15,18 +15,22 @@
                 <option>filter_var_4</option>
               </select>
             </p>
-            <div class="btn-group btn-group-toggle mx-auto" data-toggle="buttons">
-              <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-              </label>
+            <div class="btn-group btn-group-toggle center" data-toggle="buttons">
+              <button type="button" class="btn btn-link" disabled>Select Map:</button>
+              {% for map_option in map_options %}
+                <label class="btn btn-primary {% if map_option == map_options[0] %} active {% endif %}" >
+                  <input
+                    type="radio"
+                    name="map_selection"
+                    id="map_option"
+                    autocomplete="off"
+                    value="{{map_option}}"
+                    {% if map_option == map_options[0] %} checked{% endif %} >
+                  {{ map_option }}
+                </label>
+              {% endfor %}
             </div>
-            <svg id="food-atlas-map" width="960" height="600"></svg>
+            <div id="food-atlas-map"></div>
           </form>
         </div>
         <div class="col-md-3 border">
@@ -131,7 +135,6 @@
           <svg id='deep_dive_3_svg' width="365" height="300"></svg>
         </div>
       </div>
-
     </div>
   </div>
 
