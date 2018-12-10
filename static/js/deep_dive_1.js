@@ -47,18 +47,19 @@ ScatterPlot.prototype.initVis = function(){
 
 
 	vis.xAxis = d3.axisBottom()
-  		.scale(xScale);
+  		.scale(vis.xScale);
 
   	vis.yAxis = d3.axisLeft()
-  		.scale(yScale);
+  		.scale(vis.yScale);
 
-  	vis.radius.domain(d3.extent(vis.data, function(d){ return d.age; })).nice();
+  	vis.radius.domain(d3.extent(vis.data, function(d){ return d.pct_laccess_pop15; })).nice();
 
-  	vis.g.append("g")
+  	// changed these both from "g" to "svg" for some reason
+  	vis.svg.append("g")
 	  .attr("transform", "translate(0, "+vis.height+")")
 	  .call(vis.xAxis);
 
-	vis.g.append("g")
+	vis.svg.append("g")
 	  .call(vis.yAxis);
 
 	vis.tooltip = vis.svg.append("g")
@@ -88,13 +89,13 @@ ScatterPlot.prototype.wrangleData = function(){
 ScatterPlot.prototype.updateVis = function(){
 	var vis = this;
 
-	var bubble = vis.g.selectAll("circle")
+	var bubble = vis.svg.selectAll("circle")
 	.data(vis.data)
 	.enter()
 	.append("circle")
-	.attr("cx", function(d) { return xScale(d.ffrpth14); })
-	.attr("cy", function(d) { return yScale(d.pct_obese_adults13); })
-	.attr("r", function(d) { return radius(d.pct_laccess_pop15); })
+	.attr("cx", function(d) { return vis.xScale(d.ffrpth14); })
+	.attr("cy", function(d) { return vis.yScale(d.pct_obese_adults13); })
+	.attr("r", function(d) { return vis.radius(d.pct_laccess_pop15); })
 	.style("fill", "steelblue")
 	.on("mouseover", function(d) {
 		vis.tooltip.text(d.name);
