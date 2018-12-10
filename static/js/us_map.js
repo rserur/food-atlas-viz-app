@@ -2,6 +2,7 @@ class Map {
   constructor({ mapSelection, parentElement } = {}) {
     this.d3_map = d3.map();
     this.mapSelection = mapSelection;
+    this.mapVariableOptions = mapVariableOptions;
     this.parentElement = parentElement;
   }
 
@@ -21,14 +22,18 @@ class Map {
     this.svg = d3.select("#" + this.parentElement)
       .append("svg")
       .attr("width", 960)
-      .attr("height", 600);
+      .attr("height", 600)
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 960 600")
+      .classed("svg-content", true);
+
 
     // Create element for legend
     const g = this.svg.append("g")
         .attr("class", "key")
         .attr("transform", "translate(0,40)");
 
-    // Legend title - "Low income & low access to store (%), 2015"
+    // Legend title
     g.append("text")
         .attr("class", "caption")
         .attr("x", x.range()[0])
@@ -36,7 +41,7 @@ class Map {
         .attr("fill", "#000")
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
-        .text("Population, low access to store (%), 2015");
+        .text(this.mapVariableOptions[this.mapSelection].variableName);
 
     // Legend markings - 2%, 3%, etc.
     g.call(d3.axisBottom(x)
@@ -78,7 +83,7 @@ class Map {
         }
       })
       .attr("d", this.path)
-      .attr("id", function(d) { return d.id }); // id is FIPS
+      .attr("id", function(d) { return d.id }); // id is FIPS value
 
     this.svg.append("path")
       .attr("class", "county-borders")
