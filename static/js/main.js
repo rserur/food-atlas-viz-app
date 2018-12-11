@@ -20,6 +20,7 @@ function loadData() {
 			d.PCT_OBESE_ADULTS13 = +d.PCT_OBESE_ADULTS13;
 			d.FFRPTH14 = +d.FFRPTH14;
 			d.PCT_LACCESS_POP15 = +d.PCT_LACCESS_POP15;
+			d.FMRKTPTH16 = +d.FMRKTPTH16;
 		});
 
 		filtered_data = [];
@@ -32,6 +33,7 @@ function loadData() {
 			obj.food_tax = data[i].FOOD_TAX14;
 			obj.fast_food = data[i].FFRPTH14;
 			obj.low_access = data[i].PCT_LACCESS_POP15;
+			obj.farmersmarkets = data[i].FMRKTPTH16;
 			filtered_data.push(obj);
 		}
 
@@ -45,4 +47,5 @@ function loadData() {
 function createVis() {
 	//console.log(allData);
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
+	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
