@@ -10,7 +10,7 @@
 	this.displayData = []; // see data wrangling
 
 	// DEBUG RAW DATA
-	console.log(this.data);
+	//console.log(this.data);
 	this.initVis();
 }
 
@@ -99,7 +99,7 @@ ScatterPlot.prototype.updateVis = function(){
 	.style("fill", "steelblue")
 	.attr("opacity", .4)
 	.on("mouseover", function(d) {
-		vis.tooltip.text(d.name);
+		vis.tooltip.text(d.obesity);
 	});
 
 

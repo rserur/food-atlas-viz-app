@@ -8,7 +8,7 @@ d3.csv("data/combined.csv", function (data) {
 ScatterGraph = function(_parentElement, data) {
   this.parentElement = _parentElement;
   this.data = data;
-  console.log(data);
+ // console.log(data);
   this.initVis();
 }
 
@@ -43,7 +43,7 @@ ScatterGraph.prototype.initVis = function(){
   vis.yScale.domain(d3.extent(vis.data, function(d) { return +d.obesity; }));
 
   vis.rad.domain(d3.extent(vis.data, function(d){
-    return d.PCT_LACCESS_POP15;
+    return d.low_access;
   })).nice();
 
   vis.g.append('g')
