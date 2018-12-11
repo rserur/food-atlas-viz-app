@@ -18,13 +18,13 @@
  * Initialize visualization (static content, e.g. SVG area or axes)
  */
 
-ScatterPlot.prototype.initVis = function(){ 
+ScatterPlot.prototype.initVis = function(){
 	var vis = this;
 
-	vis.margin = { top: 40, right: 0, bottom: 60, left: 60 };
+	vis.margin = { top: 20, right: 0, bottom: 30, left: 0 };
 
-	vis.width = 800 - vis.margin.left - vis.margin.right,
-	vis.height = 400 - vis.margin.top - vis.margin.bottom;
+	vis.width = 365 - vis.margin.left - vis.margin.right,
+	vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
 	// SVG drawing area
 	vis.svg = d3.select("#" + vis.parentElement).append("svg")

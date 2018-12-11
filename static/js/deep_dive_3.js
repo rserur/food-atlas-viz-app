@@ -28,19 +28,33 @@ function draw_viz_3(data) {
       height = +svg.attr("height") - margin.top - margin.bottom,
       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+   var radius = d3.scaleSqrt()
+    .range([2,5]);
+
   // Creating xScale and yScale
   var xScale = d3.scaleLinear()
     .range([0, width]);
   var yScale = d3.scaleLinear()
     .range([height, 0]);
 
+    // Defining domains
+  xScale.domain(d3.extent(data, function(d){
+    return d.food_tax;
+  }));
+  yScale.domain(d3.extent(data, function(d){
+    return d.obesity;
+  }));
+  radius.domain(d3.extent(data, function(d){
+    return 2;
+  })).nice();
+
   // Creating Axes
   var xAxis = d3.axisBottom()
-    .scale(xScale)
-    .ticks(5);
+    .scale(xScale);
+    // .ticks(5);
   var yAxis = d3.axisLeft()
-    .scale(yScale)
-    .ticks(5);
+    .scale(yScale);
+    // .ticks(5);
 
   g.append('g')
     .attr('transform', 'translate(0,' + height + ')')
@@ -49,17 +63,6 @@ function draw_viz_3(data) {
 
   g.append("g")
       .call(yAxis);
-
-  // Defining domains
-  xScale.domain(d3.extent(data, function(d){
-    return d.food_tax;
-  }));
-  yScale.domain(d3.extent(data, function(d){
-    return d.obesity;
-  }));
-
-  // console.log(xScale.domain());
-  // console.log(yScale.domain());
 
   // Creating scatter plot bubbles
   var bubble;
