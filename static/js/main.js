@@ -49,3 +49,56 @@ function createVis() {
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
+
+let map_selection = $("input[name='map_selection']:checked").val();
+
+$(':radio[name="map_selection"]').change(function() {
+  map_selection=$("input[name='map_selection']:checked").val();
+  map.updateMapSelection(map_selection);
+});
+
+const mapVariableOptions = {
+  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015" },
+  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015" },
+  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015" },
+  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016" },
+  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014" },
+  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016" },
+  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016" }
+}
+const map = new Map(
+  {
+    parentElement: 'food-atlas-map',
+    mapSelection: map_selection,
+    mapVariableOptions: mapVariableOptions
+  }
+);
+
+d3.queue()
+  .defer(d3.json, "https://d3js.org/us-10m.v1.json")
+  .defer(d3.csv, "/static/data/food_atlas_data.csv", function(d) {
+      map.d3_map.set(d.id, {
+        pop15: d[mapVariableOptions.pop15.variableCode],
+        lowi15: d[mapVariableOptions.lowi15.variableCode],
+        hhnv15: d[mapVariableOptions.hhnv15.variableCode],
+        snapspth16: d[mapVariableOptions.snapspth16.variableCode],
+        ffrpth14: d[mapVariableOptions.ffrpth14.variableCode],
+        snap16: d[mapVariableOptions.snap16.variableCode],
+        fmrktpth16: d[mapVariableOptions.fmrktpth16.variableCode]
+      })
+  })
+  .await(draw_map);
+
+function draw_map(error, us) {
+  if (error) throw error;
+
+  map.initVis(us);
+}
+
+var color = d3.scaleQuantize()
+    .domain([0, 100])
+    .range(d3.schemeRdYlGn[9].reverse());
+
+var x = d3.scaleLinear()
+    .domain([0, 100])
+    .rangeRound([600, 860]);

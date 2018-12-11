@@ -1,25 +1,47 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<script src="http://d3js.org/d3.v4.min.js"></script>
-
-  <div class="row">
+  <div class="row map-view">
     <div class="col-md-12">
-      <h1>e14a Team Project</h1>
-      <h2>How does food access affect the health of the country?</h2>
+      <h1>e14a Team Project:
+      <small class="text-muted">How does food access affect the health of the country?</small></h1>
+      <div class="row">
+        <div class="col-md-5">
+          <h2>Deep Dive on country/state</h2>
+        </div>
+        <div class="col-md-7">
+          <form class="form-inline">
+            <div class="btn-group btn-group-toggle center" data-toggle="buttons">
+              <button type="button" class="btn btn-link" disabled>Select Map:</button>
+              {% for map_option in map_options %}
+                <label class="btn btn-primary {% if map_option == map_options[0] %} active {% endif %}" >
+                  <input
+                    type="radio"
+                    name="map_selection"
+                    id="map_option"
+                    autocomplete="off"
+                    value="{{map_option}}"
+                    {% if map_option == map_options[0] %} checked{% endif %} >
+                  {{ map_option }}
+                </label>
+              {% endfor %}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 border">
+          <svg id='deep_dive_1_svg' width="265" height="200"></svg>
+        </div>
+        <div class="col-md-4 border">
+          <svg id='deep_dive_2_svg' width="265" height="200"></svg>
+        </div>
+        <div class="col-md-4 border">
+          <svg id='deep_dive_3_svg' width="265" height="200"></svg>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-9">
-          <form class="form-inline">
-            <p>Filtered by:
-              <select name="filter_var" class="form-control" id="filter_var">
-                <option>filter_var_1</option>
-                <option>filter_var_2</option>
-                <option>filter_var_3</option>
-                <option>filter_var_4</option>
-              </select>
-            </p>
-            <svg id='us_map_svg' width="800" height="300"></svg>
-          </form>
+            <div id="food-atlas-map"></div>
         </div>
         <div class="col-md-3 border">
           <h3 class="pred_calc_title">Prediction Calculator</h3>
@@ -110,27 +132,6 @@
           <button type="button" class="btn btn-default">Reset</button>
         </div>
       </div>
-
-      <h2>Deep Dive on country/state</h2>
-      <div class="row">
-        <div class="col-md-4 border">
-          <svg id='deep_dive_1_svg' width="365" height="300"></svg>
-        </div>
-        <div class="col-md-4 border">
-          <svg id='deep_dive_2_svg' width="365" height="300"></svg>
-        </div>
-        <div class="col-md-4 border">
-          <svg id='deep_dive_3_svg' width="365" height="300"></svg>
-        </div>
-      </div>
-
     </div>
   </div>
-
-<script src="static/js/us_map.js"></script>
-<script src="static/js/deep_dive_1.js"></script>
-<script src="static/js/deep_dive_2.js"></script>
-<script src="static/js/deep_dive_3.js"></script>
-<script src="static/js/main.js"></script>
-
 {% endblock %}
