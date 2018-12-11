@@ -1,3 +1,12 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body > .container-fluid {
+  padding-top: 50px;
+}
+
 /* Prediction Calculator */
 /* =================================================================== */
 .pred_calc_title {
@@ -51,9 +60,9 @@
     overflow: hidden;
 }
 
-.svg-content {
-    display: inline-block;
-    position: absolute;
+.us-map {
+    display: block;
+    margin: auto;
     top: 0;
     left: 0;
 }

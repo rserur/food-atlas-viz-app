@@ -23,6 +23,7 @@
     </head>
     <body>
         <div class="container-fluid">
+          <div class="row">
           <!-- Add Flash messages  -->
           {% with messages = get_flashed_messages(category_filter=["error"]) %}
               {% if messages %}
@@ -50,7 +51,7 @@
 
           {% block content %}
           {% endblock %}
-
+        </div>
       </div>
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

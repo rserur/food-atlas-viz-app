@@ -25,7 +25,7 @@ class Map {
       .attr("height", 600)
       .attr("preserveAspectRatio", "xMinYMin meet")
       .attr("viewBox", "0 0 960 600")
-      .classed("svg-content", true);
+      .classed("us-map", true);
 
 
     // Create element for legend
