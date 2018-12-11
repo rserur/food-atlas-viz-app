@@ -14,6 +14,7 @@ d3.csv("/data/combined.csv", function (data) {
 		 var obj = new Object();
 		 obj.obesity = data[i].PCT_OBESE_ADULTS13;
 		 obj.food_tax = data[i].FOOD_TAX14;
+		 obj.low_access = data[i].PCT_LACCESS_POP15;
 	   filtered_data.push(obj);
 	}
 	// filtered_data.push(JSON.stringify(obj));
@@ -45,7 +46,7 @@ function draw_viz_3(data) {
     return d.obesity;
   }));
   radius.domain(d3.extent(data, function(d){
-    return 2;
+    return d.low_access;
   })).nice();
 
   // Creating Axes
@@ -73,7 +74,8 @@ function draw_viz_3(data) {
     .attr('class', 'bubble')
     .attr('cx', function(d){ return xScale(d.food_tax); })
     .attr('cy', function(d){ return yScale(d.obesity); })
-    .attr('r', function(d){ return 2; })
+    .attr('r', function(d){ return radius(d.low_access); })
+    .attr("opacity", .4)
     .style('fill', 'green');
 
   bubble.
