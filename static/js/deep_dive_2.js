@@ -8,7 +8,6 @@ d3.csv("data/combined.csv", function (data) {
 ScatterGraph = function(_parentElement, data) {
   this.parentElement = _parentElement;
   this.data = data;
- // console.log(data);
   this.initVis();
 }
 
@@ -17,7 +16,7 @@ ScatterGraph.prototype.initVis = function(){
   var vis = this;
   var svg = d3.select("#" + vis.parentElement);
 
-  vis.margin = {top: 20, right: 10, bottom: 80, left: 20};
+  vis.margin = {top: 20, right: 10, bottom: 50, left: 40};
   vis.width = +svg.attr("width") - vis.margin.left - vis.margin.right;
   vis.height = +svg.attr("height") - vis.margin.top - vis.margin.bottom;
   vis.g = svg.append("g")
@@ -56,6 +55,20 @@ ScatterGraph.prototype.initVis = function(){
        .attr('class', 'y axis')
        .call(vis.yAxis);
 
+  vis.g.append('text')
+       .attr("transform", "rotate(-90)")
+       .attr('x', -90)
+       .attr('y', -20)
+       .attr('class', 'label')
+       .text('Obesity');
+
+  vis.g.append('text')
+       .attr('x', (vis.width/2) + 20)
+       .attr('y', vis.height + 35)
+       .attr('text-anchor', 'end')
+       .attr('class', 'label')
+       .text('Farmers Markets');
+
   vis.bubble = vis.g.selectAll('.bubble')
                   .data(vis.data)
                   .enter()
@@ -63,8 +76,8 @@ ScatterGraph.prototype.initVis = function(){
                   .attr('class', 'bubble')
                   .attr('cx', function(d){return vis.xScale(d.farmersmarkets);})
                   .attr('cy', function(d){ return vis.yScale(d.obesity); })
-                  //.attr('r', 3)
-                  .attr('r', function(d){ return vis.rad(d.low_access); })
+                  .attr('r', function(d){ return vis.rad(d.low_access) * 2; })
+                  .attr("opacity", .5)
                   .style('fill', 'rgb(34,172,138)');
 
   vis.bubble

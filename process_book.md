@@ -10,7 +10,7 @@
 
 ## <a name="overview"></a>Overview
 
-The aim of our project is to derive insights about food distribution and the availability of healthy eating options in the US using data from the USDA Food Environment Atlas, supplemented with data from the USDA Branded Food Products Database. 
+The aim of our project is to derive insights about food distribution and the availability of healthy eating options in the US using data from the USDA Food Environment Atlas, supplemented with data from the USDA Branded Food Products Database.
 
 The Food Environment Atlas contains data at the county level and has many features, including access to restaurants, grocery stores, farmers markets and welfare programs, as well as demographic and health data. The Food Products Database contains the nutritional composition of branded and private-label foods.
 
@@ -41,7 +41,7 @@ As a group, we are all very interested in diving into the data science aspect of
 *   Design a map for policymakers
 *   Will have to do it by state because each data point (row) is a county
 *   Have a model for each state and predict how the obesity rate (any health disease) would change if they changed X about the state
-    *   Ex: Would the obesity rate decrease if 20 more grocery stores were added? 
+    *   Ex: Would the obesity rate decrease if 20 more grocery stores were added?
 *   IF TIME (likely not): can we get more granular, for example, if a whole foods specifically was added?
 *   IF TIME: can we get better data for massachusetts, so we could do it by county?
 *   Can we improve predictions by augmenting with additional county data and grouping via demographic correlates? (e.g. [http://www.statsamerica.org/uscp/](http://www.statsamerica.org/uscp/)) What if we asked for predictions for counties with median incomes > 90K,  80K-89K, etc... ? Or find some other way to group counties together besides the fact that they share a state?
@@ -551,18 +551,18 @@ Data to get separately:
 
 *   CSA farms per county
 *   ***Current diabetes and obesity rates per county
-    *   By state obesity: [https://stateofobesity.org/states/ma/](https://stateofobesity.org/states/ma/) 
+    *   By state obesity: [https://stateofobesity.org/states/ma/](https://stateofobesity.org/states/ma/)
     *   By county diabetes 2013: [https://www.cdc.gov/diabetes/atlas/countydata/atlas.html?detectflash=false](https://www.cdc.gov/diabetes/atlas/countydata/atlas.html?detectflash=false)  
 *   More recent population data - race, income (current is from 2010 census)
-    *   [https://statisticalatlas.com/state/Massachusetts/Race-and-Ethnicity#data-map/county](https://statisticalatlas.com/state/Massachusetts/Race-and-Ethnicity#data-map/county) 
-    *   [https://statisticalatlas.com/state/Massachusetts/Household-Income#data-map/county](https://statisticalatlas.com/state/Massachusetts/Household-Income#data-map/county) 
+    *   [https://statisticalatlas.com/state/Massachusetts/Race-and-Ethnicity#data-map/county](https://statisticalatlas.com/state/Massachusetts/Race-and-Ethnicity#data-map/county)
+    *   [https://statisticalatlas.com/state/Massachusetts/Household-Income#data-map/county](https://statisticalatlas.com/state/Massachusetts/Household-Income#data-map/county)
 
 Extra Data:
 
 
 
-*   Food stamps by county in MA: [https://statisticalatlas.com/state/Massachusetts/Food-Stamps](https://statisticalatlas.com/state/Massachusetts/Food-Stamps) 
-*   Population by county in MA: [https://statisticalatlas.com/state/Massachusetts/Population](https://statisticalatlas.com/state/Massachusetts/Population) 
+*   Food stamps by county in MA: [https://statisticalatlas.com/state/Massachusetts/Food-Stamps](https://statisticalatlas.com/state/Massachusetts/Food-Stamps)
+*   Population by county in MA: [https://statisticalatlas.com/state/Massachusetts/Population](https://statisticalatlas.com/state/Massachusetts/Population)
 
 
 # <a name="todo"></a>TODO (updated 12/10/18)
@@ -601,9 +601,9 @@ Table "food_atlas"
    </td>
    <td>          Type          
    </td>
-   <td> Collation 
+   <td> Collation
    </td>
-   <td> Nullable 
+   <td> Nullable
    </td>
    <td>            	Default                 
    </td>
@@ -615,7 +615,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
    <td> nextval('food_atlas_id_seq'::regclass)
    </td>
@@ -627,33 +627,33 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
    <td> county                
    </td>
-   <td> character varying(255) 
+   <td> character varying(255)
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
    <td> state                 
    </td>
-   <td> character varying(255) 
+   <td> character varying(255)
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -663,9 +663,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -675,9 +675,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -687,9 +687,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -699,9 +699,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -711,21 +711,21 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
-   <td> pct_laccess_seniors15 
+   <td> pct_laccess_seniors15
    </td>
    <td> double precision       
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -735,9 +735,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -747,9 +747,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -759,21 +759,21 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
-   <td> pct_laccess_nhasian15 
+   <td> pct_laccess_nhasian15
    </td>
    <td> double precision       
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -783,9 +783,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -795,9 +795,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -807,9 +807,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -819,9 +819,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -831,9 +831,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -843,9 +843,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -855,9 +855,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -867,9 +867,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -879,9 +879,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -891,9 +891,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -903,9 +903,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -915,9 +915,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -927,9 +927,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -939,9 +939,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -951,9 +951,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -963,9 +963,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -975,9 +975,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -987,9 +987,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -999,9 +999,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1011,9 +1011,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1023,9 +1023,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1035,9 +1035,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1047,9 +1047,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1059,9 +1059,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1071,9 +1071,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1083,9 +1083,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1095,9 +1095,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1107,9 +1107,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1119,21 +1119,21 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
-   <td> pct_fmrkt_otherfood16 
+   <td> pct_fmrkt_otherfood16
    </td>
    <td> double precision       
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1143,21 +1143,21 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
-   <td> pct_diabetes_adults13 
+   <td> pct_diabetes_adults13
    </td>
    <td> double precision       
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1167,9 +1167,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1179,9 +1179,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1191,9 +1191,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1203,9 +1203,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1215,9 +1215,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1227,9 +1227,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1239,9 +1239,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1251,9 +1251,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1263,9 +1263,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1275,9 +1275,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1287,9 +1287,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1299,9 +1299,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1311,9 +1311,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
   <tr>
@@ -1323,9 +1323,9 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null 
+   <td> not null
    </td>
-   <td> 
+   <td>
    </td>
   </tr>
 </table>
@@ -1333,6 +1333,6 @@ Table "food_atlas"
 ## <a name="visualizations"></a>Frontend & Visualizations
 
 - *US Map*: Takes [d3-geo](https://github.com/d3/d3-geo) map county and uses this to render choropleths based on selected Food Atlas data topics. This will be connected to the prediction calculator and deep dive graphs. As time permits, we may also explore the data as a bubble map using the same map object code.
-- *Fast Food & Obesity*: This is a scatterplot looking at the connection of fast food with obesity.
-- *Farmer's Markets per 1000 & Obesity:* This is a scattergraph looking at Farmer's Markets per 1000 and and obesity.
-- *Food Tax Rate & Obesity:*  This is a vizualization looking at food tax rate * obesity.
+- *Fast Food per 1000 & Obesity*: This is a scatterplot looking at the connection of the number of fast food restaurants per 1000/pop and percent of the population with low access to food (radius) to obesity. This chart will also be iterated on to include visual distinctions between metro and non metro counties. The goal is to give the user an understanding of demographics of a county that may influence the presence of fast food restaurants, and how that impacts the county's health.
+- *Farmer's Markets per 1000 & Obesity:* This is a scatterplot looking at the number of Farmer's Markets per 1000/pop and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.
+- *Food Tax Rate & Obesity:*  This is a scatterplot looking at the food tax rate and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.
