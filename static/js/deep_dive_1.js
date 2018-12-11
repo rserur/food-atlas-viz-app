@@ -21,7 +21,7 @@
 ScatterPlot.prototype.initVis = function(){
 	var vis = this;
 
-	vis.margin = { top: 20, right: 0, bottom: 30, left: 0 };
+	vis.margin = { top: 20, right: 0, bottom: 40, left: 40 };
 
 	vis.width = 365 - vis.margin.left - vis.margin.right,
 	vis.height = 200 - vis.margin.top - vis.margin.bottom;
@@ -67,6 +67,20 @@ ScatterPlot.prototype.initVis = function(){
 		.attr("x", 10)
 		.attr("y", 10)
 		.text("");
+
+	vis.svg.append('text')
+    .attr("transform", "rotate(-90)")
+    .attr('x', -90)
+    .attr('y', -25)
+    .attr('class', 'label')
+    .text('Obesity Rate');
+
+  	vis.svg.append('text')
+    .attr('x', (vis.width/2))
+    .attr('y', vis.height + 35)
+    .attr('text-anchor', 'end')
+    .attr('class', 'label')
+    .text('Fast Food');
 
 	vis.wrangleData();
 
