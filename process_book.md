@@ -1,6 +1,14 @@
 # Process Book
 
-## Overview
+ - [Overview](#overview)
+ - [Timeline](#timeline)
+ - [Roles & Responsibilities](#roles)
+ - [Ideas & Strategies](#ideas)
+ - [Current Status/TODO](#todo)
+ - [Database Schema](#schema)
+ - [Frontend & Visualizations](#visualizations)
+
+## <a name="overview"></a>Overview
 
 The aim of our project is to derive insights about food distribution and the availability of healthy eating options in the US using data from the USDA Food Environment Atlas, supplemented with data from the USDA Branded Food Products Database. 
 
@@ -9,28 +17,26 @@ The Food Environment Atlas contains data at the county level and has many featur
 We plan to produce a web app that features an interactive map of the US to visually display food access data, and a prediction calculator.
 
 
-## Task Timeline
+## <a name="timeline"></a>Task Timeline
 
 We've decided to work concurrently on the various tasks required for our project, and have allocated the next four weeks to:
 
 
 
-*   **Week 1**: We plan to spend the majority of week one exploring the datasets, refining the questions we'd like the data to answer, and identifying the variables that we'll use in our model. We'll also spend some time building the basic US map visualization and scaffolding out the web app.
-*   **Week 2**: This week will be spent working with Tableau to help us visualize the data, and building the model that that app will use. We'll also decide on the exact D3 visualizations that we will include.
-*   **Week 3**: Populate the map visualization and build and test the prediction calculator.  
-*   **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
+- [X]   **Week 1**: We plan to spend the majority of week one exploring the datasets, refining the questions we'd like the data to answer, and identifying the variables that we'll use in our model. We'll also spend some time building the basic US map visualization and scaffolding out the web app.
+- [x]   **Week 2**: This week will be spent working with Tableau to help us visualize the data, and building the model that that app will use. We'll also decide on the exact D3 visualizations that we will include.
+- [X]   **Week 3**: Populate the map visualization and build and test the prediction calculator.  
+- [ ]   **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
 
 
-## Roles and Responsibilities
+## <a name="roles"></a>Roles and Responsibilities
 
 We plan to use a [trello board](https://trello.com/invite/b/nV0Dk09z/14cb1550724df0a1790802d0c9cb6402/e14a-team-project) to keep track of our assigned tasks. We'll also check in during weekly meetings, and communicate via Slack.
 
 As a group, we are all very interested in diving into the data science aspect of this project, so all four of us will collaborate on that. Additionally, Tushal Desai and Gabe Mansur will handle back-end development, and Rachael Serur and Rebecca Larson will focus on data visualization.
 
 
-# Ideas & Strategies
-
-
+# <a name="ideas"></a>Ideas & Strategies
 
 *   Design a map for policymakers
 *   Will have to do it by state because each data point (row) is a county
@@ -41,7 +47,7 @@ As a group, we are all very interested in diving into the data science aspect of
 *   Can we improve predictions by augmenting with additional county data and grouping via demographic correlates? (e.g. [http://www.statsamerica.org/uscp/](http://www.statsamerica.org/uscp/)) What if we asked for predictions for counties with median incomes > 90K,  80K-89K, etc... ? Or find some other way to group counties together besides the fact that they share a state?
 
 
-## Backend
+## <a name="backend"></a>Backend
 
 
 ### Database
@@ -559,42 +565,30 @@ Extra Data:
 *   Population by county in MA: [https://statisticalatlas.com/state/Massachusetts/Population](https://statisticalatlas.com/state/Massachusetts/Population) 
 
 
-# TODO
+# <a name="todo"></a>TODO (updated 12/10/18)
 
 ([Trello Board](https://trello.com/invite/b/nV0Dk09z/14cb1550724df0a1790802d0c9cb6402/e14a-team-project) tracking progress)
 
 
-## In Progress:
-
-
-
-*   Explore Food Environment Atlas, USDA branded foods, and what we eat in America datasets - brainstorm predictors
-*   Finalize and organize predictors, datasets
-*   Scaffold basic US map (per county) in D3
-*   Plan/design D3 visualizations based on data findings
-
-
-## Remaining Tasks:
-
-
-
-*   Design prediction calculator (API endpoint? UI?)
-*   Use Tableau to illustrate and build out the model
-*   Code out and populate the US map with data
-*   Build (code) prediction calculator
-*   Connect prediction calculator to map
-*   Design and build cohesive data visualization experience/storytelling
-
+## In Progress/Remaining Tasks (final week):
+- [ ]   Connect prediction calculator to data & backend
+- [ ]   Connect "Deep Dive" visualizations to map
+- [ ]   "Storytelling" prose & frontend polish
+- [ ]   Try to strengthen prediction model per recommended techniques from TAs
 
 ## Finished:
-
-
-
-*   Evaluate project proposal options: food distribution vs. MBTA
-*   Upload data to GH repo
-*   Organize Project Plan notes from meeting and add to GH repo
-*   Submit Project Plan on Canvas
-*   Scaffold basic web application
+- [X]   Use Tableau to illustrate and build out the model
+- [X]   Build (code) prediction calculator frontend
+- [X]   Code out and populate the US map with data
+- [X]   Explore Food Environment Atlas, USDA branded foods, and what we eat in America datasets - brainstorm predictors
+- [X]   Finalize and organize predictors, datasets
+- [X]   Scaffold basic US map (per county) in D3
+- [X]   Plan/design D3 visualizations based on data findings
+- [X]   Evaluate project proposal options: food distribution vs. MBTA
+- [X]   Upload data to GH repo
+- [X]   Organize Project Plan notes from meeting and add to GH repo
+- [X]   Submit Project Plan on Canvas
+- [X]   Scaffold basic web application
 
 
 # <a name="schema">Database Schema</a>
@@ -1335,3 +1329,10 @@ Table "food_atlas"
    </td>
   </tr>
 </table>
+
+## <a name="visualizations"></a>Frontend & Visualizations
+
+- *US Map*: Takes [d3-geo](https://github.com/d3/d3-geo) map county and uses this to render choropleths based on selected Food Atlas data topics. This will be connected to the prediction calculator and deep dive graphs. As time permits, we may also explore the data as a bubble map using the same map object code.
+- *Fast Food & Obesity*: This is a scatterplot looking at the connection of fast food with obesity.
+- *Farmer's Markets per 1000 & Obesity:* This is a scattergraph looking at Farmer's Markets per 1000 and and obesity.
+- *Food Tax Rate & Obesity:*  This is a vizualization looking at food tax rate * obesity.
