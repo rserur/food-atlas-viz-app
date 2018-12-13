@@ -96,13 +96,13 @@ $(':radio[name="map_selection"]').change(function() {
 });
 
 const mapVariableOptions = {
-  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues },
-  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemeGreys },
-  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemePuBu },
-  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemePuRd },
-  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeOrRd },
-  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples },
-  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens }
+  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9].reverse() },
+  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemePuBu[9].reverse() },
+  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemeReds[9].reverse() },
+  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemeRdPu[9].reverse() },
+  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeYlOrRd[9].reverse() },
+  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9].reverse() },
+  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens[9].reverse() }
 }
 const map = new Map(
   {

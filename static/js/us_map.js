@@ -22,6 +22,7 @@ class Map {
     this.data = data;
     this.counties = data.objects.counties;
     this.nation = data.objects.nation;
+    this.updateLegend();
     this.updateMap();
   }
 
@@ -59,27 +60,12 @@ class Map {
 
     this.path = d3.geoPath();
 
-    // Legend color scale
-    /*
-    g.selectAll("rect")
-      .data(color.range().map(function(d) {
-          d = color.invertExtent(d);
-          if (d[0] == null) d[0] = x.domain()[0];
-          if (d[1] == null) d[1] = x.domain()[1];
-          return d;
-        }))
-      .enter().append("rect")
-        .attr("height", 8)
-        .attr("x", function(d) { return x(d[0]); })
-        .attr("width", function(d) { return x(d[1]) - x(d[0]); })
-        .attr("fill", function(d) { return color(d[0]); });
-    */
     this.updateData(data);
   }
 
   updateMap() {
 
-    color.range(this.mapVariableOptions[this.mapSelection].variableColorScheme[9].reverse());
+    color.range(this.mapVariableOptions[this.mapSelection].variableColorScheme);
 
     this.svg.append("g")
       .attr("class", "counties")
@@ -107,31 +93,33 @@ class Map {
       .attr("class", "nation-border")
       .attr("d", this.path(topojson.feature(this.data, this.nation)));
 
+    this.updateLegend();
+  }
+
+  updateLegend() {
     d3.select(".caption")
       .text(this.mapVariableOptions[this.mapSelection].variableName);
 
-    this.updateLegendScale();
-  }
-
-  updateLegendScale() {
     // Legend color scale
     const key = d3.select(".key");
+    
     key.selectAll('rect')
        .remove();
 
     var block = key.selectAll("rect")
-       .data(color.range().map(function(d) {
-        d = color.invertExtent(d);
-        if (d[0] == null) d[0] = x.domain()[0];
-        if (d[1] == null) d[1] = x.domain()[1];
-        return d;
-      }));
+                   .data(color.range().map(function(d) {
+                    d = color.invertExtent(d);
+                    if (d[0] == null) d[0] = x.domain()[0];
+                    if (d[1] == null) d[1] = x.domain()[1];
+                    return d;
+                  }));
 
-    block.enter().append("rect")
-      .attr("height", 8)
-      .attr("x", function(d) { return x(d[0]); })
-      .attr("width", function(d) { return x(d[1]) - x(d[0]); })
-      .attr("fill", function(d) { return color(d[0]); });
+    block.enter()
+          .append("rect")
+          .attr("height", 8)
+          .attr("x", function(d) { return x(d[0]); })
+          .attr("width", function(d) { return x(d[1]) - x(d[0]); })
+          .attr("fill", function(d) { return color(d[0]); });
   }
 
 }
