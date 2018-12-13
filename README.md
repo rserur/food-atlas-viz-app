@@ -14,7 +14,7 @@
 - [Database Schema](https://github.com/rserur/harvard-e14a-team-project/blob/master/process_book.md#schema) 
 - [12/3/18 Process Book PDF](https://github.com/rserur/harvard-e14a-team-project/blob/master/process_book_120318.pdf)
 
-## Milestone 2 - December 10th, 2918
+## Milestone 2 - December 10th, 2018
 - [Heroku-Deployed Prototype](https://csci-e14a-food-atlas.herokuapp.com/)
 - [12/10/18 Process Book PDF](https://github.com/rserur/harvard-e14a-team-project/blob/master/process_book_121018.pdf)
 - [D3 Visualization Descriptions](https://github.com/rserur/harvard-e14a-team-project/blob/master/process_book.md#frontend--visualizations)

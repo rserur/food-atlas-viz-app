@@ -1,3 +1,10 @@
+// TODO: Fix D3 enter, update, and exit pattern
+// TODO: Dynamically update legend, color scheme, and ranges based on mapSelection
+// US MAP Class
+// some sources drawn upon:
+// https://bl.ocks.org/mbostock/4122298
+// http://bl.ocks.org/bycoffe/5871252
+// https://github.com/stirlingw/Harvard-CS171/blob/master/LAB7/CS171-Lab7-Instructions.pdf
 class Map {
   constructor({ mapSelection, parentElement } = {}) {
     this.d3_map = d3.map();
@@ -8,17 +15,17 @@ class Map {
 
   updateMapSelection(mapSelection) {
     this.mapSelection = mapSelection;
-    this.updateVis()
+    this.updateMap()
   }
 
   updateData(data) {
     this.data = data;
     this.counties = data.objects.counties;
     this.nation = data.objects.nation;
-    this.updateVis();
+    this.updateMap();
   }
 
-  initVis(data) {
+  initMap(data) {
     this.svg = d3.select("#" + this.parentElement)
       .append("svg")
       .attr("width", 960)
@@ -26,7 +33,6 @@ class Map {
       .attr("preserveAspectRatio", "xMinYMin meet")
       .attr("viewBox", "0 0 960 600")
       .classed("us-map", true);
-
 
     // Create element for legend
     const g = this.svg.append("g")
@@ -70,7 +76,7 @@ class Map {
     this.updateData(data);
   }
 
-  updateVis() {
+  updateMap() {
     this.svg.append("g")
       .attr("class", "counties")
     .selectAll("path")

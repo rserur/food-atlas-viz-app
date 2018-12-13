@@ -4,6 +4,9 @@ var us_map, deep_dive_1, deep_dive_2, deep_dive_3;
 
 loadData();
 
+// TODO: Move all points data is loaded to this single method.
+// (lines 79-98 here and 1-22 in deep_dive_3.js)
+// TODO: fetch data from API endpoint loading from database
 function loadData() {
 
 	// ******this data should be looked at, I think it needs to have null values dropped
@@ -56,6 +59,7 @@ function createVis() {
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
 
+
 // identifies county clicked and filters lower visualizations to that state
 function filterFromMap(d) {
 	//allData.filter(function(obj) { return allData.fips == county} );
@@ -80,6 +84,9 @@ function isBrushed(brush_coords, cx, cy) {
 
 
 
+
+
+// TODO: Dynamically regenerate deep dives based on this map selection value?
 
 let map_selection = $("input[name='map_selection']:checked").val();
 
@@ -124,7 +131,7 @@ d3.queue()
 function draw_map(error, us) {
   if (error) throw error;
 
-  map.initVis(us);
+  map.initMap(us);
 }
 
 var color = d3.scaleQuantize()
