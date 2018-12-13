@@ -83,7 +83,12 @@ class Map {
         }
       })
       .attr("d", this.path)
-      .attr("id", function(d) { return d.id }); // id is FIPS value
+      .attr("id", function(d) { return d.id })
+      .on("click", function(d) {
+        console.log("clicked county ", d.id);
+        filterFromMap(d);
+      }); // id is FIPS value
+
 
     this.svg.append("path")
       .attr("class", "county-borders")

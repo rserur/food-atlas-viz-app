@@ -21,6 +21,9 @@ function loadData() {
 			d.FFRPTH14 = +d.FFRPTH14;
 			d.PCT_LACCESS_POP15 = +d.PCT_LACCESS_POP15;
 			d.FMRKTPTH16 = +d.FMRKTPTH16;
+			d.METRO13 = +d.METRO13;
+			d.FIPS = +d.FIPS;
+			d.State = +d.State;
 		});
 
 		filtered_data = [];
@@ -34,6 +37,9 @@ function loadData() {
 			obj.fast_food = data[i].FFRPTH14;
 			obj.low_access = data[i].PCT_LACCESS_POP15;
 			obj.farmersmarkets = data[i].FMRKTPTH16;
+			obj.metro = data[i].METRO13;
+			obj.fips = data[i].FIPS;
+			obj.state = data[i].State;
 			filtered_data.push(obj);
 		}
 
@@ -50,7 +56,33 @@ function createVis() {
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
 
+// identifies county clicked and filters lower visualizations to that state
+function filterFromMap(d) {
+	//allData.filter(function(obj) { return allData.fips == county} );
+
+	// the problem is that this csv doesn't have the FIPS data in it
+	console.log(map.data.objects.counties);
+	//console.log(topojson.feature(this.data, this.counties).features);
+}
+
+// brush and update vis functions
+
+function isBrushed(brush_coords, cx, cy) {
+
+	var x0 = brush_coords[0][0] ,
+	 x1 = brush_coords[1][0],
+	 y0 = brush_coords[0][1],
+	 y1 = brush_coords[1][1];
+
+	return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+}
+
+
+
+
+
 let map_selection = $("input[name='map_selection']:checked").val();
+
 
 $(':radio[name="map_selection"]').change(function() {
   map_selection=$("input[name='map_selection']:checked").val();

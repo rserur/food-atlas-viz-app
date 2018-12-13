@@ -28,7 +28,7 @@ ScatterGraph.prototype.initVis = function(){
   vis.yScale = d3.scaleLinear()
                  .range([vis.height, 0]);
 
-  vis.rad = d3.scaleSqrt()
+  vis.radius = d3.scaleSqrt()
               .range([1,4]);
 
   vis.xAxis = d3.axisBottom()
@@ -41,7 +41,7 @@ ScatterGraph.prototype.initVis = function(){
   vis.xScale.domain(d3.extent(vis.data, function(d) { return +d.farmersmarkets; }));
   vis.yScale.domain(d3.extent(vis.data, function(d) { return +d.obesity; }));
 
-  vis.rad.domain(d3.extent(vis.data, function(d){
+  vis.radius.domain(d3.extent(vis.data, function(d){
     return d.low_access;
   })).nice();
 
@@ -69,17 +69,58 @@ ScatterGraph.prototype.initVis = function(){
        .attr('class', 'label')
        .text('Farmers Markets');
 
-  vis.bubble = vis.g.selectAll('.bubble')
-                  .data(vis.data)
-                  .enter()
-                  .append('circle')
-                  .attr('class', 'bubble')
-                  .attr('cx', function(d){return vis.xScale(d.farmersmarkets);})
-                  .attr('cy', function(d){ return vis.yScale(d.obesity); })
-                  .attr('r', function(d){ return vis.rad(d.low_access) * 2; })
-                  .attr("opacity", .5)
-                  .style('fill', 'rgb(34,172,138)');
+  vis.wrangleData();
+}
 
-  vis.bubble
-     .attr("transform", "translate(30,15)scale(0.85)");
+ScatterGraph.prototype.wrangleData = function(){
+  var vis = this;
+  vis.updateVis(vis.data);
+}
+
+
+ScatterGraph.prototype.updateVis = function(data){ 
+  var vis = this;
+
+  var bubble = vis.g.selectAll('.bubble')
+      .data(data)
+      .enter()
+      .append('circle')
+      .attr('class', 'bubble')
+      .attr('cx', function(d){return vis.xScale(d.farmersmarkets);})
+      .attr('cy', function(d){ return vis.yScale(d.obesity); })
+      .attr('r', function(d){ return vis.radius(d.low_access) * 2; })
+      .attr("opacity", .2)
+      .style('fill', 'rgb(34,172,138)')
+      .attr("transform", "translate(30,15)scale(0.85)");
+
+
+  bubble.exit().remove();
+
+ // vis.g.selectAll('.bubble')
+  //   .attr("transform", "translate(30,15)scale(0.85)");
+}
+
+ScatterGraph.prototype.brushData = function(data){ 
+  var vis = this;
+
+  console.log("in deep dive 2 brushData");
+  console.log(data.length);
+
+  vis.g.selectAll('.bubble')
+      .data(data)
+      // .enter()
+      // .append('circle')
+      // .attr('class', 'bubble')
+      // .attr('cx', function(d){return vis.xScale(d.farmersmarkets);})
+      // .attr('cy', function(d){ return vis.yScale(d.obesity); })
+      // .attr('r', function(d){ return vis.radius(d.low_access) * 2; })
+      .attr("opacity", 1).exit().remove();
+      // .style('fill', 'rgb(34,172,138)')
+      // .attr("transform", "translate(30,15)scale(0.85)");
+
+  vis.updateVis();
+//  bubble.exit().remove();
+
+ // vis.g.selectAll('.bubble')
+  //   .attr("transform", "translate(30,15)scale(0.85)");
 }
