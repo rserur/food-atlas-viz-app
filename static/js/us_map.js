@@ -60,6 +60,7 @@ class Map {
     this.path = d3.geoPath();
 
     // Legend color scale
+    /*
     g.selectAll("rect")
       .data(color.range().map(function(d) {
           d = color.invertExtent(d);
@@ -72,11 +73,14 @@ class Map {
         .attr("x", function(d) { return x(d[0]); })
         .attr("width", function(d) { return x(d[1]) - x(d[0]); })
         .attr("fill", function(d) { return color(d[0]); });
-
+    */
     this.updateData(data);
   }
 
   updateMap() {
+
+    color.range(this.mapVariableOptions[this.mapSelection].variableColorScheme[9].reverse());
+
     this.svg.append("g")
       .attr("class", "counties")
     .selectAll("path")
@@ -95,7 +99,6 @@ class Map {
         filterFromMap(d);
       }); // id is FIPS value
 
-
     this.svg.append("path")
       .attr("class", "county-borders")
       .attr("d", this.path(topojson.mesh(this.data, this.counties, function(a, b) { return a !== b; })));
@@ -103,5 +106,32 @@ class Map {
     this.svg.append("path")
       .attr("class", "nation-border")
       .attr("d", this.path(topojson.feature(this.data, this.nation)));
+
+    d3.select(".caption")
+      .text(this.mapVariableOptions[this.mapSelection].variableName);
+
+    this.updateLegendScale();
   }
+
+  updateLegendScale() {
+    // Legend color scale
+    const key = d3.select(".key");
+    key.selectAll('rect')
+       .remove();
+
+    var block = key.selectAll("rect")
+       .data(color.range().map(function(d) {
+        d = color.invertExtent(d);
+        if (d[0] == null) d[0] = x.domain()[0];
+        if (d[1] == null) d[1] = x.domain()[1];
+        return d;
+      }));
+
+    block.enter().append("rect")
+      .attr("height", 8)
+      .attr("x", function(d) { return x(d[0]); })
+      .attr("width", function(d) { return x(d[1]) - x(d[0]); })
+      .attr("fill", function(d) { return color(d[0]); });
+  }
+
 }

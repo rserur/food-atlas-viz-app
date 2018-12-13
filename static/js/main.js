@@ -90,20 +90,19 @@ function isBrushed(brush_coords, cx, cy) {
 
 let map_selection = $("input[name='map_selection']:checked").val();
 
-
 $(':radio[name="map_selection"]').change(function() {
   map_selection=$("input[name='map_selection']:checked").val();
   map.updateMapSelection(map_selection);
 });
 
 const mapVariableOptions = {
-  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015" },
-  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015" },
-  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015" },
-  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016" },
-  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014" },
-  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016" },
-  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016" }
+  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues },
+  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemeGreys },
+  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemePuBu },
+  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemePuRd },
+  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeOrRd },
+  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples },
+  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens }
 }
 const map = new Map(
   {
