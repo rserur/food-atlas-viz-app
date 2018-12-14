@@ -10,7 +10,7 @@ app.secret_key = "project-e14-a"
 
 # local postgresql or heroku postgresql
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
-#db.init_app(app)
+db.init_app(app)
 
 heroku = Heroku(app)
 
