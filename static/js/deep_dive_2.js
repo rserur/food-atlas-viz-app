@@ -78,11 +78,11 @@ ScatterGraph.prototype.wrangleData = function(){
 }
 
 
-ScatterGraph.prototype.updateVis = function(data){ 
+ScatterGraph.prototype.updateVis = function(){ 
   var vis = this;
 
   var bubble = vis.g.selectAll('.bubble')
-      .data(data)
+      .data(vis.data)
       .enter()
       .append('circle')
       .attr('class', 'bubble')
