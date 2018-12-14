@@ -2,7 +2,47 @@ var allData = [];
 
 var us_map, deep_dive_1, deep_dive_2, deep_dive_3;
 
-loadData();
+loadDbData();
+
+function loadDbData() {
+	d3.json("/load_data", function (data) {
+
+	  data = data['food_atlas'];
+		data.forEach(function(d){
+			d.food_tax14 = +d.food_tax14;
+			d.pct_obese_adults13 = +d.pct_obese_adults13;
+			d.ffrpth14 = +d.ffrpth14;
+			d.pct_laccess_pop15 = +d.pct_laccess_pop15;
+			d.fmrktpth16 = +d.fmrktpth16;
+			d.metro13 = +d.metro13;
+			d.fips = +d.fips;
+			d.State = +d.State;
+		});
+
+		filtered_data = [];
+		var len = data.length;
+
+		for (var i = 0; i < len; i++)
+		{
+			var obj = new Object();
+			obj.obesity = data[i].pct_obese_adults13;
+			obj.food_tax = data[i].food_tax14;
+			obj.fast_food = data[i].ffrpth14;
+			obj.low_access = data[i].pct_laccess_pop15;
+			obj.farmersmarkets = data[i].fmrktpth16;
+			obj.metro = data[i].metro13;
+			obj.fips = data[i].fips;
+			obj.state = data[i].State;
+			filtered_data.push(obj);
+		}
+
+		allData = filtered_data;
+		//console.log(filtered_data);
+		createVis();
+	});
+}
+
+//loadData();
 
 // TODO: Move all points data is loaded to this single method.
 // (lines 79-98 here and 1-22 in deep_dive_3.js)

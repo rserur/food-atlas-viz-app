@@ -31,7 +31,7 @@ class FoodAtlas(db.Model):
     pct_snap16 = db.Column(db.Float, nullable=False)
     pct_nslp15 = db.Column(db.Float, nullable=False)
     pct_sbp15 = db.Column(db.Float, nullable=False)
-    pch_sfsp_09_15 = db.Column(db.Float, nullable=False)
+    pct_sfsp15 = db.Column(db.Float, nullable=False)
     pct_wic15 = db.Column(db.Float, nullable=False)
     sodatax_stores14 = db.Column(db.Float, nullable=False)
     sodatax_vendm14 = db.Column(db.Float, nullable=False)
