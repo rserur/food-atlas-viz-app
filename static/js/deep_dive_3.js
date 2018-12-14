@@ -75,8 +75,8 @@ function draw_viz_3(data) {
     .attr('cx', function(d){ return xScale(d.food_tax); })
     .attr('cy', function(d){ return yScale(d.obesity); })
     .attr('r', function(d){ return radius(d.low_access); })
-    .attr("opacity", .4)
-    .style('fill', 'green');
+    .attr("opacity", .5)
+    .style('fill', 'rgb(248,196,113)');
 
   bubble.
         attr("transform", "translate(0,0)scale(0.85)");
