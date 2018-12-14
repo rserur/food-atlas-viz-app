@@ -37,7 +37,7 @@ function loadDbData() {
 		}
 
 		allData = filtered_data;
-		//console.log(filtered_data);
+		console.log(filtered_data);
 		createVis();
 	});
 }
