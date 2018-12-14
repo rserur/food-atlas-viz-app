@@ -2,11 +2,14 @@
 from flask import Flask, flash, render_template, request, url_for, redirect, session
 import os
 
+from flask_heroku import Heroku
 
 app = Flask(__name__)
 
-# Local db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+# local postgresql or heroku postgresql
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+
+heroku = Heroku(app)
 
 # index route
 @app.route('/')
