@@ -9,7 +9,7 @@ cur = conn.cursor()
 data = pd.read_csv('data/df_for_webapp.csv')
 
 for i, d in data.iterrows():
-        cur.execute('''INSERT INTO food_atlas (fips, county, state, pct_laccess_pop15,
+        cur.execute('''INSERT INTO food_atlas (id, fips, county, state, pct_laccess_pop15,
         pct_laccess_lowi15, pct_laccess_hhnv15, pct_laccess_snap15, pct_laccess_child15,
         pct_laccess_seniors15, pct_laccess_white15, pct_laccess_black15, pct_laccess_hisp15,
         pct_laccess_nhasian15, pct_laccess_nhna15, pct_laccess_nhpi15, pct_laccess_multir15,
@@ -20,10 +20,10 @@ for i, d in data.iterrows():
         pct_fmrkt_baked16, pct_fmrkt_otherfood16, foodhub16, pct_diabetes_adults13,
         pct_obese_adults13, pct_hspa15, recfacpth14, pct_nhwhite10, pct_nhblack10, pct_hisp10, pct_nhasian10,
         pct_nhna10, pct_nhpi10, pct_65older10, pct_18younger10, medhhinc15, povrate15, metro13)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
                 %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
                 %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
-        (d.FIPS,d.County,d.State,d.PCT_LACCESS_POP15,
+        (d.FIPS, d.FIPS,d.County,d.State,d.PCT_LACCESS_POP15,
        d.PCT_LACCESS_LOWI15,d.PCT_LACCESS_HHNV15,d.PCT_LACCESS_SNAP15,d.PCT_LACCESS_CHILD15,
        d.PCT_LACCESS_SENIORS15,d.PCT_LACCESS_WHITE15,d.PCT_LACCESS_BLACK15,d.PCT_LACCESS_HISP15,
        d.PCT_LACCESS_NHASIAN15,d.PCT_LACCESS_NHNA15,d.PCT_LACCESS_NHPI15,d.PCT_LACCESS_MULTIR15,
