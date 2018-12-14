@@ -5,22 +5,20 @@ import os
 from flask_heroku import Heroku
 
 app = Flask(__name__)
-
 app.secret_key = "project-e14-a"
 
 # local postgresql or heroku postgresql
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
-db.init_app(app)
-
 heroku = Heroku(app)
 
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+db.init_app(app)
 
 # index route
 @app.route('/')
 @app.route('/index')
 def index():
     map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
-    return render_template('index.html', title="Home", map_options=map_options)
+    return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options)
 
 # prediction calculator route
 @app.route('/prediction-calculator')
