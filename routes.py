@@ -1,12 +1,15 @@
-# 2018-12-09 @ 05:29:55 PM
-from flask import Flask, flash, render_template, request, url_for, redirect, session
+from flask import Flask, flash, render_template, request, url_for, redirect, session, jsonify
+from models import db,FoodAtlas
 import os
 
 
 app = Flask(__name__)
 
 # Local db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5433/final_project'
+db.init_app(app)
+
+app.secret_key = "project-e14-a"
 
 # index route
 @app.route('/')
@@ -21,9 +24,29 @@ def calculator():
 
     return render_template('calculator.html', title="Prediction Calculator")
 
-# @app.route('/load_data', methods=['GET'])
-# def load_data():
-#   # test
+@app.route('/load_data', methods=['GET'])
+def load_data():
+    food_atlas_json = {'food_atlas': []}
+    food_atlas = FoodAtlas.query.all()
+    for record in food_atlas:
+        food_atlas_info = record.__dict__
+        del food_atlas_info['_sa_instance_state']
+        food_atlas_json['food_atlas'].append(food_atlas_info)
+    return jsonify(food_atlas_json)
+
+@app.route ('/get_counties/<state>', methods=['GET'])
+def get_counties(state):
+    counties = db.session.query(FoodAtlas).filter_by(state=state)
+    counties_json = {'counties': []}
+    for record in counties:
+        counties_info  = record.__dict__
+        del counties_info['_sa_instance_state']
+        counties_json['counties'].append(counties_info)
+    return jsonify(counties_json)
+    # counties = FoodAtlas.query.filter(FoodAtlas.state == state).county
+    # print(counties)
+    # map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
+    # return render_template('index.html', title="Home", map_options=map_options)
 
 @app.route("/data/<path:csv>")
 def getCSV(csv):
