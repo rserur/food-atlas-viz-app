@@ -1,3 +1,10 @@
+// TODO: Fix D3 enter, update, and exit pattern
+// TODO: Dynamically update legend, color scheme, and ranges based on mapSelection
+// US MAP Class
+// some sources drawn upon:
+// https://bl.ocks.org/mbostock/4122298
+// http://bl.ocks.org/bycoffe/5871252
+// https://github.com/stirlingw/Harvard-CS171/blob/master/LAB7/CS171-Lab7-Instructions.pdf
 class Map {
   constructor({ mapSelection, parentElement } = {}) {
     this.d3_map = d3.map();
@@ -8,17 +15,18 @@ class Map {
 
   updateMapSelection(mapSelection) {
     this.mapSelection = mapSelection;
-    this.updateVis()
+    this.updateMap()
   }
 
   updateData(data) {
     this.data = data;
     this.counties = data.objects.counties;
     this.nation = data.objects.nation;
-    this.updateVis();
+    this.updateLegend();
+    this.updateMap();
   }
 
-  initVis(data) {
+  initMap(data) {
     this.svg = d3.select("#" + this.parentElement)
       .append("svg")
       .attr("width", 960)
@@ -26,7 +34,6 @@ class Map {
       .attr("preserveAspectRatio", "xMinYMin meet")
       .attr("viewBox", "0 0 960 600")
       .classed("us-map", true);
-
 
     // Create element for legend
     const g = this.svg.append("g")
@@ -53,24 +60,13 @@ class Map {
 
     this.path = d3.geoPath();
 
-    // Legend color scale
-    g.selectAll("rect")
-      .data(color.range().map(function(d) {
-          d = color.invertExtent(d);
-          if (d[0] == null) d[0] = x.domain()[0];
-          if (d[1] == null) d[1] = x.domain()[1];
-          return d;
-        }))
-      .enter().append("rect")
-        .attr("height", 8)
-        .attr("x", function(d) { return x(d[0]); })
-        .attr("width", function(d) { return x(d[1]) - x(d[0]); })
-        .attr("fill", function(d) { return color(d[0]); });
-
     this.updateData(data);
   }
 
-  updateVis() {
+  updateMap() {
+
+    color.range(this.mapVariableOptions[this.mapSelection].variableColorScheme);
+
     this.svg.append("g")
       .attr("class", "counties")
     .selectAll("path")
@@ -83,7 +79,11 @@ class Map {
         }
       })
       .attr("d", this.path)
-      .attr("id", function(d) { return d.id }); // id is FIPS value
+      .attr("id", function(d) { return d.id })
+      .on("click", function(d) {
+        console.log("clicked county ", d.id);
+        filterFromMap(d);
+      }); // id is FIPS value
 
     this.svg.append("path")
       .attr("class", "county-borders")
@@ -92,5 +92,34 @@ class Map {
     this.svg.append("path")
       .attr("class", "nation-border")
       .attr("d", this.path(topojson.feature(this.data, this.nation)));
+
+    this.updateLegend();
   }
+
+  updateLegend() {
+    d3.select(".caption")
+      .text(this.mapVariableOptions[this.mapSelection].variableName);
+
+    // Legend color scale
+    const key = d3.select(".key");
+    
+    key.selectAll('rect')
+       .remove();
+
+    var block = key.selectAll("rect")
+                   .data(color.range().map(function(d) {
+                    d = color.invertExtent(d);
+                    if (d[0] == null) d[0] = x.domain()[0];
+                    if (d[1] == null) d[1] = x.domain()[1];
+                    return d;
+                  }));
+
+    block.enter()
+          .append("rect")
+          .attr("height", 8)
+          .attr("x", function(d) { return x(d[0]); })
+          .attr("width", function(d) { return x(d[1]) - x(d[0]); })
+          .attr("fill", function(d) { return color(d[0]); });
+  }
+
 }

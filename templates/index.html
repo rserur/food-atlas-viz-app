@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
   <header>
-    <!-- Fixed navbar -->
+    <!-- NAVBAR (FIXED) -->
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
      <ul class="navbar-nav mr-auto">
       <a class="navbar-brand" href="#">e14a Team Project</a>
     </ul>
+    <!-- TODO: Add verbose map descriptions based on selection + full map description names (instead of abbrs like pop15) -->
     <form class="form-inline mt-2 mt-md-0">
       <div class="btn-group btn-group-toggle center" data-toggle="buttons">
         <button type="button" class="btn btn-link" disabled>Select Map:</button>
@@ -69,6 +70,9 @@
       </div>
     </div>
   </main>
+  <!-- TODO: dynamically load state and county forms below using backend data -->
+  <!-- TODO: connect Calculate and Reset buttons to predictions and map regeneration -->
+  <!-- PREDICTION CALCULATOR SIDEBAR -->
   <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
       <h3 class="pred_calc_title">Prediction Calculator</h3>
@@ -129,6 +133,7 @@
           </select>
         </div>
         </div>
+        <!-- TODO: Dynamically set county based on map selections + clicks -->
         <div class="row">
           <div class="col">
             <label for="selected_county">Select County:</label>

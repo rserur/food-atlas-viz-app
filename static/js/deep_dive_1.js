@@ -12,6 +12,9 @@
 	// DEBUG RAW DATA
 	console.log(this.data);
 	this.initVis();
+
+
+	// IDEA - have the filter on map auto filter on google maps to show all grocery stores/fast food
 }
 
 /*
@@ -21,7 +24,7 @@
 ScatterPlot.prototype.initVis = function(){
 	var vis = this;
 
-	vis.margin = { top: 20, right: 0, bottom: 30, left: 0 };
+	vis.margin = { top: 20, right: 0, bottom: 40, left: 40 };
 
 	vis.width = 365 - vis.margin.left - vis.margin.right,
 	vis.height = 200 - vis.margin.top - vis.margin.bottom;
@@ -68,6 +71,21 @@ ScatterPlot.prototype.initVis = function(){
 		.attr("y", 10)
 		.text("");
 
+	vis.svg.append('text')
+    .attr("transform", "rotate(-90)")
+    .attr('x', -90)
+    .attr('y', -25)
+    .attr('class', 'label')
+    .text('Obesity Rate');
+
+  	vis.svg.append('text')
+    .attr('x', (vis.width/2))
+    .attr('y', vis.height + 35)
+    .attr('text-anchor', 'end')
+    .attr('class', 'label')
+    .text('Fast Food');
+
+
 	vis.wrangleData();
 
 }
@@ -83,29 +101,83 @@ ScatterPlot.prototype.wrangleData = function(){
 
 	// In the first step no data wrangling/filtering needed
 	//vis.displayData = vis.stackedData;
-	vis.updateVis();
+	vis.updateVis(vis.data);
 }
 
-ScatterPlot.prototype.updateVis = function(){
+ScatterPlot.prototype.updateVis = function(data){
 	var vis = this;
 
 	var bubble = vis.svg.selectAll("circle")
-	.data(vis.data)
+	.data(data)
 	.enter()
 	.append("circle")
 	.attr("cx", function(d) { return vis.xScale(d.fast_food); })
 	.attr("cy", function(d) { return vis.yScale(d.obesity); })
 	.attr("r", function(d) { return vis.radius(d.low_access); })
-	.style("fill", "steelblue")
-	.attr("opacity", .4)
+	.style("fill", function(d) { 
+		var color;
+		if (d.metro == 1) {
+			color = 'steelblue';
+		}
+		else {
+			color = 'purple';
+		}
+		return color;
+	})
+	.attr("opacity", .2)
+	.attr("class", "non_brushed")
 	.on("mouseover", function(d) {
-		vis.tooltip.text(d.name);
+		vis.tooltip.text(d.obesity);
 	});
+
+    //testing brushed data
+    vis.brush = d3.brush()
+    .on("brush", highlightCircles);
+
+    vis.svg.append("g").call(vis.brush);
+
+
+    function highlightCircles() {
+
+		if (d3.event.selection != null) {
+	      	bubble.attr("class", "non_brushed").attr("opacity", ".3");
+
+
+			var brush_coords = d3.brushSelection(this);
+
+			bubble.filter(function () {
+			var cx = d3.select(this).attr("cx"),
+			    cy = d3.select(this).attr("cy");
+
+			return isBrushed(brush_coords, cx, cy);
+			})
+			.attr("class", "brushed")
+			.attr("opacity", "1");
+
+
+			var brushed_data = d3.selectAll(".brushed").data();
+			console.log("deep dive 1 brushed data: ", brushed_data.length);
+
+			if (brushed_data.length > 0) {
+				deep_dive_2.brushData(brushed_data);
+				// THIS IS WHERE YOU NEED TO UPDATE OTHER VISUALIZATIONS, NOT THIS ONE
+			}
+			else {
+				deep_dive_2.updateVis();
+			}
+
+		}
+		else {
+			deep_dive_2.updateVis();
+		}
+
+    }
 
 
 	bubble.exit().remove();
 
 }
+
 
 /*
 d3.csv("data/combined.csv", function (data) {

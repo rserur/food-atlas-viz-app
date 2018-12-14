@@ -2,14 +2,18 @@ from flask import Flask, flash, render_template, request, url_for, redirect, ses
 from models import db,FoodAtlas
 import os
 
+from flask_heroku import Heroku
 
 app = Flask(__name__)
 
-# Local db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5433/final_project'
-db.init_app(app)
-
 app.secret_key = "project-e14-a"
+
+# local postgresql or heroku postgresql
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+# db.init_app(app)
+
+heroku = Heroku(app)
+
 
 # index route
 @app.route('/')

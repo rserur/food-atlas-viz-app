@@ -4,6 +4,9 @@ var us_map, deep_dive_1, deep_dive_2, deep_dive_3;
 
 loadData();
 
+// TODO: Move all points data is loaded to this single method.
+// (lines 79-98 here and 1-22 in deep_dive_3.js)
+// TODO: fetch data from API endpoint loading from database
 function loadData() {
 
 	// ******this data should be looked at, I think it needs to have null values dropped
@@ -21,6 +24,9 @@ function loadData() {
 			d.FFRPTH14 = +d.FFRPTH14;
 			d.PCT_LACCESS_POP15 = +d.PCT_LACCESS_POP15;
 			d.FMRKTPTH16 = +d.FMRKTPTH16;
+			d.METRO13 = +d.METRO13;
+			d.FIPS = +d.FIPS;
+			d.State = +d.State;
 		});
 
 		filtered_data = [];
@@ -34,6 +40,9 @@ function loadData() {
 			obj.fast_food = data[i].FFRPTH14;
 			obj.low_access = data[i].PCT_LACCESS_POP15;
 			obj.farmersmarkets = data[i].FMRKTPTH16;
+			obj.metro = data[i].METRO13;
+			obj.fips = data[i].FIPS;
+			obj.state = data[i].State;
 			filtered_data.push(obj);
 		}
 
@@ -50,6 +59,35 @@ function createVis() {
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 }
 
+
+// identifies county clicked and filters lower visualizations to that state
+function filterFromMap(d) {
+	//allData.filter(function(obj) { return allData.fips == county} );
+
+	// the problem is that this csv doesn't have the FIPS data in it
+	console.log(map.data.objects.counties);
+	//console.log(topojson.feature(this.data, this.counties).features);
+}
+
+// brush and update vis functions
+
+function isBrushed(brush_coords, cx, cy) {
+
+	var x0 = brush_coords[0][0] ,
+	 x1 = brush_coords[1][0],
+	 y0 = brush_coords[0][1],
+	 y1 = brush_coords[1][1];
+
+	return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1;
+}
+
+
+
+
+
+
+// TODO: Dynamically regenerate deep dives based on this map selection value?
+
 let map_selection = $("input[name='map_selection']:checked").val();
 
 $(':radio[name="map_selection"]').change(function() {
@@ -58,13 +96,13 @@ $(':radio[name="map_selection"]').change(function() {
 });
 
 const mapVariableOptions = {
-  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015" },
-  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015" },
-  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015" },
-  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016" },
-  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014" },
-  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016" },
-  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016" }
+  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9].reverse() },
+  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemePuBu[9].reverse() },
+  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemeReds[9].reverse() },
+  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemeRdPu[9].reverse() },
+  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeYlOrRd[9].reverse() },
+  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9].reverse() },
+  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens[9].reverse() }
 }
 const map = new Map(
   {
@@ -92,7 +130,7 @@ d3.queue()
 function draw_map(error, us) {
   if (error) throw error;
 
-  map.initVis(us);
+  map.initMap(us);
 }
 
 var color = d3.scaleQuantize()
