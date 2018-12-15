@@ -81,7 +81,7 @@ class Map {
       .attr("d", this.path)
       .attr("id", function(d) { return d.id })
       .on("click", function(d) {
-        console.log("clicked county ", d.id);
+        console.log(d);
         filterFromMap(d);
       }); // id is FIPS value
 
@@ -102,7 +102,7 @@ class Map {
 
     // Legend color scale
     const key = d3.select(".key");
-    
+
     key.selectAll('rect')
        .remove();
 

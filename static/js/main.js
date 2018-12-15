@@ -1,6 +1,6 @@
-var allData = [];
+let allData = [];
 
-var us_map, deep_dive_1, deep_dive_2, deep_dive_3;
+let us_map, deep_dive_1, deep_dive_2, deep_dive_3, selectedCounty;
 
 loadDbData();
 
@@ -9,6 +9,7 @@ function loadDbData() {
 
 	  data = data['food_atlas'];
 		data.forEach(function(d){
+			d.id = +d.id;
 			d.food_tax14 = +d.food_tax14;
 			d.pct_obese_adults13 = +d.pct_obese_adults13;
 			d.ffrpth14 = +d.ffrpth14;
@@ -16,7 +17,8 @@ function loadDbData() {
 			d.fmrktpth16 = +d.fmrktpth16;
 			d.metro13 = +d.metro13;
 			d.fips = +d.fips;
-			d.State = +d.State;
+			d.state = d.state;
+			d.county = d.county;
 		});
 
 		filtered_data = [];
@@ -32,7 +34,8 @@ function loadDbData() {
 			obj.farmersmarkets = data[i].fmrktpth16;
 			obj.metro = data[i].metro13;
 			obj.fips = data[i].fips;
-			obj.state = data[i].State;
+			obj.county = data[i].county;
+			obj.state = data[i].state;
 			filtered_data.push(obj);
 		}
 
@@ -47,51 +50,53 @@ function loadDbData() {
 // TODO: Move all points data is loaded to this single method.
 // (lines 79-98 here and 1-22 in deep_dive_3.js)
 // TODO: fetch data from API endpoint loading from database
-function loadData() {
-
-	// ******this data should be looked at, I think it needs to have null values dropped
-	// and metro should be a boolean
-	d3.csv("data/combined.csv", function (data) {
-	//  data.shift(); // Remove first element with headers
-	  // Process data here
-
-	  // temporary until migrated over
-	    data = data.filter((x, i) => i % 2)
-
-		data.forEach(function(d){
-			d.FOOD_TAX14 = +d.FOOD_TAX14;
-			d.PCT_OBESE_ADULTS13 = +d.PCT_OBESE_ADULTS13;
-			d.FFRPTH14 = +d.FFRPTH14;
-			d.PCT_LACCESS_POP15 = +d.PCT_LACCESS_POP15;
-			d.FMRKTPTH16 = +d.FMRKTPTH16;
-			d.METRO13 = +d.METRO13;
-			d.FIPS = +d.FIPS;
-			d.State = +d.State;
-		});
-
-		filtered_data = [];
-		var len = data.length;
-
-		for (var i = 0; i < len; i++)
-		{
-			var obj = new Object();
-			obj.obesity = data[i].PCT_OBESE_ADULTS13;
-			obj.food_tax = data[i].FOOD_TAX14;
-			obj.fast_food = data[i].FFRPTH14;
-			obj.low_access = data[i].PCT_LACCESS_POP15;
-			obj.farmersmarkets = data[i].FMRKTPTH16;
-			obj.metro = data[i].METRO13;
-			obj.fips = data[i].FIPS;
-			obj.state = data[i].State;
-			filtered_data.push(obj);
-		}
-
-	  allData = filtered_data;
-	  //console.log(filtered_data);
-	  createVis();
-	});
-
-}
+// function loadData() {
+//
+// 	// ******this data should be looked at, I think it needs to have null values dropped
+// 	// and metro should be a boolean
+// 	d3.csv("data/combined.csv", function (data) {
+// 	//  data.shift(); // Remove first element with headers
+// 	  // Process data here
+//
+// 	  // temporary until migrated over
+// 	    data = data.filter((x, i) => i % 2)
+//
+// 		data.forEach(function(d){
+// 			d.FOOD_TAX14 = +d.FOOD_TAX14;
+// 			d.PCT_OBESE_ADULTS13 = +d.PCT_OBESE_ADULTS13;
+// 			d.FFRPTH14 = +d.FFRPTH14;
+// 			d.PCT_LACCESS_POP15 = +d.PCT_LACCESS_POP15;
+// 			d.FMRKTPTH16 = +d.FMRKTPTH16;
+// 			d.METRO13 = +d.METRO13;
+// 			d.FIPS = +d.FIPS;
+// 			d.State = +d.State;
+// 		});
+//
+// 		filtered_data = [];
+// 		var len = data.length;
+//
+// 		for (var i = 0; i < len; i++)
+// 		{
+// 			var obj = new Object();
+// 			obj.id = data[i].FIPS;
+// 			obj.obesity = data[i].PCT_OBESE_ADULTS13;
+// 			obj.food_tax = data[i].FOOD_TAX14;
+// 			obj.fast_food = data[i].FFRPTH14;
+// 			obj.low_access = data[i].PCT_LACCESS_POP15;
+// 			obj.farmersmarkets = data[i].FMRKTPTH16;
+// 			obj.metro = data[i].METRO13;
+// 			obj.fips = data[i].FIPS;
+// 			obj.county = data[i].county;
+// 			obj.state = data[i].state;
+// 			filtered_data.push(obj);
+// 		}
+//
+// 	  allData = filtered_data;
+// 	  //console.log(filtered_data);
+// 	  createVis();
+// 	});
+//
+// }
 
 function createVis() {
 	//console.log(allData);
@@ -101,13 +106,18 @@ function createVis() {
 
 
 // identifies county clicked and filters lower visualizations to that state
-function filterFromMap(d) {
+const filterFromMap = (d) => {
 	//allData.filter(function(obj) { return allData.fips == county} );
 
 	// the problem is that this csv doesn't have the FIPS data in it
-	console.log(map.data.objects.counties);
+	selectedCounty = allData.find((obj)=> { return obj.fips == d.id });
+
+	if (selectedCounty) {
+		console.log(selectedCounty);
+		$('.pred_calc_selected_county').html(`${selectedCounty.county}, ${selectedCounty.state}`);
+	}
 	//console.log(topojson.feature(this.data, this.counties).features);
-}
+};
 
 // brush and update vis functions
 
@@ -162,7 +172,7 @@ d3.queue()
         snapspth16: d[mapVariableOptions.snapspth16.variableCode],
         ffrpth14: d[mapVariableOptions.ffrpth14.variableCode],
         snap16: d[mapVariableOptions.snap16.variableCode],
-        fmrktpth16: d[mapVariableOptions.fmrktpth16.variableCode]
+        fmrktpth16: d[mapVariableOptions.fmrktpth16.variableCode],
       })
   })
   .await(draw_map);
