@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 class FoodAtlas(db.Model):
     __tablename__ = 'food_atlas'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     fips = db.Column(db.Integer, unique=True, nullable=False)
     county = db.Column(db.String(255))
     state = db.Column(db.String(255))
