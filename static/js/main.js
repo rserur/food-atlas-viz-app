@@ -102,20 +102,33 @@ function createVis() {
 	//console.log(allData);
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
+	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
 }
 
 
 // identifies county clicked and filters lower visualizations to that state
 const filterFromMap = (d) => {
 	//allData.filter(function(obj) { return allData.fips == county} );
+	console.log("in filter from map");
 
 	// the problem is that this csv doesn't have the FIPS data in it
 	selectedCounty = allData.find((obj)=> { return obj.fips == d.id });
 
 	if (selectedCounty) {
+		console.log(selectedCounty.state);
 		console.log(selectedCounty);
 		$('.pred_calc_selected_county').html(`${selectedCounty.county}, ${selectedCounty.state}`);
+
+		// filter data to just from that state
+		stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
+		// stateData = allData.find((obj)=> { return obj.state == selectedCounty.state });
+		console.log(stateData);
+		deep_dive_1.filterData(selectedCounty.state);
+		deep_dive_2.filterData(selectedCounty.state);
+		deep_dive_3.filterData(selectedCounty.state);
+
 	}
+
 	//console.log(topojson.feature(this.data, this.counties).features);
 };
 

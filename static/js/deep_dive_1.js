@@ -4,7 +4,7 @@
  * @param _data			    -- the data
  */
 
- ScatterPlot = function(_parentElement, _data){
+ScatterPlot = function(_parentElement, _data){
 	this.parentElement = _parentElement;
 	this.data = _data;
 	this.displayData = []; // see data wrangling
@@ -160,15 +160,16 @@ ScatterPlot.prototype.updateVis = function(data){
 
 			if (brushed_data.length > 0) {
 				deep_dive_2.brushData(brushed_data);
-				// THIS IS WHERE YOU NEED TO UPDATE OTHER VISUALIZATIONS, NOT THIS ONE
+				deep_dive_3.brushData(brushed_data);
 			}
 			else {
-				deep_dive_2.updateVis();
+				deep_dive_2.updateVis(allData);
+				deep_dive_3.updateVis(allData);
 			}
 
 		}
 		else {
-			deep_dive_2.updateVis();
+			deep_dive_2.updateVis(allData);
 		}
 
     }
@@ -178,7 +179,19 @@ ScatterPlot.prototype.updateVis = function(data){
 
 }
 
+ScatterPlot.prototype.filterData = function(state) { 
+   var vis = this;
+    vis.svg.selectAll('circle')
+      .each(function(d) {
+        if (d.state == state) {
+          d3.select(this).transition().duration(400).style("opacity", "1");
+        }
+        else {
+          d3.select(this).transition().duration(400).style("opacity", "0");
+        }
+      });
 
+}
 /*
 d3.csv("data/combined.csv", function (data) {
   data.shift(); // Remove first element with headers

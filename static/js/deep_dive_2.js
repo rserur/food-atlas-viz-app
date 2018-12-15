@@ -78,11 +78,13 @@ ScatterGraph.prototype.wrangleData = function(){
 }
 
 
-ScatterGraph.prototype.updateVis = function(){ 
+ScatterGraph.prototype.updateVis = function(data){ 
   var vis = this;
 
+  console.log("in update 2");
+
   var bubble = vis.g.selectAll('.bubble')
-      .data(vis.data)
+      .data(data)
       .enter()
       .append('circle')
       .attr('class', 'bubble')
@@ -103,8 +105,12 @@ ScatterGraph.prototype.updateVis = function(){
 ScatterGraph.prototype.brushData = function(data){ 
   var vis = this;
 
+//  vis.g.selectAll('.bubble').exit().remove();
+
   console.log("in deep dive 2 brushData");
   console.log(data.length);
+
+  vis.clearData();
 
   vis.g.selectAll('.bubble')
       .data(data)
@@ -118,9 +124,33 @@ ScatterGraph.prototype.brushData = function(data){
       // .style('fill', 'rgb(34,172,138)')
       // .attr("transform", "translate(30,15)scale(0.85)");
 
-  vis.updateVis();
-//  bubble.exit().remove();
+ // vis.g.selectAll('.bubble').exit().remove();
+ // vis.updateVis(vis.data);
+
 
  // vis.g.selectAll('.bubble')
   //   .attr("transform", "translate(30,15)scale(0.85)");
+}
+
+ScatterGraph.prototype.filterData = function(state) { 
+   var vis = this;
+    vis.g.selectAll('.bubble')
+      .each(function(d) {
+        if (d.state == state) {
+          d3.select(this).transition().duration(400).style("opacity", "1");
+        }
+        else {
+          d3.select(this).transition().duration(400).style("opacity", "0");
+        }
+      });
+
+}
+
+ScatterGraph.prototype.clearData = function() { 
+   var vis = this;
+    vis.g.selectAll('.bubble')
+      .data(vis.data)
+      .attr("opacity", 0);
+
+
 }

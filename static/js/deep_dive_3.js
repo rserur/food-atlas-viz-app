@@ -1,100 +1,124 @@
-d3.csv("/data/combined.csv", function (data) {
-  data = data.filter((x, i) => i % 2)
-  // Process data here
-  data.forEach(function(d){
-    d.FOOD_TAX14 = +d.FOOD_TAX14;
-    d.PCT_OBESE_ADULTS13 = +d.PCT_OBESE_ADULTS13;
-  });
+ScatterThree = function(_parentElement, data) {
+  this.parentElement = _parentElement;
+  this.data = data;
+  this.initVis();
+}
 
-  filtered_data = [];
-  var len = data.length;
-  // data  = JSON.stringify(data);
-  for (var i = 0; i < len; i++)
-	{
-		 var obj = new Object();
-		 obj.obesity = data[i].PCT_OBESE_ADULTS13;
-		 obj.food_tax = data[i].FOOD_TAX14;
-		 obj.low_access = data[i].PCT_LACCESS_POP15;
-	   filtered_data.push(obj);
-	}
-	// filtered_data.push(JSON.stringify(obj));
-  draw_viz_3(filtered_data);
-});
+ScatterThree.prototype.initVis = function(){
 
-function draw_viz_3(data) {
-	var svg = d3.select("#deep_dive_3_svg");
+  var vis = this;
 
-      margin = {top: 20, right: 10, bottom: 50, left: 40},
-      width = +svg.attr("width") - margin.left - margin.right,
-      height = +svg.attr("height") - margin.top - margin.bottom,
-      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var svg = d3.select("#deep_dive_3_svg");
 
-   var radius = d3.scaleSqrt()
+      vis.margin = {top: 20, right: 10, bottom: 50, left: 40},
+      vis.width = +svg.attr("width") - vis.margin.left - vis.margin.right,
+      vis.height = +svg.attr("height") - vis.margin.top - vis.margin.bottom,
+      vis.g = svg.append("g").attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+  vis.radius = d3.scaleSqrt()
     .range([2,5]);
 
   // Creating xScale and yScale
-  var xScale = d3.scaleLinear()
-    .range([0, width]);
-  var yScale = d3.scaleLinear()
-    .range([height, 0]);
+  vis.xScale = d3.scaleLinear()
+    .range([0, vis.width]);
+  vis.yScale = d3.scaleLinear()
+    .range([vis.height, 0]);
 
     // Defining domains
-  xScale.domain(d3.extent(data, function(d){
+  vis.xScale.domain(d3.extent(vis.data, function(d){
     return d.food_tax;
   }));
-  yScale.domain(d3.extent(data, function(d){
+  vis.yScale.domain(d3.extent(vis.data, function(d){
     return d.obesity;
   }));
-  radius.domain(d3.extent(data, function(d){
+  vis.radius.domain(d3.extent(vis.data, function(d){
     return d.low_access;
   })).nice();
 
   // Creating Axes
-  var xAxis = d3.axisBottom()
-    .scale(xScale);
+  vis.xAxis = d3.axisBottom()
+    .scale(vis.xScale);
     // .ticks(5);
-  var yAxis = d3.axisLeft()
-    .scale(yScale);
+  vis.yAxis = d3.axisLeft()
+    .scale(vis.yScale);
     // .ticks(5);
 
-  g.append('g')
-    .attr('transform', 'translate(0,' + height + ')')
+  vis.g.append('g')
+    .attr('transform', 'translate(0,' + vis.height + ')')
     .attr('class', 'x axis')
-    .call(xAxis);
+    .call(vis.xAxis);
 
-  g.append("g")
-      .call(yAxis);
+  vis.g.append("g")
+      .call(vis.yAxis);
 
-  // Creating scatter plot bubbles
+  vis.wrangleData();
+}
+
+ScatterThree.prototype.wrangleData = function(){
+  var vis = this;
+  vis.updateVis(vis.data);
+}
+
+
+ScatterThree.prototype.updateVis = function(data){ 
+  var vis = this;
+
   var bubble;
-  bubble = g.selectAll('.bubble')
+
+  bubble = vis.g.selectAll('.bubble')
     .data(data)
     .enter()
     .append('circle')
     .attr('class', 'bubble')
-    .attr('cx', function(d){ return xScale(d.food_tax); })
-    .attr('cy', function(d){ return yScale(d.obesity); })
-    .attr('r', function(d){ return radius(d.low_access); })
+    .attr('cx', function(d){ return vis.xScale(d.food_tax); })
+    .attr('cy', function(d){ return vis.yScale(d.obesity); })
+    .attr('r', function(d){ return vis.radius(d.low_access); })
     .attr("opacity", .5)
     .style('fill', 'rgb(248,196,113)');
 
   bubble.
         attr("transform", "translate(0,0)scale(0.85)");
 
-  // Adding axex label
-  g.append('text')
-    .attr("transform", "rotate(-90)")
-    .attr('x', -90)
-    .attr('y', -28)
-    .attr('class', 'label')
-    .text('Obesity');
 
-  g.append('text')
-    .attr('x', (width/2) + 60)
-    .attr('y', height + 35)
-    .attr('text-anchor', 'end')
-    .attr('class', 'label')
-    .text('Food Tax');
+  bubble.exit().remove();
+
 }
+
+ScatterThree.prototype.brushData = function(data){ 
+  var vis = this;
+
+  console.log("in deep dive 2 brushData");
+  console.log(data.length);
+
+  vis.clearData();
+
+  vis.g.selectAll('.bubble')
+      .data(data)
+      .attr("opacity", 1).exit().remove();
+
+}
+
+ScatterThree.prototype.filterData = function(state) { 
+   var vis = this;
+    vis.g.selectAll('.bubble')
+      .each(function(d) {
+        if (d.state == state) {
+          d3.select(this).transition().duration(400).style("opacity", "1");
+        }
+        else {
+          d3.select(this).transition().duration(400).style("opacity", "0");
+        }
+      });
+
+}
+
+ScatterThree.prototype.clearData = function() { 
+   var vis = this;
+    vis.g.selectAll('.bubble')
+      .data(vis.data)
+      .attr("opacity", 0);
+
+}
+
 
 
