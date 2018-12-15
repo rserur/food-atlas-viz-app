@@ -2,6 +2,8 @@ let allData = [];
 
 let us_map, deep_dive_1, deep_dive_2, deep_dive_3, selectedCounty;
 
+
+
 loadDbData();
 
 function loadDbData() {
@@ -117,6 +119,7 @@ const filterFromMap = (d) => {
 	if (selectedCounty) {
 		console.log(selectedCounty.state);
 		console.log(selectedCounty);
+
 		$('.pred_calc_selected_county').html(`${selectedCounty.county}, ${selectedCounty.state}`);
 
 		// filter data to just from that state
@@ -126,6 +129,17 @@ const filterFromMap = (d) => {
 		deep_dive_1.filterData(selectedCounty.state);
 		deep_dive_2.filterData(selectedCounty.state);
 		deep_dive_3.filterData(selectedCounty.state);
+
+		getCounties(selectedCounty.state).done(function(data) {
+			counties = data['counties'];
+			populateCountiesDropdown(counties);
+			$('#selected_state').val(selectedCounty.state);
+			$('#selected_county').val(selectedCounty.fips);
+			$(".county-input").val('');
+			$("#input_1").val(selectedCounty.fast_food);
+			$("#input_2").val(selectedCounty.farmersmarkets);
+			$("#input_3").val(selectedCounty.food_tax);
+		});
 
 	}
 
@@ -157,6 +171,48 @@ $(':radio[name="map_selection"]').change(function() {
   map_selection=$("input[name='map_selection']:checked").val();
   map.updateMapSelection(map_selection);
 });
+
+let counties = [];
+
+// Dynamically populates the counties dropdown for the selected state
+$('#selected_state').change(function() {
+
+	if(!$(this).val()) return;
+	getCounties($(this).val()).done(function(data) {
+		counties = data['counties'];
+		populateCountiesDropdown(counties);
+	});
+});
+
+// Dynamically populates the inputs form based on selected county
+$("#selected_county").change(function() {
+	$(".county-input").val('');
+	county = counties.find(c => {return c.fips == $(this).val()});
+	if(!county) return;
+	$("#input_1").val(county.ffrpth14);
+	$("#input_2").val(county.fmrktpth16);
+	$("#input_3").val(county.food_tax14);
+});
+
+// Returns ajax call to counties
+function getCounties(state) {
+	var counties = [];
+	return $.get( "/get_counties/"+ state)
+  	.done(function( data ) {
+			$.each(data['counties'], function(key, county) {
+				counties.push(county);
+			});
+  	});
+}
+
+function populateCountiesDropdown(counties) {
+	var option = '<option val="">Select county</option>';
+	$("#selected_county").html(option);
+	$.each(counties, function(key, county) {
+		option = '<option value="'+ county.fips +'">' + county.county + '</option>';
+		$("#selected_county").append(option);
+	});
+}
 
 const mapVariableOptions = {
   pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9].reverse() },
