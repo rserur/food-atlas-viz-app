@@ -48,26 +48,30 @@ ScatterGraph.prototype.initVis = function(){
   vis.g.append('g')
        .attr('transform', 'translate(0,' + vis.height + ')')
        .attr('class', 'x axis')
+       .attr("class", "deep-dive-axis")
        .call(vis.xAxis);
 
   vis.g.append('g')
        .attr('transform', 'translate(5, 0)')
        .attr('class', 'y axis')
+       .attr("class", "deep-dive-axis")
        .call(vis.yAxis);
 
   vis.g.append('text')
        .attr("transform", "rotate(-90)")
-       .attr('x', -90)
-       .attr('y', -20)
-       .attr('class', 'label')
-       .text('Obesity');
+       .attr('x', -140)
+       .attr('y', -25)
+       .attr('class', 'deep-dive-label')
+       .text('Obesity Rate (%)')
+       .attr("fill", "#fff");
 
   vis.g.append('text')
-       .attr('x', (vis.width/2) + 20)
-       .attr('y', vis.height + 35)
+       .attr('x', (vis.width/2) + 35)
+      .attr('y', vis.height + 40)
        .attr('text-anchor', 'end')
-       .attr('class', 'label')
-       .text('Farmers Markets');
+       .attr('class', 'deep-dive-label')
+       .text('Farmers Markets')
+       .attr("fill", "#fff");
 
   vis.wrangleData();
 }
@@ -78,7 +82,7 @@ ScatterGraph.prototype.wrangleData = function(){
 }
 
 
-ScatterGraph.prototype.updateVis = function(data){ 
+ScatterGraph.prototype.updateVis = function(data){
   var vis = this;
 
   console.log("in update 2");
@@ -102,7 +106,7 @@ ScatterGraph.prototype.updateVis = function(data){
   //   .attr("transform", "translate(30,15)scale(0.85)");
 }
 
-ScatterGraph.prototype.brushData = function(data){ 
+ScatterGraph.prototype.brushData = function(data){
   var vis = this;
 
 //  vis.g.selectAll('.bubble').exit().remove();
@@ -132,7 +136,7 @@ ScatterGraph.prototype.brushData = function(data){
   //   .attr("transform", "translate(30,15)scale(0.85)");
 }
 
-ScatterGraph.prototype.filterData = function(state) { 
+ScatterGraph.prototype.filterData = function(state) {
    var vis = this;
     vis.g.selectAll('.bubble')
       .each(function(d) {
@@ -146,7 +150,7 @@ ScatterGraph.prototype.filterData = function(state) {
 
 }
 
-ScatterGraph.prototype.clearData = function() { 
+ScatterGraph.prototype.clearData = function() {
    var vis = this;
     vis.g.selectAll('.bubble')
       .data(vis.data)

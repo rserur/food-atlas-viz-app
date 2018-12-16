@@ -46,26 +46,30 @@ ScatterThree.prototype.initVis = function(){
   vis.g.append('g')
     .attr('transform', 'translate(0,' + vis.height + ')')
     .attr('class', 'x axis')
+    .attr("class", "deep-dive-axis")
     .call(vis.xAxis);
 
   vis.g.append('g')
        .attr('transform', 'translate(5, 0)')
        .attr('class', 'y axis')
+       .attr("class", "deep-dive-axis")
        .call(vis.yAxis);
 
   vis.g.append('text')
        .attr("transform", "rotate(-90)")
-       .attr('x', -90)
-       .attr('y', -20)
-       .attr('class', 'label')
-       .text('Obesity');
+       .attr('x', -140)
+       .attr('y', -25)
+       .attr('class', 'deep-dive-label')
+       .text('Obesity Rate (%)')
+       .attr("fill", "#fff");
 
   vis.g.append('text')
-       .attr('x', (vis.width/2) + 20)
-       .attr('y', vis.height + 35)
+       .attr('x', (vis.width/2) + 35)
+       .attr('y', vis.height + 40)
        .attr('text-anchor', 'end')
-       .attr('class', 'label')
-       .text('Food Tax');
+       .attr('class', 'deep-dive-label')
+       .text('Food Tax')
+       .attr("fill", "#fff");
 
   vis.wrangleData();
 }
@@ -76,7 +80,7 @@ ScatterThree.prototype.wrangleData = function(){
 }
 
 
-ScatterThree.prototype.updateVis = function(data){ 
+ScatterThree.prototype.updateVis = function(data){
   var vis = this;
 
   var bubble;
@@ -100,7 +104,7 @@ ScatterThree.prototype.updateVis = function(data){
 
 }
 
-ScatterThree.prototype.brushData = function(data){ 
+ScatterThree.prototype.brushData = function(data){
   var vis = this;
 
   console.log("in deep dive 2 brushData");
@@ -114,7 +118,7 @@ ScatterThree.prototype.brushData = function(data){
 
 }
 
-ScatterThree.prototype.filterData = function(state) { 
+ScatterThree.prototype.filterData = function(state) {
    var vis = this;
     vis.g.selectAll('.bubble')
       .each(function(d) {
@@ -128,13 +132,10 @@ ScatterThree.prototype.filterData = function(state) {
 
 }
 
-ScatterThree.prototype.clearData = function() { 
+ScatterThree.prototype.clearData = function() {
    var vis = this;
     vis.g.selectAll('.bubble')
       .data(vis.data)
       .attr("opacity", 0);
 
 }
-
-
-

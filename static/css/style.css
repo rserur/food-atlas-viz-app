@@ -14,18 +14,19 @@ body {
 
 body > .container-fluid {
   padding-top: 70px;
+  padding-bottom: 70px;
 }
 
 p {
   font-family: baskerville-urw, serif;
   font-size: 1.5em;
   font-weight: 700;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
 }
 
 h1 {
   font-family: baskerville-urw, serif;
-  font-size: 1.8em;
+  font-size: 1.75em;
   font-style: italic;
 }
 
@@ -33,6 +34,7 @@ h2 {
   font-family: baskerville-urw, serif;
   font-size: 1.25em;
   font-style: italic;
+  padding-bottom: .5em;
 }
 
 h3 {
@@ -49,6 +51,28 @@ nav.navbar.bg-dark, .card-header, .prediction-calculator {
 
 h3, h4 {
   text-transform: uppercase;
+  font-weight: 900;
+}
+
+.deep-dive-axis line {
+  stroke: white;
+}
+
+.deep-dive-axis path {
+  stroke: white;
+}
+
+.deep-dive-axis text {
+  stroke: white;
+}
+
+.deep-dive-label {
+  color: white;
+  font-weight: 700;
+}
+
+.col-form-label {
+  font-size: .9em;
   font-weight: 900;
 }
 

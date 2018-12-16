@@ -60,30 +60,35 @@ ScatterPlot.prototype.initVis = function(){
   	// changed these both from "g" to "svg" for some reason
   	vis.svg.append("g")
 	  .attr("transform", "translate(0, "+vis.height+")")
+    .attr("class", "deep-dive-axis")
 	  .call(vis.xAxis);
 
 	vis.svg.append("g")
+    .attr("class", "deep-dive-axis")
 	  .call(vis.yAxis);
 
 	vis.tooltip = vis.svg.append("g")
 		.append("text")
 		.attr("x", 10)
 		.attr("y", 10)
-		.text("");
+		.text("")
+    .attr("fill", "#fff");
 
 	vis.svg.append('text')
     .attr("transform", "rotate(-90)")
-    .attr('x', -90)
+    .attr('x', -140)
     .attr('y', -25)
-    .attr('class', 'label')
-    .text('Obesity Rate');
+    .attr('class', 'deep-dive-label')
+    .text('Obesity Rate (%)')
+    .attr("fill", "#fff");
 
   	vis.svg.append('text')
-    .attr('x', (vis.width/2))
-    .attr('y', vis.height + 35)
+    .attr('x', (vis.width/2) + 35)
+    .attr('y', vis.height + 40)
     .attr('text-anchor', 'end')
-    .attr('class', 'label')
-    .text('Fast Food');
+    .attr('class', 'deep-dive-label')
+    .text('Fast Food')
+    .attr("fill", "#fff");
 
 
 	vis.wrangleData();
@@ -114,7 +119,7 @@ ScatterPlot.prototype.updateVis = function(data){
 	.attr("cx", function(d) { return vis.xScale(d.fast_food); })
 	.attr("cy", function(d) { return vis.yScale(d.obesity); })
 	.attr("r", function(d) { return vis.radius(d.low_access); })
-	.style("fill", function(d) { 
+	.style("fill", function(d) {
 		var color;
 		if (d.metro == 1) {
 			color = 'steelblue';
@@ -179,7 +184,7 @@ ScatterPlot.prototype.updateVis = function(data){
 
 }
 
-ScatterPlot.prototype.filterData = function(state) { 
+ScatterPlot.prototype.filterData = function(state) {
    var vis = this;
     vis.svg.selectAll('circle')
       .each(function(d) {
