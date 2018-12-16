@@ -1,6 +1,8 @@
 from flask import Flask, flash, render_template, request, url_for, redirect, session, jsonify
 from models import db,FoodAtlas
 import os
+from sklearn.externals import joblib
+import numpy as np
 
 from flask_heroku import Heroku
 
@@ -8,9 +10,9 @@ app = Flask(__name__)
 app.secret_key = "project-e14-a"
 
 # local postgresql or heroku postgresql
-heroku = Heroku(app)
+# heroku = Heroku(app)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5433/final_project'
 db.init_app(app)
 
 # index route
@@ -51,6 +53,26 @@ def get_counties(state):
     # map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
     # return render_template('index.html', title="Home", map_options=map_options)
 
+@app.route('/predict', methods=['POST'])
+def make_prediction():
+    if request.method=='POST':
+        entered_li = []
+
+        # get request values
+        selected_state = request.form['selected_state']
+        fips = int(request.form['selected_county'])
+        input_1 = request.form['input_1']
+        input_2 = request.form['input_2']
+        input_3 = request.form['input_3']
+
+        # build 1 observation for prediction
+        extra_features = []
+        entered_li = np.concatenate([fips,selected_state,input_1,input_2,input_3,extra_features], axis=0)
+        prediction = model.predict(np.array(entered_li).reshape(1, -1))
+        predicted_val = str(np.squeeze(prediction.round(2)))
+        map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
+        return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options, predicted_val=predicted_val)
+
 @app.route("/data/<path:csv>")
 def getCSV(csv):
     csvFile = os.path.join("data/", csv)
@@ -62,4 +84,5 @@ def parseCSV(fileNm):
   return '\n'.join(lines)
 
 if __name__ == "__main__":
+    model = joblib.load('regr.pkl')
     app.run(debug=True)

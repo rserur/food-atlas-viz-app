@@ -46,32 +46,40 @@
                 <h3 class="my-0">Prediction Calculator</h3>
               </div>
               <div class="card-body prediction-calculator">
-                <div class="row">
-                  <div class="col">
-                    <span class="step">Step 2 <i class="fas fa-arrow-alt-circle-right"></i></span><p class="pred-calc-desc">Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
-                    <input type="hidden" name="selected_state" class="form-control" id="selected_state">
-                    <input type="hidden" name="selected_county" class="form-control" id="selected_county">
+                <form name="predictCalcForm" id="predictCalcForm" method="POST" action="/predict">
+                  <div class="row">
+                    <div class="col">
+                      <span class="step">Step 2 <i class="fas fa-arrow-alt-circle-right"></i></span><p class="pred-calc-desc">Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
+                      <input type="hidden" name="selected_state" class="form-control" id="selected_state">
+                      <input type="hidden" name="selected_county" class="form-control" id="selected_county">
+                    </div>
+                    </div>
+
+                  <hr class="pred_calc_top_hr">
+                  <div class="form-group row">
+                    <label for="input_1" class="col-8 col-form-label">Fast Food (%):</label>
+                    <input type="text" class="form-control col-3" name="input_1" id="input_1" {% if input_1 %} value="{{input_1}}" {% endif %}>
                   </div>
+
+                  <div class="form-group row">
+                    <label for="input_2" class="col-8 col-form-label">Farmers' Markets per 1000:</label>
+                    <input type="text" class="form-control col-3" name="input_2" id="input_2" {% if input_2 %} value="{{input_2}}" {% endif %}>
+                  </div>
+                  <div class="form-group row">
+                    <label for="input_3" class="col-8 col-form-label">Food Tax Rate (%):</label>
+                    <input type="text" class="form-control col-3" name="input_3" id="input_3" {% if input_3 %} value="{{input_3}}" {% endif %}>
                   </div>
 
-                <hr class="pred_calc_top_hr">
-                <div class="form-group row">
-                  <label for="input_1" class="col-8 col-form-label">Fast Food (%):</label>
-                  <input type="text" class="form-control col-3" name="input_1" id="input_1">
-                </div>
-
-                <div class="form-group row">
-                  <label for="input_2" class="col-8 col-form-label">Farmers' Markets per 1000:</label>
-                  <input type="text" class="form-control col-3" name="input_2" id="input_2">
-                </div>
-                <div class="form-group row">
-                  <label for="input_3" class="col-8 col-form-label">Food Tax Rate (%):</label>
-                  <input type="text" class="form-control col-3" name="input_3" id="input_3">
-                </div>
-
+                  <br>
+                  <button type="submit" class="btn btn-primary">Calculate</button>
+                  <button type="button" class="btn btn-default" onclick="resetPredictCalcForm()">Reset</button>
+                </form>
                 <br>
-                <button type="button" class="btn btn-primary">Calculate</button>
-                <button type="button" class="btn btn-default">Reset</button>
+                <h2 id="predicted_val_display">
+                  {% if predicted_val %}
+                    Predicted Obesity: {{ predicted_val }} %
+                  {% endif %}
+                </h2>
               </div>
             </div>
           </div>
