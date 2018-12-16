@@ -48,8 +48,24 @@ ScatterThree.prototype.initVis = function(){
     .attr('class', 'x axis')
     .call(vis.xAxis);
 
-  vis.g.append("g")
-      .call(vis.yAxis);
+  vis.g.append('g')
+       .attr('transform', 'translate(5, 0)')
+       .attr('class', 'y axis')
+       .call(vis.yAxis);
+
+  vis.g.append('text')
+       .attr("transform", "rotate(-90)")
+       .attr('x', -90)
+       .attr('y', -20)
+       .attr('class', 'label')
+       .text('Obesity');
+
+  vis.g.append('text')
+       .attr('x', (vis.width/2) + 20)
+       .attr('y', vis.height + 35)
+       .attr('text-anchor', 'end')
+       .attr('class', 'label')
+       .text('Food Tax');
 
   vis.wrangleData();
 }
@@ -77,7 +93,7 @@ ScatterThree.prototype.updateVis = function(data){
     .style('fill', 'rgb(248,196,113)');
 
   bubble.
-        attr("transform", "translate(0,0)scale(0.85)");
+        attr("transform", "translate(5,0)scale(0.85)");
 
 
   bubble.exit().remove();
