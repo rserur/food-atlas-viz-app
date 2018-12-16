@@ -3,27 +3,28 @@
   <header>
     <!-- NAVBAR (FIXED) -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-     <ul class="navbar-nav mr-auto">
-      <a class="navbar-brand" href="#">e14a Team Project</a>
-    </ul>
-    <!-- TODO: Add verbose map descriptions based on selection + full map description names (instead of abbrs like pop15) -->
-    <form class="form-inline mt-2 mt-md-0">
-      <div class="btn-group btn-group-toggle center" data-toggle="buttons">
-        <button type="button" class="btn btn-primary" disabled>Select Map:</button>
-        {% for key, value in map_options.items() %}
-          <label class="btn btn-primary my-2 my-sm-0 {% if key == map_options[0] %} active {% endif %}" >
-            <input
-              type="radio"
-              name="map_selection"
-              id="map_option"
-              autocomplete="off"
-              value="{{key}}"
-              {% if map_option == map_options[0] %} checked{% endif %} >
-            {{ value }}
-          </label>
-        {% endfor %}
-      </div>
-    </form>
+       <ul class="navbar-nav mr-auto">
+        <li><a class="navbar-brand" href="#">e14a Team Project</a></li>
+        <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#aboutModal">About</button></li>
+      </ul>
+      <!-- TODO: Add verbose map descriptions based on selection + full map description names (instead of abbrs like pop15) -->
+      <form class="form-inline mt-2 mt-md-0">
+        <div class="btn-group btn-group-toggle center" data-toggle="buttons">
+          <button type="button" class="btn btn-primary" disabled>Select Map:</button>
+          {% for key, value in map_options.items() %}
+            <label class="btn btn-primary my-2 my-sm-0 {% if key == map_options[0] %} active {% endif %}" >
+              <input
+                type="radio"
+                name="map_selection"
+                id="map_option"
+                autocomplete="off"
+                value="{{key}}"
+                {% if map_option == map_options[0] %} checked{% endif %} >
+              {{ value }}
+            </label>
+          {% endfor %}
+        </div>
+      </form>
     </nav>
   </header>
   <!-- MAIN CONTENT -->
@@ -46,7 +47,7 @@
               <div class="card-body prediction-calculator">
                 <div class="row">
                   <div class="col">
-                    <p>Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
+                    <p class="pred-calc-desc">Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
                     <input type="hidden" name="selected_state" class="form-control" id="selected_state">
                     <input type="hidden" name="selected_county" class="form-control" id="selected_county">
                   </div>
@@ -109,4 +110,33 @@
     </div>
   </main>
 
+  <!-- About Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="aboutModalLabel">About This Project</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>This project was created by Tushal Desai, Rebecca Larson, Gabe Mansur, and Rachael Serur for Harvard CSCI E-14a class.</p>
+        <p>
+          Our project derive insights about food distribution and the availability of healthy eating options in the US using data from the <a href="https://catalog.data.gov/dataset/food-environment-atlas-f4a22" target="_blank">USDA Food Environment Atlas</a>.
+        </p>
+        <h5>About the Visualizations</h5>
+        <ul>
+          <li><strong>US Map</strong>: This visualization takes d3-geo-driven US county map data and renders choropleths based on selected Food Atlas data topics. It is connected to the prediction calculator and deep dive graphs and acts as a form of navigation for them.</li>
+          <li><strong>Fast Food per 1000 & Obesity</strong>: This is a scatterplot looking at the connection of the number of fast food restaurants per 1000/pop and percent of the population with low access to food (radius) to obesity. This chart will also be iterated on to include visual distinctions between metro and non metro counties. The goal is to give the user an understanding of demographics of a county that may influence the presence of fast food restaurants, and how that impacts the county's health.</li>
+          <li><strong>Farmer's Markets per 1000 & Obesity</strong>: This is a scatterplot looking at the number of Farmer's Markets per 1000/pop and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.</li>
+          <li><strong>Food Tax Rate & Obesity</strong>: This is a scatterplot looking at the food tax rate and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
