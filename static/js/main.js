@@ -290,5 +290,8 @@ function resetPredictCalcForm() {
 	document.getElementById("input_1").value = "";
 	document.getElementById("input_2").value = "";
 	document.getElementById("input_3").value = "";
+	document.getElementsByClassName("selected_county_map")[0].innerHTML = "the country";
+	document.getElementsByClassName("selected_county_pred_calc")[0].innerHTML = "(click on county)";
+	document.getElementsByClassName("selected_county_deep_dive")[0].innerHTML = "the US";
 	document.getElementById("predicted_val_display").innerHTML = "";
 }
