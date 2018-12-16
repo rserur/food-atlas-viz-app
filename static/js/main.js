@@ -259,3 +259,10 @@ var color = d3.scaleQuantize()
 var x = d3.scaleLinear()
     .domain([0, 100])
     .rangeRound([600, 860]);
+
+function resetPredictCalcForm() {
+	document.getElementById("input_1").value = "";
+	document.getElementById("input_2").value = "";
+	document.getElementById("input_3").value = "";
+	document.getElementById("predicted_val_display").innerHTML = "";
+}
