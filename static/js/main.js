@@ -2,7 +2,26 @@ let allData = [];
 
 let us_map, deep_dive_1, deep_dive_2, deep_dive_3, selectedCounty, deep_dive_3_state;
 
+$("#predictCalcForm").submit(function(e) {
 
+    var form = $(this);
+    var url = form.attr('action');
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(),
+           success: function(data)
+           {
+						 	console.log('DID IT');
+					 		$('#predicted_val_display').hide();
+              $('#predicted_obesity').text(data.predictions.predicted_obesity);
+							$('#predicted_val_display').fadeIn();
+           }
+         });
+
+    e.preventDefault();
+});
 
 loadDbData();
 
@@ -143,9 +162,11 @@ const filterFromMap = (d) => {
 			$("#input_1").val(selectedCounty.fast_food);
 			$("#input_2").val(selectedCounty.farmersmarkets);
 			$("#input_3").val(selectedCounty.food_tax);
+			$("#predictCalcForm").submit();
 		});
-
 	}
+
+
 
 	//console.log(topojson.feature(this.data, this.counties).features);
 };

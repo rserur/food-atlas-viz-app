@@ -87,14 +87,14 @@ h5 {
 }
 
 .chart-tooltip {
-  position: absolute;     
-  text-align: center;     
-  width: 80px;          
-  height: 14px;         
-  padding: 2px;       
-  font: 14px sans-serif;    
-  background: #fff; 
-  border: 0px;        
+  position: absolute;
+  text-align: center;
+  width: 80px;
+  height: 14px;
+  padding: 2px;
+  font: 14px sans-serif;
+  background: #fff;
+  border: 0px;
   pointer-events: none;
 }
 
@@ -108,6 +108,12 @@ h5 {
 .pred_calc_top_hr {
   margin-top: 5px;
   margin-bottom: 0px;
+}
+
+#predicted_val_display {
+  color: #00BC8C;
+  font-weight: 700;
+  display: none;
 }
 
 /* US Map */
