@@ -33,7 +33,7 @@ ScatterGraph.prototype.initVis = function(){
 
   vis.xAxis = d3.axisBottom()
                 .scale(vis.xScale)
-                .ticks(3);
+                .ticks(8);
 
   vis.yAxis = d3.axisLeft()
            .scale(vis.yScale);

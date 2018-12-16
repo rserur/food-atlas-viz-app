@@ -24,9 +24,9 @@ ScatterPlot = function(_parentElement, _data){
 ScatterPlot.prototype.initVis = function(){
 	var vis = this;
 
-	vis.margin = { top: 20, right: 0, bottom: 40, left: 40 };
+	vis.margin = { top: 20, right: 10, bottom: 40, left: 40 };
 
-	vis.width = 365 - vis.margin.left - vis.margin.right,
+	vis.width = 280 - vis.margin.left - vis.margin.right,
 	vis.height = 200 - vis.margin.top - vis.margin.bottom;
 
 	// SVG drawing area
@@ -50,7 +50,8 @@ ScatterPlot.prototype.initVis = function(){
 
 
 	vis.xAxis = d3.axisBottom()
-  		.scale(vis.xScale);
+  		.scale(vis.xScale)
+  		.ticks(8);
 
   	vis.yAxis = d3.axisLeft()
   		.scale(vis.yScale);
