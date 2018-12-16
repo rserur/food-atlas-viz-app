@@ -218,9 +218,9 @@ const mapVariableOptions = {
   pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9]},
   lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemePuBu[9]},
   hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemeReds[9]},
-  snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemeRdPu[9].reverse() },
+  // snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemeRdPu[9].reverse() },
   ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeYlOrRd[9]},
-  snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9]},
+  // snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9]},
   fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens[9].reverse() }
 }
 const map = new Map(
@@ -238,9 +238,9 @@ d3.queue()
         pop15: d[mapVariableOptions.pop15.variableCode],
         lowi15: d[mapVariableOptions.lowi15.variableCode],
         hhnv15: d[mapVariableOptions.hhnv15.variableCode],
-        snapspth16: d[mapVariableOptions.snapspth16.variableCode],
+        // snapspth16: d[mapVariableOptions.snapspth16.variableCode],
         ffrpth14: d[mapVariableOptions.ffrpth14.variableCode],
-        snap16: d[mapVariableOptions.snap16.variableCode],
+        // snap16: d[mapVariableOptions.snap16.variableCode],
         fmrktpth16: d[mapVariableOptions.fmrktpth16.variableCode],
       })
   })

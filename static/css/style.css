@@ -16,6 +16,13 @@ body > .container-fluid {
   padding-top: 70px;
 }
 
+p {
+  font-family: baskerville-urw, serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
 h1 {
   font-family: baskerville-urw, serif;
   font-size: 1.8em;
@@ -32,7 +39,7 @@ h3 {
   font-size: 1em;
 }
 
-nav.navbar.bg-dark, .card-header {
+nav.navbar.bg-dark, .card-header, .prediction-calculator {
   background-color: #000 !important;
 }
 
@@ -48,8 +55,8 @@ h3, h4 {
 /* Prediction Calculator */
 /* =================================================================== */
 .pred_calc_selected_county {
-  color: rgb(34,172,138);
   font-weight: bold;
+  border-bottom: 4px solid #22AC8A;
 }
 
 .pred_calc_top_hr {
