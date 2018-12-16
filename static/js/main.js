@@ -134,6 +134,12 @@ const filterFromMap = (d) => {
 
 	// the problem is that this csv doesn't have the FIPS data in it
 	selectedCounty = allData.find((obj)=> { return obj.fips == d.id });
+	if(!selectedCounty){
+		$('.pred_calc_selected_county').html('(click on county)');
+		$("#input_1").val('');
+		$("#input_2").val('');
+		$("#input_3").val('');
+	}
 
 	if (selectedCounty) {
 		console.log(selectedCounty.state);
@@ -159,8 +165,8 @@ const filterFromMap = (d) => {
 			$('#selected_state').val(selectedCounty.state);
 			$('#selected_county').val(selectedCounty.fips);
 			$(".county-input").val('');
-			$("#input_1").val(selectedCounty.fast_food);
-			$("#input_2").val(selectedCounty.farmersmarkets);
+			$("#input_1").val(selectedCounty.fast_food.toFixed(2));
+			$("#input_2").val(selectedCounty.farmersmarkets.toFixed(2));
 			$("#input_3").val(selectedCounty.food_tax);
 			$("#predictCalcForm").submit();
 		});
@@ -170,6 +176,22 @@ const filterFromMap = (d) => {
 
 	//console.log(topojson.feature(this.data, this.counties).features);
 };
+
+// Loads a map tooltip on hover
+const loadToolTip = (id) => {
+	selectedCounty = allData.find((obj)=> { return obj.fips == id });
+	if(!selectedCounty){
+		return '<div class="tip-data"><h5>No data available for this county</h5></div>';
+	}
+	return '<div class="tip-data"><h5>'+ selectedCounty.county +', ' + selectedCounty.state +'</h5>' +
+				 'Fast food / 1000:' +
+  		 	 '<span class="tip-data">'+ selectedCounty.fast_food.toFixed(2) +'</span><br>'+
+				 'Farmers markets / 1000: ' +
+				 '<span class="tip-data">'+ selectedCounty.farmersmarkets.toFixed(2) +'</span><br>'+
+				 'Food tax rate: ' +
+				 '<span class="tip-data">'+ selectedCounty.food_tax +'</span>' +
+				 '</div>';
+}
 
 // brush and update vis functions
 
