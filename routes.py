@@ -56,9 +56,18 @@ def make_prediction():
         df = []
         selected_state = request.form['selected_state']
         fips = int(request.form['selected_county'])
-        input_1 = float(request.form['input_1'])
-        input_2 = float(request.form['input_2'])
-        input_3 = float(request.form['input_3'])
+        try:
+          input_1 = float(request.form['input_1'])
+        except ValueError:
+          input_1 = 0
+        try:
+          input_2 = float(request.form['input_2'])
+        except ValueError:
+          input_2 = 0
+        try:
+          input_3 = float(request.form['input_3'])
+        except ValueError:
+          input_3 = 0
 
         # Set default values for the remaining features for the selected county(fips)
         record = FoodAtlas.query.filter_by(fips=fips).first()
@@ -121,7 +130,7 @@ def make_prediction():
         prediction = model.predict(np.array(df).reshape(1, -1))
         predicted_val = str(np.squeeze(prediction.round(2)))
         map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'hhnv15': 'No Car & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets' }
-        return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options, predicted_val=predicted_val, input_1=input_1, input_2=input_2, input_3=input_3)
+        return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options, predicted_val=predicted_val, input_1=input_1, input_2=input_2, input_3=input_3, fips=fips)
 
 @app.route("/data/<path:csv>")
 def getCSV(csv):

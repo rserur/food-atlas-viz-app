@@ -51,7 +51,7 @@
                     <div class="col">
                       <span class="step">Step 2 <i class="fas fa-arrow-alt-circle-right"></i></span><p class="pred-calc-desc">Take the data further. What would obesity look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
                       <input type="hidden" name="selected_state" class="form-control" id="selected_state">
-                      <input type="hidden" name="selected_county" class="form-control" id="selected_county">
+                      <input type="hidden" name="selected_county" class="form-control" id="selected_county" {% if fips %} value="{{fips}}" {% endif %}>
                     </div>
                     </div>
 
