@@ -9,8 +9,9 @@
       </ul>
       <!-- TODO: Add verbose map descriptions based on selection + full map description names (instead of abbrs like pop15) -->
       <form class="form-inline mt-2 mt-md-0">
+        <span class="step">Step 1 <i class="fas fa-arrow-alt-circle-right"></i></span>
         <div class="btn-group btn-group-toggle center" data-toggle="buttons">
-          <button type="button" class="btn btn-primary" disabled>Select Map:</button>
+          <button type="button" class="btn btn-link" disabled>Select General Map:</button>
           {% for key, value in map_options.items() %}
             <label class="btn btn-primary my-2 my-sm-0 {% if key == map_options[0] %} active {% endif %}" >
               <input
@@ -47,7 +48,7 @@
               <div class="card-body prediction-calculator">
                 <div class="row">
                   <div class="col">
-                    <p class="pred-calc-desc">Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
+                    <span class="step">Step 2 <i class="fas fa-arrow-alt-circle-right"></i></span><p class="pred-calc-desc">Take the data further. What would X look like if we predicted it based on values from <span class="pred_calc_selected_county">(select county)</span>?</p>
                     <input type="hidden" name="selected_state" class="form-control" id="selected_state">
                     <input type="hidden" name="selected_county" class="form-control" id="selected_county">
                   </div>
