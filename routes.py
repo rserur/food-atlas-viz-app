@@ -58,10 +58,67 @@ def make_prediction():
         input_1 = float(request.form['input_1'])
         input_2 = float(request.form['input_2'])
         input_3 = float(request.form['input_3'])
-        df = [input_1,input_2,input_3]
-        # prediction = model.predict(np.array(df).reshape(1, -1))
-        # predicted_val = str(np.squeeze(prediction.round(2)))
-        predicted_val = 100
+
+        # Set default values for the remaining features for the selected county(fips)
+        record = FoodAtlas.query.filter_by(fips=fips).first()
+        supercpth14 = record.supercpth14
+        pct_fmrkt_sfmnp16 = record.pct_fmrkt_sfmnp16
+        ffrpth14 = input_1
+        pct_nhwhite10 = record.pct_nhwhite10
+        pct_nhpi10 = record.pct_nhpi10
+        metro13 = record.metro13
+        pct_fmrkt_snap16 = record.pct_fmrkt_snap16
+        pct_laccess_lowi15 = record.pct_laccess_lowi15
+        convspth14 = record.convspth14
+        pct_65older10 = record.pct_65older10
+        chipstax_stores14 = record.chipstax_stores14
+        pct_fmrkt_frveg16 = record.pct_fmrkt_frveg16
+        pct_laccess_snap15 = record.pct_laccess_snap15
+        pct_laccess_white15 = record.pct_laccess_white15
+        pct_laccess_nhasian15 = record.pct_laccess_nhasian15
+        snapspth16 = record.snapspth16
+        pct_laccess_hisp15 = record.pct_laccess_hisp15
+        pct_laccess_seniors15 = record.pct_laccess_seniors15
+        sodatax_stores14 = record.sodatax_stores14
+        pct_laccess_pop15 = record.pct_laccess_pop15
+        fsrpth14 = record.fsrpth14
+        foodhub16 = record.foodhub16
+        pct_laccess_multir15 = record.pct_laccess_multir15
+        pct_sfsp15 = record.pct_sfsp15
+        pct_fmrkt_wic16 = record.pct_fmrkt_wic16
+        pct_nhna10 = record.pct_nhna10
+        food_tax14 = input_3
+        pct_fmrkt_credit16 = record.pct_fmrkt_credit16
+        pct_laccess_hhnv15 = record.pct_laccess_hhnv15
+        pct_laccess_nhna15 = record.pct_laccess_nhna15
+        chipstax_vendm14 = record.chipstax_vendm14
+        medhhinc15 = record.medhhinc15
+        pct_fmrkt_anmlprod16 = record.pct_fmrkt_anmlprod16
+        pct_hspa15 = record.pct_hspa15
+        pct_wic15 = record.pct_wic15
+        pct_18younger10 = record.pct_18younger10
+        pct_fmrkt_otherfood16 = record.pct_fmrkt_otherfood16
+        fmrktpth16 = input_2
+        pct_fmrkt_wiccash16 = record.pct_fmrkt_wiccash16
+        povrate15 = record.povrate15
+        pct_fmrkt_baked16 = record.pct_fmrkt_baked16
+        pct_snap16 = record.pct_snap16
+        pct_nhblack10 = record.pct_nhblack10
+        pct_nhasian10 = record.pct_nhasian10
+        pct_laccess_black15 = record.pct_laccess_black15
+        sodatax_vendm14 = record.sodatax_vendm14
+        pct_nslp15 = record.pct_nslp15
+        recfacpth14 = record.recfacpth14
+        pct_laccess_child15 = record.pct_laccess_child15
+        pct_sbp15 = record.pct_sbp15
+        pct_hisp10 = record.pct_hisp10
+        pct_laccess_nhpi15 = record.pct_laccess_nhpi15
+        specspth14 = record.specspth14
+        grocpth14 = record.grocpth14
+
+        df = [supercpth14,pct_fmrkt_sfmnp16,ffrpth14,pct_nhwhite10,pct_nhpi10,metro13,pct_fmrkt_snap16,pct_laccess_lowi15,convspth14,pct_65older10,chipstax_stores14,pct_fmrkt_frveg16,pct_laccess_snap15,pct_laccess_white15,pct_laccess_nhasian15,snapspth16,pct_laccess_hisp15,pct_laccess_seniors15,sodatax_stores14,pct_laccess_pop15,fsrpth14,foodhub16,pct_laccess_multir15,pct_sfsp15,pct_fmrkt_wic16,pct_nhna10,food_tax14,pct_fmrkt_credit16,pct_laccess_hhnv15,pct_laccess_nhna15,chipstax_vendm14,medhhinc15,pct_fmrkt_anmlprod16,pct_hspa15,pct_wic15,pct_18younger10,pct_fmrkt_otherfood16,fmrktpth16,pct_fmrkt_wiccash16,povrate15,pct_fmrkt_baked16,pct_snap16,pct_nhblack10,pct_nhasian10,pct_laccess_black15,sodatax_vendm14,pct_nslp15,recfacpth14,pct_laccess_child15,pct_sbp15,pct_hisp10,pct_laccess_nhpi15,specspth14,grocpth14]
+        prediction = model.predict(np.array(df).reshape(1, -1))
+        predicted_val = str(np.squeeze(prediction.round(2)))
         map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'hhnv15': 'No Car & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets' }
         return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options, predicted_val=predicted_val, input_1=input_1, input_2=input_2, input_3=input_3)
 
