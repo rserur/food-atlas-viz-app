@@ -21,8 +21,8 @@
 
     </head>
     <body>
-        <div class="container-fluid">
-          <div class="row">
+      <div class="container-fluid">
+        <div class="row">
           <!-- Add Flash messages  -->
           {% with messages = get_flashed_messages(category_filter=["error"]) %}
               {% if messages %}
@@ -52,6 +52,16 @@
           {% endblock %}
         </div>
       </div>
+      <footer class="text-muted">
+       <div class="container-fluid">
+         <hr>
+         <p class="float-right">
+           <a href="#">Back to Top</a>
+         </p>
+         <p><a href="https://github.com/rserur/harvard-e14a-team-project" target="_blank"><i class="fab fa-github"></i> View on GitHub</a></p>
+         <p class="text-center">Created for Harvard CSCI E-14a by Tushal Desai, Rebecca Larson, Gabe Mansur, and Rachael Serur.</p>
+       </div>
+      </footer>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"
               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -72,6 +82,4 @@
       <script src="{{ url_for('static', filename='js/us_map.js') }}"></script>
       <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
-
-  </body>
 </html>
