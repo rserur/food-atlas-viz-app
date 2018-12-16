@@ -1,22 +1,52 @@
+* {
+  border-radius: 0 !important;
+}
+
 html {
   position: relative;
   min-height: 100%;
+}
+
+body {
+  font-family: proxima-nova, sans-serif;
+  font-size: 1.2em;
 }
 
 body > .container-fluid {
   padding-top: 70px;
 }
 
+h1 {
+  font-family: baskerville-urw, serif;
+  font-size: 1.8em;
+  font-style: italic;
+}
+
+h2 {
+  font-family: baskerville-urw, serif;
+  font-size: 1.25em;
+  font-style: italic;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+nav.navbar.bg-dark, .card-header {
+  background-color: #000 !important;
+}
+
+.card {
+  border-width: 0;
+}
+
+h3, h4 {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
 /* Prediction Calculator */
 /* =================================================================== */
-.pred_calc_title {
-  color: grey;
-}
-
-.border {
-  border: 1px solid black;
-}
-
 .pred_calc_selected_county {
   color: rgb(34,172,138);
   font-weight: bold;
@@ -31,15 +61,19 @@ body > .container-fluid {
 /* =================================================================== */
 
 .map-view {
-  min-height: 960px;
+  min-height: 550px;
+}
+
+.caption {
+  font-size: 1.3em;
 }
 
 .counties {
-  fill: rgb(195, 195, 195);
+  fill: #282828;
 }
 
 .counties :hover {
-  fill: red;
+  fill: #00BC8C;
 }
 
 .county-borders, .nation-border {

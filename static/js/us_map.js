@@ -29,10 +29,10 @@ class Map {
   initMap(data) {
     this.svg = d3.select("#" + this.parentElement)
       .append("svg")
-      .attr("width", 960)
-      .attr("height", 600)
+      .attr("width", 768)
+      .attr("height", 480)
       .attr("preserveAspectRatio", "xMinYMin meet")
-      .attr("viewBox", "0 0 960 600")
+      .attr("viewBox", "0 0 768 600")
       .classed("us-map", true);
 
     // Create element for legend
@@ -45,7 +45,7 @@ class Map {
         .attr("class", "caption")
         .attr("x", x.range()[0])
         .attr("y", -6)
-        .attr("fill", "#000")
+        .attr("fill", "#fff")
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
         .text(this.mapVariableOptions[this.mapSelection].variableName);
