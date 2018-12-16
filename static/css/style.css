@@ -18,7 +18,7 @@ body > .container-fluid {
 
 p.pred-calc-desc {
   font-family: baskerville-urw, serif;
-  font-size: 1.5em;
+  font-size: 1.25em;
   font-weight: 700;
   margin-bottom: 0.8em;
 }
@@ -113,6 +113,7 @@ h5 {
 #predicted_val_display {
   color: #00BC8C;
   font-weight: 700;
+  font-size: 1.2em;
   display: none;
 }
 
