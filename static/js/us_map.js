@@ -40,6 +40,16 @@ class Map {
         .attr("class", "key")
         .attr("transform", "translate(0,40)");
 
+    // Tooltip
+    this.tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        return loadToolTip(d.id);
+      });
+
+    this.svg.call(this.tip);
+
     // Legend title
     g.append("text")
         .attr("class", "caption")
@@ -80,6 +90,8 @@ class Map {
       })
       .attr("d", this.path)
       .attr("id", function(d) { return d.id })
+      .on('mouseover', this.tip.show)
+      .on('mouseout', this.tip.hide)
       .on("click", function(d) {
         console.log(d);
         filterFromMap(d);
