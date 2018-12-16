@@ -73,7 +73,7 @@ h5 {
 
 .deep-dive-label {
   color: white;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .col-form-label {
@@ -85,6 +85,18 @@ h5 {
   color: #00BC8C;
   font-size: 1.2em;
   font-weight: 900;
+}
+
+.chart-tooltip {
+  position: absolute;     
+  text-align: center;     
+  width: 80px;          
+  height: 14px;         
+  padding: 2px;       
+  font: 14px sans-serif;    
+  background: #fff; 
+  border: 0px;        
+  pointer-events: none;
 }
 
 /* Prediction Calculator */

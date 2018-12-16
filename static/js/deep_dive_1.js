@@ -106,7 +106,7 @@ ScatterPlot.prototype.wrangleData = function(){
 	//vis.stackedData = vis.stack(vis.transposedData);
 
 	// In the first step no data wrangling/filtering needed
-	//vis.displayData = vis.stackedData;
+	vis.displayData = vis.data;
 	vis.updateVis(vis.data);
 }
 
@@ -130,17 +130,22 @@ ScatterPlot.prototype.updateVis = function(data){
 		}
 		return color;
 	})
-	.attr("opacity", .2)
+	.attr("opacity", .3)
 	.attr("class", "non_brushed")
 	.on("mouseover", function(d) {
 		vis.tooltip.text(d.obesity);
-	});
+	})
+    .on("mouseout", function(d) {
+      vis.tooltip.text("");
+    });
 
     //testing brushed data
     vis.brush = d3.brush()
     .on("brush", highlightCircles);
 
     vis.svg.append("g").call(vis.brush);
+
+ 
 
 
     function highlightCircles() {

@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.secret_key = "project-e14-a"
 
 # local postgresql or heroku postgresql
-heroku = Heroku(app)
+# heroku = Heroku(app)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
 db.init_app(app)
 
 # index route
@@ -76,5 +76,5 @@ def parseCSV(fileNm):
   return '\n'.join(lines)
 
 if __name__ == "__main__":
-    model = joblib.load('regr.pkl')
+    #model = joblib.load('regr.pkl')
     app.run(debug=True)

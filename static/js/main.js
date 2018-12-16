@@ -1,6 +1,6 @@
 let allData = [];
 
-let us_map, deep_dive_1, deep_dive_2, deep_dive_3, selectedCounty;
+let us_map, deep_dive_1, deep_dive_2, deep_dive_3, selectedCounty, deep_dive_3_state;
 
 
 
@@ -130,6 +130,10 @@ const filterFromMap = (d) => {
 		deep_dive_2.filterData(selectedCounty.state);
 		deep_dive_3.filterData(selectedCounty.state);
 
+		d3.select("deep_dive_3_svg").remove();
+		deep_dive_3_state = new BarChart("deep_dive_3_svg", stateData);
+
+
 		getCounties(selectedCounty.state).done(function(data) {
 			counties = data['counties'];
 			populateCountiesDropdown(counties);
@@ -147,6 +151,7 @@ const filterFromMap = (d) => {
 };
 
 // brush and update vis functions
+
 
 function isBrushed(brush_coords, cx, cy) {
 

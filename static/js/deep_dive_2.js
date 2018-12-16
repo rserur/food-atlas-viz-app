@@ -57,6 +57,24 @@ ScatterGraph.prototype.initVis = function(){
        .attr("class", "deep-dive-axis")
        .call(vis.yAxis);
 
+  // vis.g.append('g')
+  //   .attr('transform', 'translate(0,0)')
+  //   .attr("class", "chart-tooltip")
+  //   .append("text")
+  //   .text("testing");
+
+  // vis.tooltip = vis.g.append("text")
+  //    // .attr('class', 'chart-tooltip')
+  //   //  .append("text")
+  //     .attr("fill", "white")
+  //     .style("opacity", 0);
+
+   // .style("background", "white");
+   // .attr("x", 10)
+  //  .attr("y", 10)
+   // .text("")
+   // .attr("fill", "#fff");
+
   vis.g.append('text')
        .attr("transform", "rotate(-90)")
        .attr('x', -140)
@@ -95,10 +113,29 @@ ScatterGraph.prototype.updateVis = function(data){
       .attr('cx', function(d){return vis.xScale(d.farmersmarkets);})
       .attr('cy', function(d){ return vis.yScale(d.obesity); })
       .attr('r', function(d){ return vis.radius(d.low_access) * 2; })
-      .attr("opacity", .2)
+      .attr("opacity", .3)
       .style('fill', 'rgb(34,172,138)')
-      .attr("transform", "translate(30,15)scale(0.85)");
+      .attr("transform", "translate(30,15)scale(0.85)")
+      .on("mouseover", function(d) {
+        //vis.g.selectAll(".chart-tooltip").text(d.obesity);
+        vis.tooltip
+          .style("opacity", 1)
+          .attr("x", (d3.event.pageX - 400) + "px")
+          .attr("y", (d3.event.pageY - 1100) + "px")
+          .text("Obesity: " + d.obesity + " " + d3.event.pageX + " " + d3.event.pageY);
 
+
+       // vis.tooltip.text("Obesity: " + d.obesity);
+      })
+      .on("mouseout", function(d) {
+        //vis.tooltip.text("");
+      });
+
+  vis.tooltip = vis.g.append("g").append("text")
+      .attr('class', 'chart-tooltip')
+    //  .append("text")
+      .attr("fill", "white")
+      .style("opacity", 0);
 
   bubble.exit().remove();
 

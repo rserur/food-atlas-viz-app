@@ -56,6 +56,13 @@ ScatterThree.prototype.initVis = function(){
        .attr("class", "deep-dive-axis")
        .call(vis.yAxis);
 
+  vis.tooltip = vis.g.append("g")
+    .append("text")
+    .attr("x", 10)
+    .attr("y", 10)
+    .text("")
+    .attr("fill", "#fff");
+
   vis.g.append('text')
        .attr("transform", "rotate(-90)")
        .attr('x', -140)
@@ -94,8 +101,14 @@ ScatterThree.prototype.updateVis = function(data){
     .attr('cx', function(d){ return vis.xScale(d.food_tax); })
     .attr('cy', function(d){ return vis.yScale(d.obesity); })
     .attr('r', function(d){ return vis.radius(d.low_access); })
-    .attr("opacity", .5)
-    .style('fill', 'rgb(248,196,113)');
+    .attr("opacity", .3)
+    .style('fill', 'rgb(248,196,113)')
+    .on("mouseover", function(d) {
+      vis.tooltip.text(d.obesity);
+    })
+    .on("mouseout", function(d) {
+      vis.tooltip.text("");
+    });
 
   bubble.
         attr("transform", "translate(5,0)scale(0.85)");
