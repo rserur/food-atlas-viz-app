@@ -11,7 +11,7 @@
       <div class="btn-group btn-group-toggle center" data-toggle="buttons">
         <button type="button" class="btn btn-link" disabled>Select Map:</button>
         {% for map_option in map_options %}
-          <label class="btn btn-outline-primary my-2 my-sm-0 {% if map_option == map_options[0] %} active {% endif %}" >
+          <label class="btn btn-primary-outline my-2 my-sm-0 {% if map_option == map_options[0] %} active {% endif %}" >
             <input
               type="radio"
               name="map_selection"
@@ -146,7 +146,7 @@
       </div>
 
       <hr class="pred_calc_top_hr">
-      <p class="pred_calc_selected_county"></p>
+      <p class="pred_calc_selected_county">(click a county to select)</p>
       <div class="row">
         <div class="col">
           <label for="input_1">Fast-food restaurants/1,000</small></label>
