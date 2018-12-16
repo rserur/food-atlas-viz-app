@@ -37,8 +37,9 @@ ScatterThree.prototype.initVis = function(){
 
   // Creating Axes
   vis.xAxis = d3.axisBottom()
-    .scale(vis.xScale);
-    // .ticks(5);
+    .scale(vis.xScale)
+    .ticks(8);
+
   vis.yAxis = d3.axisLeft()
     .scale(vis.yScale);
     // .ticks(5);
