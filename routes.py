@@ -52,6 +52,7 @@ def get_counties(state):
 @app.route('/predict', methods=['POST'])
 def make_prediction():
     if request.method=='POST':
+        model = joblib.load('regr.pkl')
         df = []
         selected_state = request.form['selected_state']
         fips = int(request.form['selected_county'])
@@ -133,5 +134,5 @@ def parseCSV(fileNm):
   return '\n'.join(lines)
 
 if __name__ == "__main__":
-    model = joblib.load('regr.pkl')
+
     app.run(debug=True)
