@@ -213,7 +213,7 @@ ScatterPlot.prototype.brushOn = function(){
 				if (selectedCounty) {
 					stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
 					deep_dive_2.updateVis(stateData);
-					deep_dive_3.updateVis(stateData);
+					//deep_dive_3.updateVis(stateData);
 				}
 				else {
 					deep_dive_2.updateVis(allData);
@@ -240,7 +240,8 @@ ScatterPlot.prototype.brushOn = function(){
 
 		}
 		else {
-			//deep_dive_2.updateVis(allData);
+			deep_dive_2.updateVis(allData);
+			deep_dive_3.updateVis(allData);
 		}
 
     }
