@@ -120,22 +120,44 @@ function loadDbData() {
 // }
 
 function createVis() {
-	//console.log(allData);
+
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
+
+
 }
 
 function resetVisualizations() {
 
 	deep_dive_1.updateVis(allData);
 	deep_dive_2.updateVis(allData);
-	
+
 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
 	$('.reset-link').html('');
 	$('.pred_calc_selected_county').html('the US');
 
+
+}
+
+function toggleSelect() {
+
+	deep_dive_1.brushOn();
+	console.log($('#select-button'));
+	$('#select-button').html('Selection is on');
+	$('#select-button').css({"color":"gray"});
+	$('#select-button').css({"text-decoration":"none"});
+	$('#select-button').css({"pointer-events":"none"});
+
+	// if ($('#select-button')["0"].innerHTML == "Turn selecting off"){
+	// 	deep_dive_1.brushOff();
+	// 	$('#select-button').html('Turn selecting on');
+	// }
+	// else {
+	// 	deep_dive_1.brushOn();
+	// 	$('#select-button').html('Turn selecting off');
+	// }
 
 }
 

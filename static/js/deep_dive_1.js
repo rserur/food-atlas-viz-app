@@ -67,13 +67,6 @@ ScatterPlot.prototype.initVis = function(){
     .attr("class", "deep-dive-axis")
 	  .call(vis.yAxis);
 
-	vis.tooltip = vis.svg.append("g")
-		.attr('class', 'chart-tooltip')
-		.append("text")
-		.attr("x", 10)
-		.attr("y", 10)
-		.text("")
-    	.attr("fill", "#fff");
 
 	vis.svg.append('text')
     .attr("transform", "rotate(-90)")
@@ -122,19 +115,23 @@ ScatterPlot.prototype.updateVis = function(data){
 	.attr("cx", function(d) { return vis.xScale(d.fast_food); })
 	.attr("cy", function(d) { return vis.yScale(d.obesity); })
 	.attr("r", function(d) { return vis.radius(d.low_access); })
-	.style("fill", function(d) {
-		var color;
-		if (d.metro == 1) {
-			color = 'steelblue';
-		}
-		else {
-			color = 'purple';
-		}
-		return color;
-	})
+	.style("fill", "#8C1D6E")
+	// .style("fill", function(d) {
+	// 	var color;
+	// 	if (d.metro == 1) {
+	// 		color = '#104175';
+	// 	}
+	// 	else {
+	// 		color = '#BC786D';
+	// 	}
+	// 	return color;
+	// })
 	.attr("opacity", .3)
 	.attr("class", "non_brushed")
 	.on("mouseover", function(d) {
+		// if (d.metro == 1) {
+		// 	vis.tooltip.text(d.county + ", " + d.state + " (metro)");
+		// }
 		vis.tooltip.text(d.county + ", " + d.state);
 	})
     .on("mouseout", function(d) {
@@ -142,15 +139,80 @@ ScatterPlot.prototype.updateVis = function(data){
     });
 
     //testing brushed data
+    // vis.brush = d3.brush()
+    // .on("brush", highlightCircles);
+
+    // vis.svg.append("g").call(vis.brush);
+
+	vis.tooltip = vis.svg.append("g")
+		.attr('class', 'chart-tooltip')
+		.append("text")
+		.attr("x", 10)
+		.attr("y", 10)
+		.text("")
+    	.attr("fill", "#fff");
+
+
+  //   function highlightCircles() {
+
+		// if (d3.event.selection != null) {
+	 //      	bubble.attr("class", "non_brushed").attr("opacity", ".3");
+
+
+		// 	var brush_coords = d3.brushSelection(this);
+
+		// 	bubble.filter(function () {
+		// 	var cx = d3.select(this).attr("cx"),
+		// 	    cy = d3.select(this).attr("cy");
+
+		// 	return isBrushed(brush_coords, cx, cy);
+		// 	})
+		// 	.attr("class", "brushed")
+		// 	.attr("opacity", "1");
+
+
+		// 	var brushed_data = d3.selectAll(".brushed").data();
+		// 	console.log("deep dive 1 brushed data: ", brushed_data.length);
+
+		// 	if (brushed_data.length > 0) {
+		// 		deep_dive_2.updateVis(brushed_data);
+		// 		deep_dive_3.updateVis(brushed_data);
+		// 	}
+		// 	else {
+		// 		deep_dive_2.updateVis(allData);
+		// 		deep_dive_3.updateVis(allData);
+		// 	}
+
+		// }
+		// else {
+		// 	deep_dive_2.updateVis(allData);
+		// }
+
+  //   }
+
+
+	bubble.exit().remove();
+
+}
+
+ScatterPlot.prototype.brushOn = function(){
+    //testing brushed data
+    var vis = this;
+
+    console.log("in brush on")
+
     vis.brush = d3.brush()
     .on("brush", highlightCircles);
 
     vis.svg.append("g").call(vis.brush);
 
-
-
-
     function highlightCircles() {
+
+    	var bubble = vis.svg.selectAll("circle");
+
+    	// vis.svg.on("click", function(d) {
+    	// 	d3.select("vis.brush").call(vis.brush.extent([0, 0]));
+    	// });
 
 		if (d3.event.selection != null) {
 	      	bubble.attr("class", "non_brushed").attr("opacity", ".3");
@@ -187,32 +249,13 @@ ScatterPlot.prototype.updateVis = function(data){
 
     }
 
+}
 
-	bubble.exit().remove();
+ScatterPlot.prototype.brushOff = function() {
+	var vis = this;
+
+	vis.brush = null;
+	console.log(vis.brush);
 
 }
 
-// ScatterPlot.prototype.filterData = function(state) {
-//    var vis = this;
-//     vis.svg.selectAll('circle')
-//       .each(function(d) {
-//         if (d.state == state) {
-//           d3.select(this).transition().duration(400).style("opacity", "1");
-//         }
-//         else {
-//           d3.select(this).transition().duration(400).style("opacity", "0");
-//         }
-//       });
-
-// }
-
-// ScatterPlot.prototype.revealData = function() {
-//    var vis = this;
-//    vis.svg.selectAll('circle').transition().duration(400).style("opacity", .3);
-// }
-
-/*
-d3.csv("data/combined.csv", function (data) {
-  data.shift(); // Remove first element with headers
-  // Process data here
-});*/

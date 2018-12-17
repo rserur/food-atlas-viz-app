@@ -22,12 +22,6 @@ BarChart.prototype.initVis = function(){
              .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
 
-  // Creating xScale and yScale
-  // vis.xScale = d3.scaleLinear()
-  //   .range([0, vis.width]);
-  // vis.yScale = d3.scaleLinear()
-  //   .range([vis.height, 0]);
-
    vis.xScale = d3.scaleLinear()
  	.domain([d3.min(map), d3.max(map)])
  	.rangeRound([0, vis.width]);
