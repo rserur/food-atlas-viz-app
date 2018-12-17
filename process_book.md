@@ -1343,7 +1343,10 @@ Table "food_atlas"
 
 Overview:
 Our project aims to derive insights about food access and attributes across the US by evaluating how those factors affect the health of a community. Our team is Tushal Desai, Rebecca Larson, Gabe Mansur, and Rachael Serur. 
-This project is designed for policy makers to better understand what changes could make...
+We worked to solve the question, 'How can policy makers introduce policies that are the most effective at bettering the health of a county?'
+This project is designed for policy makers to better understand what changes could make better the health of their county. There are many factors that influence the health of a community -- ranging from culture, income, food access, healthy food options, welfare programs, etc. Each county differs across these variables and therefore changing certain variables (for example, adding more grocery stores or reducing the number of fast food restaurants) affect the health of the county uniquely from others.
+Our project allows policy makers to see a visual summary of the US according to these variables, both through a full map of all counties and three more linked visualizations that show deeper detail on specific veriables. The user can make further discoveries on a narrowed county level. By clicking on a county, the policy maker can use our Obesity Prediction Calculator to test how changing a couple variables can influence the health of that county. The three linked visualizations also update their context to show the policy maker only data from that county's state.
+This application allows policy makers comprehensive insight into the trends and specifics of the country and each county and provides guidance in policies they should target to best help a specific county.
 
 Process:
 To accomplish our goal, we used data from the USDA Food Environment Atlas. This dataset contains data at the county level and has many features, including access to restaurants, grocery stores, farmers markets and welfare programs, as well as demographic and health data. 
@@ -1369,8 +1372,10 @@ Demo:
 - Reset the visualizations
 
 Challenges:
-- a lot of missing data
-- not enough or the right data to make accurate obesity rate predictions
+One of the most immediate challenges in this project was our dataset. After selecting features, we found that about half of our data had at least one null value in each county, so the entire county had to be dropped from the prediction model. Having all of the county data would have made our model more accurate and could show the user more accurate trends.
+Another challenge was figuring out at what level our model should predict. We originally wanted to have separate models for each state with the understanding that there were many cultural factors not captured in the data, and were hoping to account for this by narrowing our focus to a state level. However, we only had county level data and most states have too few counties to build an accurate model around.
+
+- there weren't really trends among features and response variable when did EDA, all a large bunch 
 
 Conclusion:
-
+Overall, this project provides a good jumping off point to further investigate this idea of county-specific food policy. To have better accuracy, one would need more recent data with more relevant variables. The inaccuracy of this obesity prediction calculator also indicates that there are likely many factors that influence the health of a community that can't be perfectly captured by a number, such as culture, reinforcing that policy makers should not rely solely on data to introduce policy into a community. They should incorporate the voice of the community to have a fuller understanding and work with the community to find effective solutions.
