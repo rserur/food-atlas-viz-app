@@ -16,6 +16,9 @@ heroku = Heroku(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/final_project'
 db.init_app(app)
 
+def is_valid_value(v):
+    return isinstance(v, str) or not math.isnan(v)
+
 # index route
 @app.route('/')
 @app.route('/index')
@@ -39,7 +42,7 @@ def load_data():
         del record_as_dict['_sa_instance_state']
 
         # remove any NaN values in the single record
-        nullless_record_as_dict = { k: v for k, v in record_as_dict.items() if isinstance(v, str) or not math.isnan(v) }
+        nullless_record_as_dict = { k: v for k, v in record_as_dict.items() if is_valid_value(v) }
         # import code; code.interact(local=dict(globals(), **locals()))
         food_atlas_json['food_atlas'].append(nullless_record_as_dict)
     return jsonify(food_atlas_json)
@@ -49,9 +52,12 @@ def get_counties(state):
     counties = db.session.query(FoodAtlas).filter_by(state=state)
     counties_json = {'counties': []}
     for record in counties:
-        counties_info  = record.__dict__
-        del counties_info['_sa_instance_state']
-        counties_json['counties'].append(counties_info)
+        record_as_dict = record.__dict__
+        del record_as_dict['_sa_instance_state']
+
+        # remove any NaN values in the single record
+        nullless_record_as_dict = { k: v for k, v in record_as_dict.items() if is_valid_value(v) }
+        counties_json['counties'].append(nullless_record_as_dict)
     return jsonify(counties_json)
 
 @app.route('/predict', methods=['POST'])
@@ -123,7 +129,20 @@ def make_prediction():
         grocpth14 = record.grocpth14
 
         df = [supercpth14,pct_fmrkt_sfmnp16,ffrpth14,pct_nhwhite10,pct_nhpi10,metro13,pct_fmrkt_snap16,pct_laccess_lowi15,convspth14,pct_65older10,chipstax_stores14,pct_fmrkt_frveg16,pct_laccess_snap15,pct_laccess_white15,pct_laccess_nhasian15,snapspth16,pct_laccess_hisp15,pct_laccess_seniors15,sodatax_stores14,pct_laccess_pop15,fsrpth14,foodhub16,pct_laccess_multir15,pct_sfsp15,pct_fmrkt_wic16,pct_nhna10,food_tax14,pct_fmrkt_credit16,pct_laccess_hhnv15,pct_laccess_nhna15,chipstax_vendm14,medhhinc15,pct_fmrkt_anmlprod16,pct_hspa15,pct_wic15,pct_18younger10,pct_fmrkt_otherfood16,fmrktpth16,pct_fmrkt_wiccash16,povrate15,pct_fmrkt_baked16,pct_snap16,pct_nhblack10,pct_nhasian10,pct_laccess_black15,sodatax_vendm14,pct_nslp15,recfacpth14,pct_laccess_child15,pct_sbp15,pct_hisp10,pct_laccess_nhpi15,specspth14,grocpth14]
-        prediction = model.predict(np.array(df).reshape(1, -1))
+
+
+        # Replace NaN values with 0. If time permits, something like `df.fillna(df.mean(), inplace=True)`
+        # is preferable using pandas with the original dataset... this would replace NaN values with the column mean instead.
+        nulless_df = []
+        for item in df:
+            if is_valid_value(item):
+                nulless_df.append(item)
+            else:
+                nulless_df.append(0)
+
+        # import code; code.interact(local=dict(globals(), **locals()))
+
+        prediction = model.predict(np.array(nulless_df).reshape(1, -1))
 
         predicted_obesity = str(np.squeeze(prediction.round(2)))
 
