@@ -73,7 +73,7 @@
                     <input type="text" class="form-control col-3" name="input_3" id="input_3" {% if input_3 %} value="{{input_3}}" {% endif %}>
                   </div>
                   <button type="submit" class="btn btn-primary">Predict</button>
-                  <button type="button" class="btn btn-default" onclick="resetPredictCalcForm()">Reset</button>
+                  <button type="button" class="btn btn-default" onclick="resetPredictCalcForm(); resetVisualizations();">Reset</button>
                 </form>
               </div>
             </div>
@@ -89,6 +89,7 @@
                 </div>
                 <div class="card-body card-deep-dive" style="padding: 10px; background-color: #23272E">
                   <svg id='deep_dive_1_svg' width="280" height="200">
+                    <br>
                     <span id="select-button" class="reset-link" onclick="toggleSelect()"> Turn selecting on </span>
                   </svg>
                 </div>
