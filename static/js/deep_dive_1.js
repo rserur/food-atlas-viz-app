@@ -192,24 +192,24 @@ ScatterPlot.prototype.updateVis = function(data){
 
 }
 
-ScatterPlot.prototype.filterData = function(state) {
-   var vis = this;
-    vis.svg.selectAll('circle')
-      .each(function(d) {
-        if (d.state == state) {
-          d3.select(this).transition().duration(400).style("opacity", "1");
-        }
-        else {
-          d3.select(this).transition().duration(400).style("opacity", "0");
-        }
-      });
+// ScatterPlot.prototype.filterData = function(state) {
+//    var vis = this;
+//     vis.svg.selectAll('circle')
+//       .each(function(d) {
+//         if (d.state == state) {
+//           d3.select(this).transition().duration(400).style("opacity", "1");
+//         }
+//         else {
+//           d3.select(this).transition().duration(400).style("opacity", "0");
+//         }
+//       });
 
-}
+// }
 
-ScatterPlot.prototype.revealData = function() {
-   var vis = this;
-   vis.svg.selectAll('circle').transition().duration(400).style("opacity", .3);
-}
+// ScatterPlot.prototype.revealData = function() {
+//    var vis = this;
+//    vis.svg.selectAll('circle').transition().duration(400).style("opacity", .3);
+// }
 
 /*
 d3.csv("data/combined.csv", function (data) {

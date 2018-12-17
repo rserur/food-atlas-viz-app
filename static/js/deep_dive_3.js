@@ -121,28 +121,28 @@ ScatterThree.prototype.updateVis = function(data){
 
 }
 
-ScatterThree.prototype.brushData = function(data){
-  var vis = this;
+// ScatterThree.prototype.brushData = function(data){
+//   var vis = this;
 
-  vis.g.selectAll('.bubble').remove();
+//   vis.g.selectAll('.bubble').remove();
 
-  vis.g.selectAll('.bubble')
-      .data(data)
-      .attr("opacity", 1).exit().remove();
+//   vis.g.selectAll('.bubble')
+//       .data(data)
+//       .attr("opacity", 1).exit().remove();
 
-}
+// }
 
-ScatterThree.prototype.filterData = function(state) {
-   var vis = this;
-    vis.g.selectAll('.bubble')
-      .each(function(d) {
-        if (d.state == state) {
-          d3.select(this).transition().duration(400).style("opacity", "1");
-        }
-        else {
-          d3.select(this).transition().duration(400).style("opacity", "0");
-        }
-      });
+// ScatterThree.prototype.filterData = function(state) {
+//    var vis = this;
+//     vis.g.selectAll('.bubble')
+//       .each(function(d) {
+//         if (d.state == state) {
+//           d3.select(this).transition().duration(400).style("opacity", "1");
+//         }
+//         else {
+//           d3.select(this).transition().duration(400).style("opacity", "0");
+//         }
+//       });
 
-}
+// }
 
