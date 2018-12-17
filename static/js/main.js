@@ -128,8 +128,9 @@ function createVis() {
 
 function resetVisualizations() {
 
-	deep_dive_1.revealData();
-	deep_dive_2.revealData();
+	deep_dive_1.updateVis(allData);
+	deep_dive_2.updateVis(allData);
+	
 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
 	$('.reset-link').html('');
@@ -161,14 +162,12 @@ const filterFromMap = (d) => {
 
 		// filter data to just from that state
 		stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
-		// stateData = allData.find((obj)=> { return obj.state == selectedCounty.state });
-		console.log(stateData);
-		deep_dive_1.filterData(selectedCounty.state);
-		deep_dive_2.filterData(selectedCounty.state);
-		//deep_dive_3.filterData(selectedCounty.state);
 
-		//d3.select("deep_dive_3_svg").remove();
-		//d3.selectAll("deep_dive_1_svg > *").remove();
+		console.log(stateData);
+		deep_dive_1.updateVis(stateData);
+		deep_dive_2.updateVis(stateData);
+
+
 		d3.select("#deep_dive_3_svg").selectAll("*").remove();
 
 		deep_dive_3 = new BarChart("deep_dive_3_svg", stateData);
@@ -225,10 +224,6 @@ function isBrushed(brush_coords, cx, cy) {
 
 
 
-
-
-
-// TODO: Dynamically regenerate deep dives based on this map selection value?
 
 let map_selection = $("input[name='map_selection']:checked").val();
 

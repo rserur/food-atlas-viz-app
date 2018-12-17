@@ -68,11 +68,12 @@ ScatterPlot.prototype.initVis = function(){
 	  .call(vis.yAxis);
 
 	vis.tooltip = vis.svg.append("g")
+		.attr('class', 'chart-tooltip')
 		.append("text")
 		.attr("x", 10)
 		.attr("y", 10)
 		.text("")
-    .attr("fill", "#fff");
+    	.attr("fill", "#fff");
 
 	vis.svg.append('text')
     .attr("transform", "rotate(-90)")
@@ -112,6 +113,8 @@ ScatterPlot.prototype.wrangleData = function(){
 ScatterPlot.prototype.updateVis = function(data){
 	var vis = this;
 
+	vis.svg.selectAll('circle').remove();
+
 	var bubble = vis.svg.selectAll("circle")
 	.data(data)
 	.enter()
@@ -132,7 +135,7 @@ ScatterPlot.prototype.updateVis = function(data){
 	.attr("opacity", .3)
 	.attr("class", "non_brushed")
 	.on("mouseover", function(d) {
-		vis.tooltip.text(d.obesity);
+		vis.tooltip.text(d.county + ", " + d.state);
 	})
     .on("mouseout", function(d) {
       vis.tooltip.text("");
@@ -169,8 +172,8 @@ ScatterPlot.prototype.updateVis = function(data){
 			console.log("deep dive 1 brushed data: ", brushed_data.length);
 
 			if (brushed_data.length > 0) {
-				deep_dive_2.brushData(brushed_data);
-				deep_dive_3.brushData(brushed_data);
+				deep_dive_2.updateVis(brushed_data);
+				deep_dive_3.updateVis(brushed_data);
 			}
 			else {
 				deep_dive_2.updateVis(allData);

@@ -57,6 +57,7 @@ ScatterThree.prototype.initVis = function(){
        .call(vis.yAxis);
 
   vis.tooltip = vis.g.append("g")
+    .attr('class', 'chart-tooltip')
     .append("text")
     .attr("x", 10)
     .attr("y", 10)
@@ -91,6 +92,8 @@ ScatterThree.prototype.wrangleData = function(){
 ScatterThree.prototype.updateVis = function(data){
   var vis = this;
 
+  vis.g.selectAll('.bubble').remove();
+
   var bubble;
 
   bubble = vis.g.selectAll('.bubble')
@@ -104,7 +107,7 @@ ScatterThree.prototype.updateVis = function(data){
     .attr("opacity", .3)
     .style('fill', 'rgb(248,196,113)')
     .on("mouseover", function(d) {
-      vis.tooltip.text(d.obesity);
+      vis.tooltip.text(d.county + ", " + d.state);
     })
     .on("mouseout", function(d) {
       vis.tooltip.text("");
@@ -121,7 +124,7 @@ ScatterThree.prototype.updateVis = function(data){
 ScatterThree.prototype.brushData = function(data){
   var vis = this;
 
-  vis.clearData();
+  vis.g.selectAll('.bubble').remove();
 
   vis.g.selectAll('.bubble')
       .data(data)
@@ -143,10 +146,3 @@ ScatterThree.prototype.filterData = function(state) {
 
 }
 
-ScatterThree.prototype.clearData = function() {
-   var vis = this;
-    vis.g.selectAll('.bubble')
-      .data(vis.data)
-      .attr("opacity", 0);
-
-}

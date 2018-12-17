@@ -57,24 +57,6 @@ ScatterGraph.prototype.initVis = function(){
        .attr("class", "deep-dive-axis")
        .call(vis.yAxis);
 
-  // vis.g.append('g')
-  //   .attr('transform', 'translate(0,0)')
-  //   .attr("class", "chart-tooltip")
-  //   .append("text")
-  //   .text("testing");
-
-  // vis.tooltip = vis.g.append("rect")
-  //    // .attr('class', 'chart-tooltip')
-  //   //  .append("text")
-  //     .attr("fill", "white")
-  //     .style("opacity", 0);
-
-   // .style("background", "white");
-   // .attr("x", 10)
-  //  .attr("y", 10)
-   // .text("")
-   // .attr("fill", "#fff");
-
   vis.g.append('text')
        .attr("transform", "rotate(-90)")
        .attr('x', -140)
@@ -103,6 +85,8 @@ ScatterGraph.prototype.wrangleData = function(){
 ScatterGraph.prototype.updateVis = function(data){
   var vis = this;
 
+  vis.g.selectAll('.bubble').remove();
+
   var bubble = vis.g.selectAll('.bubble')
       .data(data)
       .enter()
@@ -118,12 +102,9 @@ ScatterGraph.prototype.updateVis = function(data){
         //vis.g.selectAll(".chart-tooltip").text(d.obesity);
         vis.tooltip
           .style("opacity", 1)
-          .attr("x", (d3.event.pageX - 400) + "px")
-          .attr("y", (d3.event.pageY - 1000) + "px")
-          .text("Obesity: " + d.obesity + " " + d3.event.pageX + " " + d3.event.pageY);
-
-
-       // vis.tooltip.text("Obesity: " + d.obesity);
+        //  .attr("x", (d3.event.pageX - 400) + "px")
+         // .attr("y", (d3.event.pageY - 1000) + "px")
+          .text(d.county + ", " + d.state); // d3.event.pageX + " " + d3.event.pageY);
       })
       .on("mouseout", function(d) {
         vis.tooltip.text("");
@@ -133,6 +114,8 @@ ScatterGraph.prototype.updateVis = function(data){
      .attr('class', 'chart-tooltip')
      .append("text")
      .attr("fill", "white")
+     .attr("x", 10)
+     .attr("y", 10)
      .style("opacity", 0);
 
 
@@ -172,15 +155,18 @@ ScatterGraph.prototype.brushData = function(data){
 
 ScatterGraph.prototype.filterData = function(state) {
    var vis = this;
-    vis.g.selectAll('.bubble')
-      .each(function(d) {
-        if (d.state == state) {
-          d3.select(this).transition().duration(400).style("opacity", "1");
-        }
-        else {
-          d3.select(this).transition().duration(400).style("opacity", "0");
-        }
-      });
+   vis.g.selectAll('.bubble').remove();
+
+
+    // vis.g.selectAll('.bubble')
+    //   .each(function(d) {
+    //     if (d.state == state) {
+    //       d3.select(this).transition().duration(400).style("opacity", "1");
+    //     }
+    //     else {
+    //       d3.select(this).transition().duration(400).style("opacity", "0");
+    //     }
+    //   });
 
 }
 
