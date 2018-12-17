@@ -298,8 +298,8 @@ const map = new Map(
 
 d3.queue()
   .defer(d3.json, "https://d3js.org/us-10m.v1.json")
-  .defer(d3.csv, "/static/data/food_atlas_data.csv", function(d) {
-      map.d3_map.set(d.id, {
+  .defer(d3.csv, "/data/df_for_webapp.csv", function(d) {
+      map.d3_map.set(d.FIPS, {
         pop15: d[mapVariableOptions.pop15.variableCode],
         lowi15: d[mapVariableOptions.lowi15.variableCode],
         hhnv15: d[mapVariableOptions.hhnv15.variableCode],
