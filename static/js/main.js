@@ -32,6 +32,7 @@ function loadDbData() {
 		data.forEach(function(d){
 			d.id = +d.id;
 			d.food_tax14 = +d.food_tax14;
+			d.pct_diabetes_adults13 = +d.pct_diabetes_adults13;
 			d.pct_obese_adults13 = +d.pct_obese_adults13;
 			d.ffrpth14 = +d.ffrpth14;
 			d.pct_laccess_pop15 = +d.pct_laccess_pop15;
@@ -49,6 +50,7 @@ function loadDbData() {
 		{
 			var obj = new Object();
 			obj.obesity = data[i].pct_obese_adults13;
+			obj.diabetes = data[i].pct_diabetes_adults13;
 			obj.food_tax = data[i].food_tax14;
 			obj.fast_food = data[i].ffrpth14;
 			obj.low_access = data[i].pct_laccess_pop15;
@@ -120,11 +122,9 @@ function loadDbData() {
 // }
 
 function createVis() {
-
 	deep_dive_1 = new ScatterPlot("deep_dive_1_svg", allData);
 	deep_dive_2 = new ScatterGraph("deep_dive_2_svg", allData);
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
-
 
 }
 
@@ -160,7 +160,6 @@ function toggleSelect() {
 	// 	deep_dive_1.brushOn();
 	// 	$('#select-button').html('Turn selecting off');
 	// }
-
 }
 
 
@@ -302,7 +301,7 @@ const mapVariableOptions = {
   pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9]},
   lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemePuBu[9]},
   hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemeReds[9]},
-  // snapspth16: { variableCode: "SNAPSPTH16", variableName: "SNAP-authorized stores/1,000 pop, 2016", variableColorScheme: d3.schemeRdPu[9].reverse() },
+  diabetes13: { variableCode: "PCT_DIABETES_ADULTS13", variableName: "Adult diabetes rate, 2013", variableColorScheme: d3.schemePuBu[9].reverse() },
   ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeYlOrRd[9]},
   // snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9]},
   fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens[9].reverse() }
@@ -319,6 +318,7 @@ d3.queue()
   .defer(d3.json, "https://d3js.org/us-10m.v1.json")
   .defer(d3.csv, "/data/df_for_webapp.csv", function(d) {
       map.d3_map.set(d.FIPS, {
+				diabetes13: d[mapVariableOptions.diabetes13.variableCode],
         pop15: d[mapVariableOptions.pop15.variableCode],
         lowi15: d[mapVariableOptions.lowi15.variableCode],
         hhnv15: d[mapVariableOptions.hhnv15.variableCode],
