@@ -61,18 +61,9 @@ def make_prediction():
         df = []
         selected_state = request.form['selected_state']
         fips = int(request.form['selected_county'])
-        try:
-          input_1 = float(request.form['input_1'])
-        except ValueError:
-          input_1 = 0
-        try:
-          input_2 = float(request.form['input_2'])
-        except ValueError:
-          input_2 = 0
-        try:
-          input_3 = float(request.form['input_3'])
-        except ValueError:
-          input_3 = 0
+        input_1 = float(request.form['input_1'])
+        input_2 = float(request.form['input_2'])
+        input_3 = float(request.form['input_3'])
 
         # Set default values for the remaining features for the selected county(fips)
         record = FoodAtlas.query.filter_by(fips=fips).first()
@@ -133,6 +124,7 @@ def make_prediction():
 
         df = [supercpth14,pct_fmrkt_sfmnp16,ffrpth14,pct_nhwhite10,pct_nhpi10,metro13,pct_fmrkt_snap16,pct_laccess_lowi15,convspth14,pct_65older10,chipstax_stores14,pct_fmrkt_frveg16,pct_laccess_snap15,pct_laccess_white15,pct_laccess_nhasian15,snapspth16,pct_laccess_hisp15,pct_laccess_seniors15,sodatax_stores14,pct_laccess_pop15,fsrpth14,foodhub16,pct_laccess_multir15,pct_sfsp15,pct_fmrkt_wic16,pct_nhna10,food_tax14,pct_fmrkt_credit16,pct_laccess_hhnv15,pct_laccess_nhna15,chipstax_vendm14,medhhinc15,pct_fmrkt_anmlprod16,pct_hspa15,pct_wic15,pct_18younger10,pct_fmrkt_otherfood16,fmrktpth16,pct_fmrkt_wiccash16,povrate15,pct_fmrkt_baked16,pct_snap16,pct_nhblack10,pct_nhasian10,pct_laccess_black15,sodatax_vendm14,pct_nslp15,recfacpth14,pct_laccess_child15,pct_sbp15,pct_hisp10,pct_laccess_nhpi15,specspth14,grocpth14]
         prediction = model.predict(np.array(df).reshape(1, -1))
+
         predicted_obesity = str(np.squeeze(prediction.round(2)))
 
         predictions_json = {'predictions': { 'predicted_obesity': predicted_obesity }}
