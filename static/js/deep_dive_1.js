@@ -23,7 +23,7 @@ ScatterPlot = function(_parentElement, _data){
 ScatterPlot.prototype.initVis = function(){
 	var vis = this;
 
-	vis.margin = { top: 20, right: 10, bottom: 40, left: 40 };
+	vis.margin = { top: 20, right: 10, bottom: 50, left: 40 };
 
 	vis.width = 280 - vis.margin.left - vis.margin.right,
 	vis.height = 200 - vis.margin.top - vis.margin.bottom;
@@ -86,7 +86,6 @@ ScatterPlot.prototype.initVis = function(){
 
 
 	vis.wrangleData();
-
 }
 
 /*
@@ -100,7 +99,8 @@ ScatterPlot.prototype.wrangleData = function(){
 
 	// In the first step no data wrangling/filtering needed
 	vis.displayData = vis.data;
-	vis.updateVis(vis.data);
+	vis.brushOn();
+	//vis.updateVis(vis.data);
 }
 
 ScatterPlot.prototype.updateVis = function(data){
@@ -153,43 +153,6 @@ ScatterPlot.prototype.updateVis = function(data){
     	.attr("fill", "#fff");
 
 
-  //   function highlightCircles() {
-
-		// if (d3.event.selection != null) {
-	 //      	bubble.attr("class", "non_brushed").attr("opacity", ".3");
-
-
-		// 	var brush_coords = d3.brushSelection(this);
-
-		// 	bubble.filter(function () {
-		// 	var cx = d3.select(this).attr("cx"),
-		// 	    cy = d3.select(this).attr("cy");
-
-		// 	return isBrushed(brush_coords, cx, cy);
-		// 	})
-		// 	.attr("class", "brushed")
-		// 	.attr("opacity", "1");
-
-
-		// 	var brushed_data = d3.selectAll(".brushed").data();
-		// 	console.log("deep dive 1 brushed data: ", brushed_data.length);
-
-		// 	if (brushed_data.length > 0) {
-		// 		deep_dive_2.updateVis(brushed_data);
-		// 		deep_dive_3.updateVis(brushed_data);
-		// 	}
-		// 	else {
-		// 		deep_dive_2.updateVis(allData);
-		// 		deep_dive_3.updateVis(allData);
-		// 	}
-
-		// }
-		// else {
-		// 	deep_dive_2.updateVis(allData);
-		// }
-
-  //   }
-
 
 	bubble.exit().remove();
 
@@ -198,8 +161,6 @@ ScatterPlot.prototype.updateVis = function(data){
 ScatterPlot.prototype.brushOn = function(){
     //testing brushed data
     var vis = this;
-
-    console.log("in brush on")
 
     vis.brush = d3.brush()
     .on("brush", highlightCircles);
@@ -231,23 +192,43 @@ ScatterPlot.prototype.brushOn = function(){
 
 
 			var brushed_data = d3.selectAll(".brushed").data();
-			console.log("deep dive 1 brushed data: ", brushed_data.length);
 
 			if (brushed_data.length > 0) {
 				deep_dive_2.updateVis(brushed_data);
-				deep_dive_3.updateVis(brushed_data);
+				if (!selectedCounty) {
+					deep_dive_3.updateVis(brushed_data);
+				}
+				else {
+					d3.select("#deep_dive_3_svg").selectAll("*").remove();
+					deep_dive_3 = new BarChart("deep_dive_3_svg", brushed_data);
+				}
+				
 			}
 			else {
-				deep_dive_2.updateVis(allData);
-				deep_dive_3.updateVis(allData);
+				//resetVisualizations();
+
+				if (selectedCounty) {
+					stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
+					deep_dive_2.updateVis(stateData);
+					d3.select("#deep_dive_3_svg").selectAll("*").remove();
+					deep_dive_3 = new BarChart("deep_dive_3_svg", stateData);					
+				}
+				else {
+					deep_dive_2.updateVis(allData);
+					deep_dive_3.updateVis(allData);
+				}
+
 			}
 
 		}
 		else {
-			deep_dive_2.updateVis(allData);
+			//deep_dive_2.updateVis(allData);
 		}
 
     }
+
+    //TESTING OUT PUTTING THIS HERE SO BUBBLES ARE ON TOP OF BRUSH
+    vis.updateVis(vis.data);
 
 }
 

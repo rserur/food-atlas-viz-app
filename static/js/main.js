@@ -135,7 +135,7 @@ function resetVisualizations() {
 
 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
-	$('.reset-link').html('');
+	$('#see-all-data').html('');
 	$('.pred_calc_selected_county').html('the US');
 
 
@@ -180,7 +180,7 @@ const filterFromMap = (d) => {
 		console.log(selectedCounty);
 
 		$('.pred_calc_selected_county').html(`${selectedCounty.county}, ${selectedCounty.state}`);
-		$('.reset-link').html('See all');
+		$('#see-all-data').html('See all');
 
 		// filter data to just from that state
 		stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });

@@ -99,6 +99,8 @@ BarChart.prototype.wrangleData = function(){
 BarChart.prototype.updateVis = function(data){
   var vis = this;
 
+  vis.g.selectAll('.bar').remove();
+
   var formatCount = d3.format(",.0f");
 
   var bar = vis.g.selectAll(".bar")
