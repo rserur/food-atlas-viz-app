@@ -321,8 +321,11 @@ var x = d3.scaleLinear()
     .rangeRound([600, 860]);
 
 function resetPredictCalcForm() {
-	document.getElementById("input_1").value = "";
-	document.getElementById("input_2").value = "";
-	document.getElementById("input_3").value = "";
-	document.getElementById("predicted_val_display").innerHTML = "";
+	$("#input_1").val("");
+	$("#input_2").val("");
+	$("#input_3").val("");
+	$(".selected_county_map")[0].innerHTML = "the country";
+	$(".selected_county_pred_calc")[0].innerHTML = "(click on county)";
+	$(".selected_county_deep_dive")[0].innerHTML = "the US";
+	$('#predicted_val_display').hide();
 }
