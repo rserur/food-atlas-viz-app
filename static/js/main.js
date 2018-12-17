@@ -36,6 +36,8 @@ function loadDbData() {
 			d.pct_obese_adults13 = +d.pct_obese_adults13;
 			d.ffrpth14 = +d.ffrpth14;
 			d.pct_laccess_pop15 = +d.pct_laccess_pop15;
+			d.pct_laccess_lowi15 = +d.pct_laccess_lowi15;
+			d.pct_laccess_hhnv15 = +d.pct_laccess_hhnv15;
 			d.fmrktpth16 = +d.fmrktpth16;
 			d.metro13 = +d.metro13;
 			d.fips = +d.fips;
@@ -54,6 +56,8 @@ function loadDbData() {
 			obj.food_tax = data[i].food_tax14;
 			obj.fast_food = data[i].ffrpth14;
 			obj.low_access = data[i].pct_laccess_pop15;
+			obj.low_access_low_income = data[i].pct_laccess_lowi15;
+			obj.low_access_no_car = data[i].pct_laccess_hhnv15;
 			obj.farmersmarkets = data[i].fmrktpth16;
 			obj.metro = data[i].metro13;
 			obj.fips = data[i].fips;
@@ -220,8 +224,11 @@ const loadToolTip = (id) => {
 	if(!selectedCounty){
 		return '<div class="tip-data"><h5>No data available for this county</h5></div>';
 	}
+	var mapOptions = mapVariableOptions[map_selection];
 	return '<div class="tip-data"><h5>'+ selectedCounty.county +', ' + selectedCounty.state +'</h5>' +
-				 'Fast food / 1000:' +
+				 mapOptions.variableName + ': ' +
+				 '<span class="tip-data">'+ selectedCounty[mapOptions.variableKey].toFixed(2) + '</span><br>'+
+				 'Fast food / 1000: ' +
   		 	 '<span class="tip-data">'+ selectedCounty.fast_food.toFixed(2) +'</span><br>'+
 				 'Farmers markets / 1000: ' +
 				 '<span class="tip-data">'+ selectedCounty.farmersmarkets.toFixed(2) +'</span><br>'+
@@ -298,13 +305,13 @@ function populateCountiesDropdown(counties) {
 }
 
 const mapVariableOptions = {
-  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableColorScheme: d3.schemeBlues[9]},
-  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableColorScheme: d3.schemePuBu[9]},
-  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableColorScheme: d3.schemeReds[9]},
-  diabetes13: { variableCode: "PCT_DIABETES_ADULTS13", variableName: "Adult diabetes rate, 2013", variableColorScheme: d3.schemePuBu[9].reverse() },
-  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableColorScheme: d3.schemeYlOrRd[9]},
+  pop15: { variableCode: "PCT_LACCESS_POP15", variableName: "Population, low access to store (%), 2015", variableKey: "low_access", variableColorScheme: d3.schemeBlues[9]},
+  lowi15: { variableCode: "PCT_LACCESS_LOWI15", variableName: "Low income & low access to store (%), 2015", variableKey: "low_access_low_income", variableColorScheme: d3.schemePuBu[9]},
+  hhnv15: { variableCode: "PCT_LACCESS_HHNV15", variableName: "Households, no car & low access to store (%), 2015", variableKey: "low_access_no_car", variableColorScheme: d3.schemeReds[9]},
+  diabetes13: { variableCode: "PCT_DIABETES_ADULTS13", variableName: "Adult diabetes rate, 2013", variableKey: "diabetes", variableColorScheme: d3.schemePuBu[9].reverse() },
+  ffrpth14: { variableCode: "FFRPTH14", variableName: "Fast-food restaurants/1,000 pop, 2014", variableKey: "fast_food", variableColorScheme: d3.schemeYlOrRd[9]},
   // snap16: { variableCode: "PCT_SNAP16", variableName: "SNAP participants (% pop), 2016", variableColorScheme: d3.schemePurples[9]},
-  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableColorScheme: d3.schemeGreens[9].reverse() }
+  fmrktpth16: { variableCode: "FMRKTPTH16", variableName: "Farmers' markets/1,000 pop, 2016", variableKey: "farmersmarkets", variableColorScheme: d3.schemeGreens[9].reverse() }
 }
 const map = new Map(
   {
