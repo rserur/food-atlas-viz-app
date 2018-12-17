@@ -3,6 +3,7 @@ from models import db,FoodAtlas
 import os
 from sklearn.externals import joblib
 import numpy as np
+import math
 
 from flask_heroku import Heroku
 
@@ -20,7 +21,7 @@ db.init_app(app)
 @app.route('/index')
 def index():
     # map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
-    map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'hhnv15': 'No Car & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets' }
+    map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'hhnv15': 'No Car & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets', 'diabetes13': 'Diabetes' }
     return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options)
 
 # prediction calculator route
@@ -34,9 +35,13 @@ def load_data():
     food_atlas_json = {'food_atlas': []}
     food_atlas = FoodAtlas.query.all()
     for record in food_atlas:
-        food_atlas_info = record.__dict__
-        del food_atlas_info['_sa_instance_state']
-        food_atlas_json['food_atlas'].append(food_atlas_info)
+        record_as_dict = record.__dict__
+        del record_as_dict['_sa_instance_state']
+
+        # remove any NaN values in the single record
+        nullless_record_as_dict = { k: v for k, v in record_as_dict.items() if isinstance(v, str) or not math.isnan(v) }
+        # import code; code.interact(local=dict(globals(), **locals()))
+        food_atlas_json['food_atlas'].append(nullless_record_as_dict)
     return jsonify(food_atlas_json)
 
 @app.route ('/get_counties/<state>', methods=['GET'])
