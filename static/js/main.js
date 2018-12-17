@@ -224,10 +224,14 @@ const loadToolTip = (id) => {
 	if(!selectedCounty){
 		return '<div class="tip-data"><h5>No data available for this county</h5></div>';
 	}
-	var mapOptions = mapVariableOptions[map_selection];
+
 	return '<div class="tip-data"><h5>'+ selectedCounty.county +', ' + selectedCounty.state +'</h5>' +
-				 mapOptions.variableName + ': ' +
-				 '<span class="tip-data">'+ selectedCounty[mapOptions.variableKey].toFixed(2) + '</span><br>'+
+				 /*'Low access to stores: ' +
+				 '<span class="tip-data">'+ selectedCounty.low_access.toFixed(2) +'</span><br>'+
+				 'Low access and low income: ' +
+				 '<span class="tip-data">'+ selectedCounty.low_access_low_income.toFixed(2) +'</span><br>'+
+				 'Low access / no vehicle: ' +
+				 '<span class="tip-data">'+ selectedCounty.low_access_no_car.toFixed(2) +'</span><br>'+ */
 				 'Fast food / 1000: ' +
   		 	 '<span class="tip-data">'+ selectedCounty.fast_food.toFixed(2) +'</span><br>'+
 				 'Farmers markets / 1000: ' +
