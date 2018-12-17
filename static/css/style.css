@@ -97,7 +97,7 @@ h5 {
   height: 14px;
   padding: 2px;
   font: 14px sans-serif;
-  background: #fff;
+  fill: gray;
   border: 0px;
   pointer-events: none;
 }
@@ -190,6 +190,18 @@ h5 {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
+}
+
+.reset-link {
+  color: #00BC8C;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+.reset-link:hover {
+  text-decoration: underline;
 }
 
 div.tip-data {

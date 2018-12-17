@@ -126,11 +126,22 @@ function createVis() {
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
 }
 
+function resetVisualizations() {
+
+	deep_dive_1.revealData();
+	deep_dive_2.revealData();
+	d3.select("#deep_dive_3_svg").selectAll("*").remove();
+	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
+	$('.reset-link').html('');
+	$('.pred_calc_selected_county').html('the US');
+
+
+}
+
 
 // identifies county clicked and filters lower visualizations to that state
 const filterFromMap = (d) => {
 	//allData.filter(function(obj) { return allData.fips == county} );
-	console.log("in filter from map");
 
 	// the problem is that this csv doesn't have the FIPS data in it
 	selectedCounty = allData.find((obj)=> { return obj.fips == d.id });
@@ -146,6 +157,7 @@ const filterFromMap = (d) => {
 		console.log(selectedCounty);
 
 		$('.pred_calc_selected_county').html(`${selectedCounty.county}, ${selectedCounty.state}`);
+		$('.reset-link').html('See all');
 
 		// filter data to just from that state
 		stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
@@ -153,10 +165,13 @@ const filterFromMap = (d) => {
 		console.log(stateData);
 		deep_dive_1.filterData(selectedCounty.state);
 		deep_dive_2.filterData(selectedCounty.state);
-		deep_dive_3.filterData(selectedCounty.state);
+		//deep_dive_3.filterData(selectedCounty.state);
 
-		d3.select("deep_dive_3_svg").remove();
-		deep_dive_3_state = new BarChart("deep_dive_3_svg", stateData);
+		//d3.select("deep_dive_3_svg").remove();
+		//d3.selectAll("deep_dive_1_svg > *").remove();
+		d3.select("#deep_dive_3_svg").selectAll("*").remove();
+
+		deep_dive_3 = new BarChart("deep_dive_3_svg", stateData);
 
 
 		getCounties(selectedCounty.state).done(function(data) {

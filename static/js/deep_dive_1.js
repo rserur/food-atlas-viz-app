@@ -10,7 +10,6 @@ ScatterPlot = function(_parentElement, _data){
 	this.displayData = []; // see data wrangling
 
 	// DEBUG RAW DATA
-	console.log(this.data);
 	this.initVis();
 
 
@@ -145,7 +144,7 @@ ScatterPlot.prototype.updateVis = function(data){
 
     vis.svg.append("g").call(vis.brush);
 
- 
+
 
 
     function highlightCircles() {
@@ -203,6 +202,12 @@ ScatterPlot.prototype.filterData = function(state) {
       });
 
 }
+
+ScatterPlot.prototype.revealData = function() {
+   var vis = this;
+   vis.svg.selectAll('circle').transition().duration(400).style("opacity", .3);
+}
+
 /*
 d3.csv("data/combined.csv", function (data) {
   data.shift(); // Remove first element with headers

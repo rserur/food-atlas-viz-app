@@ -63,7 +63,7 @@ ScatterGraph.prototype.initVis = function(){
   //   .append("text")
   //   .text("testing");
 
-  // vis.tooltip = vis.g.append("text")
+  // vis.tooltip = vis.g.append("rect")
   //    // .attr('class', 'chart-tooltip')
   //   //  .append("text")
   //     .attr("fill", "white")
@@ -103,8 +103,6 @@ ScatterGraph.prototype.wrangleData = function(){
 ScatterGraph.prototype.updateVis = function(data){
   var vis = this;
 
-  console.log("in update 2");
-
   var bubble = vis.g.selectAll('.bubble')
       .data(data)
       .enter()
@@ -121,21 +119,22 @@ ScatterGraph.prototype.updateVis = function(data){
         vis.tooltip
           .style("opacity", 1)
           .attr("x", (d3.event.pageX - 400) + "px")
-          .attr("y", (d3.event.pageY - 1100) + "px")
+          .attr("y", (d3.event.pageY - 1000) + "px")
           .text("Obesity: " + d.obesity + " " + d3.event.pageX + " " + d3.event.pageY);
 
 
        // vis.tooltip.text("Obesity: " + d.obesity);
       })
       .on("mouseout", function(d) {
-        //vis.tooltip.text("");
+        vis.tooltip.text("");
       });
 
-  vis.tooltip = vis.g.append("g").append("text")
-      .attr('class', 'chart-tooltip')
-    //  .append("text")
-      .attr("fill", "white")
-      .style("opacity", 0);
+  vis.tooltip = vis.g.append("g")
+     .attr('class', 'chart-tooltip')
+     .append("text")
+     .attr("fill", "white")
+     .style("opacity", 0);
+
 
   bubble.exit().remove();
 
@@ -148,8 +147,6 @@ ScatterGraph.prototype.brushData = function(data){
 
 //  vis.g.selectAll('.bubble').exit().remove();
 
-  console.log("in deep dive 2 brushData");
-  console.log(data.length);
 
   vis.clearData();
 
@@ -187,11 +184,18 @@ ScatterGraph.prototype.filterData = function(state) {
 
 }
 
+ScatterGraph.prototype.revealData = function() {
+   var vis = this;
+   vis.g.selectAll('.bubble').transition().duration(400).style("opacity", .3);
+}
+
 ScatterGraph.prototype.clearData = function() {
    var vis = this;
-    vis.g.selectAll('.bubble')
-      .data(vis.data)
-      .attr("opacity", 0);
+
+   vis.g.selectAll('.bubble').exit().remove();
+    // vis.g.selectAll('.bubble')
+    //   .data(vis.data)
+    //   .attr("opacity", .1);
 
 
 }

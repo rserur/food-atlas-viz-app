@@ -10,6 +10,7 @@ BarChart.prototype.initVis = function(){
 
   var vis = this;
   var svg = d3.select("#" + vis.parentElement);
+  var food_tax_rate = vis.data[0].food_tax;
   var map = vis.data.map(function(d,i){ return parseFloat(d.obesity); });
 
   console.log(map);
@@ -59,7 +60,6 @@ BarChart.prototype.initVis = function(){
     .attr("class", "deep-dive-axis")
     .call(vis.xAxis);
 
-
   vis.tooltip = vis.g.append("g")
     .append("text")
     .attr("x", 10)
@@ -67,8 +67,24 @@ BarChart.prototype.initVis = function(){
     .text("")
     .attr("fill", "#fff");
 
+  vis.label = vis.g.append("g")
+    .append("text")
+    .attr("x", -40)
+    .attr("y", 0)
+    .attr("fill", "#fff")
+    .style("font-size", "14px")
+    .text("Food tax: ");
+
+  vis.label_value = vis.g.append("g")
+    .append("text")
+    .attr("x", -40)
+    .attr("y", 16)
+    .attr("fill", "#00BC8C")
+    .style("font-size", "18px")
+    .text(food_tax_rate + "%");
+
   vis.g.append('text')
-       .attr('x', (vis.width/2) + 35)
+       .attr('x', (vis.width/2) + 70)
        .attr('y', vis.height + 40)
        .attr('text-anchor', 'end')
        .attr('class', 'deep-dive-label')
@@ -76,30 +92,6 @@ BarChart.prototype.initVis = function(){
        .attr("fill", "#fff");
 
   vis.wrangleData();
-  // vis.x = d3.scaleLinear()
-  // 	.domain([d3.min(map), d3.max(map)])
-  // 	.rangeRound([0, vis.width]);
-
-  // vis.bins = d3.histogram()
-  // 	.domain(vis.x.domain())
-  // 	.thresholds(vis.x.ticks(8))
-  // 	(map);
-
-  // vis.y = d3.scaleLinear()
-  // 	.domain([0, d3.max(binds, function(d) { return d.length; })])
-  // 	.range([vis.height, 0]);
-
-  // vis.g.append("g")
-  //   .attr("class", "axis axis--x")
-  //   .attr("transform", "translate(0," + vis.height + ")")
-  //   .call(d3.axisBottom(vis.x));
-
-  // vis.g.append("text")
-  // 	.attr('x', (vis.width/2))
-  //   .attr('y', vis.height + 35)
-  //   .attr('text-anchor', 'end')
-  //   .attr('class', 'label');
-
 
 }
 
@@ -132,6 +124,7 @@ BarChart.prototype.updateVis = function(data){
     .attr("x", (vis.xScale(vis.bins[1].x1) - vis.xScale(vis.bins[1].x0)) / 2)
     .attr("y", -4)
     .attr("text-anchor", "middle")
+    .attr("fill", "#fff")
     .text(function(d) { return formatCount(d.length); });
 
 

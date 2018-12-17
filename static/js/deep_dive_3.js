@@ -121,9 +121,6 @@ ScatterThree.prototype.updateVis = function(data){
 ScatterThree.prototype.brushData = function(data){
   var vis = this;
 
-  console.log("in deep dive 2 brushData");
-  console.log(data.length);
-
   vis.clearData();
 
   vis.g.selectAll('.bubble')
