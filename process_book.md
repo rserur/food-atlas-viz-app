@@ -7,6 +7,7 @@
  - [Current Status/TODO](#todo)
  - [Database Schema](#schema)
  - [Frontend & Visualizations](#visualizations)
+ - [Presentation](#presentation)
 
 ## <a name="overview"></a>Overview
 
@@ -1336,3 +1337,40 @@ Table "food_atlas"
 - *Fast Food per 1000 & Obesity*: This is a scatterplot looking at the connection of the number of fast food restaurants per 1000/pop and percent of the population with low access to food (radius) to obesity. This chart will also be iterated on to include visual distinctions between metro and non metro counties. The goal is to give the user an understanding of demographics of a county that may influence the presence of fast food restaurants, and how that impacts the county's health.
 - *Farmer's Markets per 1000 & Obesity:* This is a scatterplot looking at the number of Farmer's Markets per 1000/pop and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.
 - *Food Tax Rate & Obesity:*  This is a scatterplot looking at the food tax rate and obesity. The size of the circle radius reflects the percent of the population with low access to food sources.
+
+## <a name="presentation"></a>Presentation
+*Screencast Script*
+
+Overview:
+Our project aims to derive insights about food access and attributes across the US by evaluating how those factors affect the health of a community. Our team is Tushal Desai, Rebecca Larson, Gabe Mansur, and Rachael Serur. 
+This project is designed for policy makers to better understand what changes could make...
+
+Process:
+To accomplish our goal, we used data from the USDA Food Environment Atlas. This dataset contains data at the county level and has many features, including access to restaurants, grocery stores, farmers markets and welfare programs, as well as demographic and health data. 
+
+- looking through data
+- EDA
+- narrowing our scope and defining goal
+- feature engineering and model creation
+- map creation
+- deep dive visualization creations
+- prediction calculator creation
+- putting it all together
+
+Demo:
+- The different variables of the map
+- Tooltips on counties 
+- The bottom visualizations 
+  - Brushing the first graphs filters the rest
+  - tooltips
+- Clicking on a county
+- Use the prediction calculator
+- See how the bottom visualizations filtered and the last one changed to be better suited to the data
+- Reset the visualizations
+
+Challenges:
+- a lot of missing data
+- not enough or the right data to make accurate obesity rate predictions
+
+Conclusion:
+
