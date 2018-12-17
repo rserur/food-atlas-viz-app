@@ -133,6 +133,8 @@ function resetVisualizations() {
 	deep_dive_1.updateVis(allData);
 	deep_dive_2.updateVis(allData);
 
+	console.log("in reset");
+
 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
 	$('#see-all-data').html('');

@@ -195,28 +195,46 @@ ScatterPlot.prototype.brushOn = function(){
 
 			if (brushed_data.length > 0) {
 				deep_dive_2.updateVis(brushed_data);
-				if (!selectedCounty) {
-					deep_dive_3.updateVis(brushed_data);
-				}
-				else {
-					d3.select("#deep_dive_3_svg").selectAll("*").remove();
-					deep_dive_3 = new BarChart("deep_dive_3_svg", brushed_data);
-				}
+				deep_dive_3.updateVis(brushed_data);
+
+				// if ($('#see-all-data')["0"].innerHTML == "") {
+
+				// 	deep_dive_3.updateVis(brushed_data);
+				// }
+				// else {
+				// 	console.log("thinks in selected county while brushed");
+				// 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
+				// 	deep_dive_3 = new BarChart("deep_dive_3_svg", brushed_data);
+				//}
 				
 			}
 			else {
-				//resetVisualizations();
 
 				if (selectedCounty) {
 					stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
 					deep_dive_2.updateVis(stateData);
-					d3.select("#deep_dive_3_svg").selectAll("*").remove();
-					deep_dive_3 = new BarChart("deep_dive_3_svg", stateData);					
+					deep_dive_3.updateVis(stateData);
 				}
 				else {
 					deep_dive_2.updateVis(allData);
 					deep_dive_3.updateVis(allData);
 				}
+
+				// if (selectedCounty) {
+				// 	stateData = allData.filter(function(obj) { return obj.state == selectedCounty.state });
+				// 	deep_dive_2.updateVis(stateData);
+
+				// 	console.log("thinks in selected county");
+
+				// 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
+				// 	deep_dive_3 = new BarChart("deep_dive_3_svg", stateData);					
+				// }
+				// else {
+				// 	//resetVisualizations();
+				// 	deep_dive_2.updateVis(allData);
+				// 	d3.select("#deep_dive_3_svg").selectAll("*").remove();
+				// 	deep_dive_3 = new ScatterThree("deep_dive_3_svg", allData);
+				// }
 
 			}
 
