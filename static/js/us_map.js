@@ -75,6 +75,19 @@ class Map {
 
   updateMap() {
 
+    if(this.mapSelection == 'ffrpth14' || this.mapSelection == 'fmrktpth16'){
+        color.domain([0, 3]);
+        x.domain([0, 3]);
+    }
+    else if(this.mapSelection == 'fmrktpth16'){
+        color.domain([0, 1]);
+        x.domain([0, 1]);
+    }
+    else {
+      color.domain([0, 100]);
+      x.domain([0, 100]);
+    }
+
     color.range(this.mapVariableOptions[this.mapSelection].variableColorScheme);
 
     this.svg.append("g")
@@ -125,6 +138,7 @@ class Map {
 
     var block = key.selectAll("rect")
                    .data(color.range().map(function(d) {
+
                     d = color.invertExtent(d);
                     if (d[0] == null) d[0] = x.domain()[0];
                     if (d[1] == null) d[1] = x.domain()[1];
