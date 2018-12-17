@@ -84,8 +84,13 @@ class Map {
     .data(topojson.feature(this.data, this.counties).features)
     .enter().append("path")
       .attr("fill", (d) => {
+        d.id = + d.id;
         if (this.d3_map.get(d.id)) {
           return color(this.d3_map.get(d.id)[map_selection])
+        }
+        else{
+          console.log('id not found: ' + d.id);
+          console.log(d);
         }
       })
       .attr("d", this.path)
