@@ -27,7 +27,7 @@ We've decided to work concurrently on the various tasks required for our project
 - [X]   **Week 1**: We plan to spend the majority of week one exploring the datasets, refining the questions we'd like the data to answer, and identifying the variables that we'll use in our model. We'll also spend some time building the basic US map visualization and scaffolding out the web app.
 - [x]   **Week 2**: This week will be spent working with Tableau to help us visualize the data, and building the model that that app will use. We'll also decide on the exact D3 visualizations that we will include.
 - [X]   **Week 3**: Populate the map visualization and build and test the prediction calculator.  
-- [ ]   **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
+- [x]   **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
 
 
 ## <a name="roles"></a>Roles and Responsibilities
