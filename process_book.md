@@ -590,7 +590,7 @@ Extra Data:
 
 # <a name="schema">Database Schema</a>
 
-_12/17/18 Update: Database was redesigned to allow null values for most variables to allow for the maximum number of counties manipulable in the application. Given more time, we would have also built a way for null columns fed into the prediction calculator to be replaced with mean values based on the whole dataset for optimal accuracy.
+_12/17/18 Update: Database was redesigned to allow null values for most variables to allow for the maximum number of counties manipulable in the application. Given more time, we would have also built a way for null columns fed into the prediction calculator to be replaced with mean values based on the whole dataset for optimal accuracy._
 
 Table "food_atlas"
 
