@@ -23,19 +23,16 @@ We plan to produce a web app that features an interactive map of the US to visua
 We've decided to work concurrently on the various tasks required for our project, and have allocated the next four weeks to:
 
 
-
-- [X]   **Week 1**: We plan to spend the majority of week one exploring the datasets, refining the questions we'd like the data to answer, and identifying the variables that we'll use in our model. We'll also spend some time building the basic US map visualization and scaffolding out the web app.
-- [x]   **Week 2**: This week will be spent working with Tableau to help us visualize the data, and building the model that that app will use. We'll also decide on the exact D3 visualizations that we will include.
-- [X]   **Week 3**: Populate the map visualization and build and test the prediction calculator.  
-- [ ]   **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
-
+- [X]  **Week 1**: We plan to spend the majority of week one exploring the datasets, refining the questions we'd like the data to answer, and identifying the variables that we'll use in our model. We'll also spend some time building the basic US map visualization and scaffolding out the web app.
+- [X]  **Week 2**: This week will be spent working with Tableau to help us visualize the data, and building the model that that app will use. We'll also decide on the exact D3 visualizations that we will include.
+- [X]  **Week 3**: Populate the map visualization and build and test the prediction calculator.  
+- [X]  **Week 4**: Finalize the visualizations, trying to use the data to tell a cohesive story.
 
 ## <a name="roles"></a>Roles and Responsibilities
 
 We plan to use a [trello board](https://trello.com/invite/b/nV0Dk09z/14cb1550724df0a1790802d0c9cb6402/e14a-team-project) to keep track of our assigned tasks. We'll also check in during weekly meetings, and communicate via Slack.
 
 As a group, we are all very interested in diving into the data science aspect of this project, so all four of us will collaborate on that. Additionally, Tushal Desai and Gabe Mansur will handle back-end development, and Rachael Serur and Rebecca Larson will focus on data visualization.
-
 
 # <a name="ideas"></a>Ideas & Strategies
 
@@ -47,16 +44,15 @@ As a group, we are all very interested in diving into the data science aspect of
 *   IF TIME: can we get better data for massachusetts, so we could do it by county?
 *   Can we improve predictions by augmenting with additional county data and grouping via demographic correlates? (e.g. [http://www.statsamerica.org/uscp/](http://www.statsamerica.org/uscp/)) What if we asked for predictions for counties with median incomes > 90K,  80K-89K, etc... ? Or find some other way to group counties together besides the fact that they share a state?
 
-
 ## <a name="backend"></a>Backend
-
 
 ### Database
 
 [Schema](#schema)
 
-Features List:
+_12/17/18 Update: **Bolded items** prominent in UI._
 
+Features List:
 
 <table>
   <tr>
@@ -68,7 +64,7 @@ Features List:
    </td>
   </tr>
   <tr>
-   <td>Population, low access to store (%), 2015
+   <td><strong>Population, low access to store (%), 2015</strong>
    </td>
    <td>PCT_LACCESS_POP15
    </td>
@@ -76,11 +72,11 @@ Features List:
    </td>
   </tr>
   <tr>
-   <td>Low income & low access to store (%), 2015
+   <td><strong>Low income & low access to store (%), 2015</strong>
    </td>
    <td>PCT_LACCESS_LOWI15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -88,7 +84,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_HHNV15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -96,7 +92,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_SNAP15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -104,7 +100,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_CHILD15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -112,7 +108,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_SENIORS15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -120,7 +116,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_WHITE15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -128,7 +124,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_BLACK15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -136,7 +132,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_HISP15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -144,7 +140,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_NHASIAN15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -152,7 +148,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_NHNA15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -160,7 +156,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_NHPI15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -168,7 +164,7 @@ Features List:
    </td>
    <td>PCT_LACCESS_MULTIR15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -212,7 +208,7 @@ Features List:
    </td>
   </tr>
   <tr>
-   <td>Fast-food restaurants/1,000 pop, 2014
+   <td><strong>Fast-food restaurants/1,000 pop, 2014</strong>
    </td>
    <td>FFRPTH14
    </td>
@@ -232,7 +228,7 @@ Features List:
    </td>
    <td>PCT_SNAP16
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -240,7 +236,7 @@ Features List:
    </td>
    <td>PCT_NSLP15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -248,7 +244,7 @@ Features List:
    </td>
    <td>PCT_SBP15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -260,7 +256,7 @@ Summer Food Service Program participants (% pop), 2015*
 <p>
 PCT_SFSP15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -268,7 +264,7 @@ PCT_SFSP15
    </td>
    <td>PCT_WIC15
    </td>
-   <td>Demographic (maybe can use in prediction calc?)
+   <td>Demographic
    </td>
   </tr>
   <tr>
@@ -304,7 +300,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>General food sales tax, retail stores, 2014*
+   <td><strong>General food sales tax, retail stores, 2014*</strong>
    </td>
    <td>FOOD_TAX14
    </td>
@@ -312,7 +308,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>Farmers' markets/1,000 pop, 2016
+   <td><strong>Farmers' markets/1,000 pop, 2016</strong>
    </td>
    <td>FMRKTPTH16
    </td>
@@ -400,7 +396,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>Adult diabetes rate, 2013
+   <td><strong>Adult diabetes rate, 2013</strong>
    </td>
    <td>PCT_DIABETES_ADULTS13
    </td>
@@ -408,7 +404,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>Adult obesity rate, 2013
+   <td><strong>Adult obesity rate, 2013</strong>
    </td>
    <td>PCT_OBESE_ADULTS13
    </td>
@@ -520,7 +516,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>FIPS
+   <td><strong>FIPS</strong>
    </td>
    <td>
    </td>
@@ -528,7 +524,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>State
+   <td><strong>State</strong>
    </td>
    <td>
    </td>
@@ -536,7 +532,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>County
+   <td><strong>County</strong>
    </td>
    <td>
    </td>
@@ -547,8 +543,6 @@ PCT_SFSP15
 
 
 Data to get separately:
-
-
 
 *   CSA farms per county
 *   ***Current diabetes and obesity rates per county
@@ -595,6 +589,8 @@ Extra Data:
 
 
 # <a name="schema">Database Schema</a>
+
+_12/17/18 Update: Database was redesigned to allow null values for most variables to allow for the maximum number of counties manipulable in the application. Given more time, we would have also built a way for null columns fed into the prediction calculator to be replaced with mean values based on the whole dataset for optimal accuracy._
 
 Table "food_atlas"
 
@@ -666,7 +662,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -678,7 +674,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -690,7 +686,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -702,7 +698,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -714,7 +710,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -726,7 +722,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -738,7 +734,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -750,7 +746,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -762,7 +758,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -774,7 +770,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -786,7 +782,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -798,7 +794,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -810,7 +806,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -822,7 +818,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -834,7 +830,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -846,7 +842,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -858,7 +854,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -870,7 +866,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -882,7 +878,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes (but null values removed in notebook)
    </td>
    <td>
    </td>
@@ -894,7 +890,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -906,7 +902,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -918,7 +914,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -930,7 +926,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -942,7 +938,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -954,7 +950,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -966,7 +962,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -978,7 +974,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -990,7 +986,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1002,7 +998,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1014,7 +1010,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes (but null values removed in notebook)
    </td>
    <td>
    </td>
@@ -1026,7 +1022,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes (but null values removed in notebook)
    </td>
    <td>
    </td>
@@ -1038,7 +1034,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1050,7 +1046,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1062,7 +1058,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1074,7 +1070,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1086,7 +1082,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1098,7 +1094,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1110,7 +1106,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1122,7 +1118,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1134,7 +1130,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1146,7 +1142,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1158,7 +1154,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1170,7 +1166,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1182,7 +1178,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1194,7 +1190,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1206,7 +1202,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1218,7 +1214,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1230,7 +1226,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1242,7 +1238,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1254,7 +1250,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1266,7 +1262,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1278,7 +1274,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1290,7 +1286,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1302,7 +1298,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1314,7 +1310,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
@@ -1326,7 +1322,7 @@ Table "food_atlas"
    </td>
    <td>           
    </td>
-   <td> not null
+   <td> yes
    </td>
    <td>
    </td>
