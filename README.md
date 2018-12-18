@@ -11,7 +11,7 @@
 
 ## Milestone 1 - December 3rd, 2018
 - [Python Notebook and EDA PDF](https://github.com/rserur/harvard-e14a-team-project/blob/master/supplemental_files/notebook_and_eda_120318.pdf)
-- [Database Schema](https://github.com/rserur/harvard-e14a-team-project/blob/master/supplemental_files/process_book.md#schema) 
+- [Database Schema](https://github.com/rserur/harvard-e14a-team-project/blob/master/supplemental_files/process_book.md#schema)
 - [12/3/18 Process Book PDF](https://github.com/rserur/harvard-e14a-team-project/blob/master/supplemental_files/process_book_120318.pdf)
 
 ## Milestone 2 - December 10th, 2018
@@ -22,7 +22,7 @@
 ## Milestone 3 - December 17th, 2018
 - [Heroku App Link](https://csci-e14a-food-atlas.herokuapp.com/)
 - [12/17/18 Process Book PDF](https://github.com/rserur/harvard-e14a-team-project/blob/master/supplemental_files/process_book_121718.pdf)
-- [Screencast](https://www.youtube.com/<PROJECT_LINK>)
+- [Screencast](https://youtu.be/C6i5LmWl6tQ)
 - For code files:
   - The project code doesn't include any additional library files.
   - The data folder includes all our data files. 2018-usda-food-environment-atlas-dataset.xls is our original data file that we used and df_for_webapp.csv is our processed csv generated from the notebook. The data folder also includes the import_csv_to_db.py script to load the data from the csv to our database.
