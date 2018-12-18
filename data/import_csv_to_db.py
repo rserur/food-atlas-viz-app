@@ -6,7 +6,7 @@ import pandas as pd
 conn = psycopg2.connect("host=localhost dbname=final_project user=postgres")
 cur = conn.cursor()
 
-data = pd.read_csv('data/df_for_webapp.csv')
+data = pd.read_csv('df_for_webapp.csv')
 
 for i, d in data.iterrows():
         cur.execute('''INSERT INTO food_atlas (id, fips, county, state, pct_laccess_pop15,
