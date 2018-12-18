@@ -560,24 +560,26 @@ Data to get separately:
 
 Extra Data:
 
-
-
 *   Food stamps by county in MA: [https://statisticalatlas.com/state/Massachusetts/Food-Stamps](https://statisticalatlas.com/state/Massachusetts/Food-Stamps)
 *   Population by county in MA: [https://statisticalatlas.com/state/Massachusetts/Population](https://statisticalatlas.com/state/Massachusetts/Population)
 
 
-# <a name="todo"></a>TODO (updated 12/10/18)
+# <a name="todo"></a>TODO/Current Status (updated 12/17/18)
 
 ([Trello Board](https://trello.com/invite/b/nV0Dk09z/14cb1550724df0a1790802d0c9cb6402/e14a-team-project) tracking progress)
 
 
 ## In Progress/Remaining Tasks (final week):
-- [ ]   Connect prediction calculator to data & backend
-- [ ]   Connect "Deep Dive" visualizations to map
-- [ ]   "Storytelling" prose & frontend polish
-- [ ]   Try to strengthen prediction model per recommended techniques from TAs
+- [ ]   Presentation recording
+- [ ]   README
 
 ## Finished:
+
+- [X]   Presentation script
+- [X]   Connect prediction calculator to data & backend
+- [X]   Connect "Deep Dive" visualizations to map
+- [X]   "Storytelling" prose & frontend polish
+- [X]   Try to strengthen prediction model per recommended techniques from TAs
 - [X]   Use Tableau to illustrate and build out the model
 - [X]   Build (code) prediction calculator frontend
 - [X]   Code out and populate the US map with data
