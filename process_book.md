@@ -516,7 +516,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>FIPS
+   <td><strong>FIPS</strong>
    </td>
    <td>
    </td>
@@ -524,7 +524,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>State
+   <td><strong>State</strong>
    </td>
    <td>
    </td>
@@ -532,7 +532,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>County
+   <td><strong>County</strong>
    </td>
    <td>
    </td>
