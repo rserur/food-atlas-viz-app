@@ -396,7 +396,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>Adult diabetes rate, 2013
+   <td><strong>Adult diabetes rate, 2013</strong>
    </td>
    <td>PCT_DIABETES_ADULTS13
    </td>
@@ -404,7 +404,7 @@ PCT_SFSP15
    </td>
   </tr>
   <tr>
-   <td>Adult obesity rate, 2013
+   <td><strong>Adult obesity rate, 2013</strong>
    </td>
    <td>PCT_OBESE_ADULTS13
    </td>
