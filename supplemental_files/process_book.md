@@ -569,10 +569,6 @@ Extra Data:
 ([Trello Board](https://trello.com/invite/b/nV0Dk09z/14cb1550724df0a1790802d0c9cb6402/e14a-team-project) tracking progress)
 
 
-## In Progress/Remaining Tasks (final week):
-- [ ]   Presentation recording
-- [ ]   README
-
 ## Finished:
 
 - [X]   Presentation script
@@ -592,6 +588,8 @@ Extra Data:
 - [X]   Organize Project Plan notes from meeting and add to GH repo
 - [X]   Submit Project Plan on Canvas
 - [X]   Scaffold basic web application
+- [x]   Presentation recording
+- [x]   README
 
 
 # <a name="schema">Database Schema</a>
