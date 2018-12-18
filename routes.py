@@ -24,7 +24,7 @@ def is_valid_value(v):
 @app.route('/index')
 def index():
     # map_options = [ 'pop15', 'lowi15', 'hhnv15', 'snapspth16', 'ffrpth14', 'snap16', 'fmrktpth16']
-    map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'hhnv15': 'No Car & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets', 'diabetes13': 'Diabetes' }
+    map_options = { 'pop15': 'Population', 'lowi15': 'Low Income & Low Access', 'ffrpth14': 'Fast Food', 'fmrktpth16': 'Farmer\'s Markets', 'diabetes13': 'Diabetes' }
     return render_template('index.html', title="CSCI e14a - Food Access & Health Project", map_options=map_options)
 
 # prediction calculator route
